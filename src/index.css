@@ -1,0 +1,401 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    overflow-x: hidden;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .font-playfair {
+    font-family: 'Playfair Display', serif;
+  }
+  
+  .text-shadow-luxury {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .bg-luxury-gradient {
+    background: linear-gradient(90deg, #FFB733 0%, #FF9900 40%, #E8860A 100%);
+  }
+  
+  .bg-luxury-gradient-light {
+    background: linear-gradient(90deg, #FFD966 0%, #FFB733 100%);
+  }
+  
+  .bg-luxury-gradient {
+    background: linear-gradient(135deg, #FFEF94 0%, #FFE55C 25%, #FFD700 50%, #DAA520 75%, #B8860B 100%);
+  }
+  
+  .bg-luxury-gradient-light {
+    background: linear-gradient(135deg, #FFE55C 0%, #FFD700 100%);
+  }
+  
+  .text-luxury-gold {
+    color: #FFD700;
+  }
+  
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #FFD54F 0%, #FFCA28 50%, #FFB300 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 1px 2px rgba(218, 165, 32, 0.3));
+  }
+  
+  .bg-burgundy-accent {
+    background: rgba(128, 0, 32, 0.1);
+    background: linear-gradient(135deg, #fdd65d 0%, #fdc662 100%);
+  }
+  
+  .bg-burgundy-accent-subtle {
+    background: rgba(128, 0, 32, 0.05);
+  }
+  
+  .border-luxury {
+    border-color: #FFB733;
+  }
+  
+  .border-burgundy {
+    border-color: rgba(128, 0, 32, 0.15);
+  }
+  
+  .text-luxury {
+    color: #FFB733;
+  }
+  
+  .text-luxury-dark {
+    color: #FF9900;
+  }
+  
+  .text-burgundy {
+    color: rgba(128, 0, 32, 0.8);
+  }
+}
+
+@layer components {
+  /* Luxury Button Styles */
+  .btn-luxury {
+    @apply relative overflow-hidden;
+    background: linear-gradient(135deg, #FFD54F 0%, #FFCA28 50%, #FFB300 100%);
+    box-shadow: 
+      0 4px 15px rgba(218, 165, 32, 0.4),
+      0 1px 2px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(218, 165, 32, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .btn-luxury:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      0 8px 25px rgba(218, 165, 32, 0.6),
+      0 2px 4px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  
+  .btn-luxury:active {
+    transform: translateY(0);
+    box-shadow: 
+      0 2px 8px rgba(218, 165, 32, 0.3),
+      0 1px 2px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  .btn-luxury::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transition: left 0.6s ease;
+  }
+  
+  .btn-luxury:hover::before {
+    left: 100%;
+  }
+  
+  /* Premium Badge */
+  .badge-premium {
+    @apply inline-flex items-center;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    box-shadow: 
+      0 2px 8px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 215, 0, 0.1);
+  }
+  
+  .badge-burgundy {
+    @apply inline-flex items-center;
+    background: rgba(128, 0, 32, 0.1);
+    border: 1px solid rgba(128, 0, 32, 0.15);
+    box-shadow: 
+      0 2px 8px rgba(128, 0, 32, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+  
+  /* Luxury Card */
+  .card-luxury {
+    background: linear-gradient(135deg, rgba(17, 17, 17, 0.95) 0%, rgba(0, 0, 0, 0.98) 100%);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    box-shadow: 
+      0 10px 40px rgba(0, 0, 0, 0.3),
+      0 2px 8px rgba(255, 215, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+  }
+  
+  .card-luxury:hover {
+    border-color: rgba(255, 215, 0, 0.4);
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.4),
+      0 4px 16px rgba(255, 215, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  .card-burgundy {
+    background: linear-gradient(135deg, rgba(17, 17, 17, 0.95) 0%, rgba(0, 0, 0, 0.98) 100%);
+    border: 1px solid rgba(128, 0, 32, 0.15);
+    box-shadow: 
+      0 10px 40px rgba(0, 0, 0, 0.3),
+      0 2px 8px rgba(128, 0, 32, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+  }
+  
+  .card-burgundy:hover {
+    border-color: rgba(128, 0, 32, 0.25);
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.4),
+      0 4px 16px rgba(128, 0, 32, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Luxury Form Elements */
+  .input-luxury {
+    @apply bg-black/50 border text-white placeholder-gray-400 transition-all duration-300;
+    border-color: rgba(255, 215, 0, 0.3);
+    box-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.1),
+      inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .input-luxury:focus {
+    border-color: #FFD700;
+    box-shadow: 
+      0 0 0 3px rgba(255, 215, 0, 0.1),
+      0 2px 8px rgba(255, 215, 0, 0.2),
+      inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    outline: none;
+  }
+  
+  /* Tooltip */
+  .tooltip {
+    @apply absolute z-50 px-3 py-2 text-sm font-medium text-white opacity-0 pointer-events-none transition-all duration-300;
+    background: linear-gradient(135deg, rgba(17, 17, 17, 0.95) 0%, rgba(0, 0, 0, 0.98) 100%);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+  }
+  
+  .tooltip.show {
+    @apply opacity-100 pointer-events-auto;
+  }
+  
+  /* Stats Badge with Tooltip */
+  .stats-badge {
+    @apply relative cursor-pointer z-10;
+    transition: all 0.3s ease;
+  }
+  
+  .stats-badge:hover {
+    transform: translateY(-2px);
+  }
+  
+  .stats-tooltip {
+    @apply absolute px-4 py-3 text-base font-medium text-white opacity-0 pointer-events-none transition-all duration-300;
+    z-index: 9999;
+    background: linear-gradient(135deg, rgba(17, 17, 17, 0.95) 0%, rgba(0, 0, 0, 0.98) 100%);
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(20px);
+    border-radius: 8px;
+    max-width: 320px;
+    min-height: auto;
+    white-space: normal;
+    word-wrap: break-word;
+    line-height: 1.4;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    min-width: 240px;
+  }
+  
+  /* Responsive tooltip positioning */
+  @media (max-width: 768px) {
+    .stats-tooltip {
+      left: 0;
+      right: 0;
+      transform: translateY(8px);
+      margin: 0 10px;
+      max-width: calc(100vw - 40px);
+      font-size: 0.9rem;
+    }
+  }
+  
+  /* Tooltip positioning for edge cases */
+  .stats-tooltip.tooltip-left {
+    left: 0;
+    transform: translateY(8px);
+  }
+  
+  .stats-tooltip.tooltip-right {
+    right: 0;
+    left: auto;
+    transform: translateY(8px);
+  }
+  
+  .stats-tooltip.show {
+    @apply opacity-100 pointer-events-auto;
+  }
+  
+  .stats-tooltip.show.tooltip-left {
+    transform: translateY(0);
+  }
+  
+  .stats-tooltip.show.tooltip-right {
+    transform: translateY(0);
+  }
+  
+  .stats-tooltip.show:not(.tooltip-left):not(.tooltip-right) {
+    transform: translateX(-50%) translateY(0);
+  }
+  
+  .stats-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: rgba(17, 17, 17, 0.95);
+  }
+  
+  /* Green safety badge */
+  .badge-safety {
+    @apply inline-flex items-center;
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(22, 163, 74, 0.2) 100%);
+    border: 1px solid rgba(34, 197, 94, 0.4);
+    box-shadow: 
+      0 2px 8px rgba(34, 197, 94, 0.2),
+      inset 0 1px 0 rgba(34, 197, 94, 0.1);
+  }
+  
+  /* Fix text gradient alignment */
+  .text-gradient-gold-price {
+    background: linear-gradient(135deg, #FFD54F 0%, #FFCA28 50%, #FFB300 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+    vertical-align: baseline;
+    line-height: 1;
+    filter: drop-shadow(0 1px 2px rgba(218, 165, 32, 0.3));
+  }
+  
+  /* Animations */
+  .float-luxury {
+    animation: floatLuxury 6s ease-in-out infinite;
+  }
+  
+  @keyframes floatLuxury {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-10px) scale(1.02); }
+  }
+  
+  .fade-in-luxury {
+    animation: fadeInLuxury 1s ease-out forwards;
+  }
+  
+  @keyframes fadeInLuxury {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .slide-in-luxury {
+    animation: slideInLuxury 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  
+  @keyframes slideInLuxury {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* Geometric Shapes */
+  /* Section Dividers */
+  .luxury-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #FFB733, transparent);
+    margin: 6rem 0;
+  }
+  
+  .luxury-diagonal {
+    height: 150px;
+    background: linear-gradient(135deg, #000000 0%, #111111 50%, #000000 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%);
+    position: relative;
+  }
+  
+  .luxury-diagonal::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #FFB733, transparent);
+  }
+  
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #000;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #FFD966, #FF9900);
+    border-radius: 3px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #FFD966, #FFB733);
+  }
+}
