@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import { CheckCircle, Play, Mail, BookOpen, Users, Home, Crown, Diamond, Target, Scissors, Star, Gift, Heart, Download, MessageCircle, Calendar, Award, Zap, Clock } from 'lucide-react';
+import { CheckCircle, Play, Mail, BookOpen, Users, Home, Crown, Diamond, Target, Scissors, Star, Gift, Heart, Download, MessageCircle, Calendar, Award, Zap, Clock, Shield, Lock, TrendingUp } from 'lucide-react';
 
 export default function ThankYouPage() {
   const navigate = useNavigate();
