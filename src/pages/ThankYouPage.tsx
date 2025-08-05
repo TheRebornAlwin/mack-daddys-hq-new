@@ -227,53 +227,6 @@ export default function ThankYouPage() {
               </div>
             ))}
           </div>
-              {
-                icon: <Scissors className="h-8 w-8" />,
-                title: "Complete Video Course",
-                description: "12 hours of step-by-step instruction covering every technique Sean uses daily",
-                value: "$297"
-              },
-              {
-                icon: <BookOpen className="h-8 w-8" />,
-                title: "Downloadable Guides",
-                description: "Reference materials you can print and keep in your station for quick review",
-                value: "$97"
-              },
-              {
-                icon: <Users className="h-8 w-8" />,
-                title: "Private Community",
-                description: "24/7 access to fellow students and direct communication with Sean",
-                value: "$197"
-              },
-              {
-                icon: <MessageCircle className="h-8 w-8" />,
-                title: "Live Q&A Sessions",
-                description: "Monthly group calls where Sean answers your specific questions",
-                value: "$497"
-              },
-              {
-                icon: <Calendar className="h-8 w-8" />,
-                title: "30-Day Challenge",
-                description: "Structured daily practice with accountability and community support",
-                value: "$197"
-              },
-              {
-                icon: <Award className="h-8 w-8" />,
-                title: "Lifetime Updates",
-                description: "Every new technique, trend, and method Sean develops - yours forever",
-                value: "$297"
-              }
-            ].map((item, index) => (
-              <div key={index} className="card-luxury rounded-lg p-8 text-center group hover:transform hover:-translate-y-2 transition-all duration-300">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-luxury-gradient rounded mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <div className="text-black">{item.icon}</div>
-                </div>
-                <h3 className="text-gradient-gold font-bold text-lg mb-3">{item.title}</h3>
-                <p className="text-gray-300 leading-relaxed mb-4">{item.description}</p>
-                <div className="text-luxury font-semibold">{item.value} Value</div>
-              </div>
-            ))}
-          </div>
           
           <div className="text-center pt-8 border-t border-luxury/30">
             <p className="text-2xl text-gray-300 mb-2">Total Value: <span className="text-gradient-gold font-bold">${purchaseDetails.totalValue.toLocaleString()}</span></p>
