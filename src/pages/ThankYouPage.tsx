@@ -100,12 +100,133 @@ export default function ThankYouPage() {
         {/* What You Get Right Now */}
         <div className="card-luxury rounded-lg p-10 mb-16 border-l-4 border-luxury">
           <h2 className="text-3xl font-playfair font-bold text-gradient-gold mb-10 text-center flex items-center justify-center">
-            <Gift className="h-8 w-8 mr-4" />
+            <Gift className="h-8 w-8 text-luxury-gold mr-4" />
             Everything You Get Right Now
           </h2>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
-            {[
+            {(() => {
+              const baseItems = [
+                {
+                  icon: <Scissors className="h-8 w-8" />,
+                  title: "Complete Video Course",
+                  description: "12 hours of step-by-step instruction covering every technique Sean uses daily",
+                  value: "$297"
+                },
+                {
+                  icon: <BookOpen className="h-8 w-8" />,
+                  title: "Downloadable Guides",
+                  description: "Reference materials you can print and keep in your station for quick review",
+                  value: "$97"
+                },
+                {
+                  icon: <Users className="h-8 w-8" />,
+                  title: "Private Community",
+                  description: "24/7 access to fellow students and direct communication with Sean",
+                  value: "$197"
+                },
+                {
+                  icon: <MessageCircle className="h-8 w-8" />,
+                  title: "Live Q&A Sessions",
+                  description: "Monthly group calls where Sean answers your specific questions",
+                  value: "$497"
+                },
+                {
+                  icon: <Calendar className="h-8 w-8" />,
+                  title: "30-Day Challenge",
+                  description: "Structured daily practice with accountability and community support",
+                  value: "$197"
+                },
+                {
+                  icon: <Award className="h-8 w-8" />,
+                  title: "Lifetime Updates",
+                  description: "Every new technique, trend, and method Sean develops - yours forever",
+                  value: "$297"
+                }
+              ];
+
+              const bumpItems = [
+                {
+                  icon: <Shield className="h-8 w-8" />,
+                  title: "Stylist Survival Kit",
+                  description: "Learn the 12 biggest mistakes beginners make and how to avoid them completely",
+                  value: "$97"
+                },
+                {
+                  icon: <Target className="h-8 w-8" />,
+                  title: "Red-Flag Client Guide",
+                  description: "Identify and handle difficult clients before they become problems",
+                  value: "$67"
+                },
+                {
+                  icon: <CheckCircle className="h-8 w-8" />,
+                  title: "First-Cut Action Plan",
+                  description: "Exact step-by-step plan for your first professional cut so you never freeze up",
+                  value: "$133"
+                }
+              ];
+
+              const upsellItems = [
+                {
+                  icon: <Crown className="h-8 w-8" />,
+                  title: "Premium Pricing Strategies",
+                  description: "Watch clients happily pay $120+ without hesitation while you feel completely confident",
+                  value: "$97"
+                },
+                {
+                  icon: <Heart className="h-8 w-8" />,
+                  title: "Client Retention Secrets",
+                  description: "Have clients texting you 'When's your next opening?' and booking 8 weeks in advance",
+                  value: "$67"
+                },
+                {
+                  icon: <Zap className="h-8 w-8" />,
+                  title: "Social Media Marketing",
+                  description: "Wake up to DMs saying 'I NEED an appointment' from followers who found you online",
+                  value: "$97"
+                },
+                {
+                  icon: <Diamond className="h-8 w-8" />,
+                  title: "Shop Opening Blueprint",
+                  description: "Walk into your own shop knowing exactly what to do, from lease to grand opening",
+                  value: "$197"
+                },
+                {
+                  icon: <TrendingUp className="h-8 w-8" />,
+                  title: "Financial Planning Tools",
+                  description: "See your monthly income predictions and watch your savings grow with clear roadmaps",
+                  value: "$97"
+                },
+                {
+                  icon: <Lock className="h-8 w-8" />,
+                  title: "Legal & Insurance Guide",
+                  description: "Sleep soundly knowing you're fully protected and following every rule perfectly",
+                  value: "$67"
+                }
+              ];
+
+              let allItems = [...baseItems];
+              
+              if (purchaseDetails.hasBump) {
+                allItems = [...allItems, ...bumpItems];
+              }
+              
+              if (purchaseDetails.hasUpsell) {
+                allItems = [...allItems, ...upsellItems];
+              }
+              
+              return allItems;
+            })().map((item, index) => (
+              <div key={index} className="card-luxury rounded-lg p-8 text-center group hover:transform hover:-translate-y-2 transition-all duration-300">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-luxury-gradient rounded mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <div className="text-black">{item.icon}</div>
+                </div>
+                <h3 className="text-gradient-gold font-bold text-lg mb-3">{item.title}</h3>
+                <p className="text-gray-300 leading-relaxed mb-4">{item.description}</p>
+                <div className="text-luxury font-semibold">{item.value} Value</div>
+              </div>
+            ))}
+          </div>
               {
                 icon: <Scissors className="h-8 w-8" />,
                 title: "Complete Video Course",
