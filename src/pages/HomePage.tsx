@@ -122,7 +122,7 @@ export default function HomePage() {
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center group">
               <div className="relative">
-                <Scissors className="h-7 w-7 text-luxury-gold mr-4 group-hover:rotate-12 transition-transform duration-500" />
+                <img src="/assets/logo.png" alt="Mack Daddy's Logo" className="h-7 w-7 mr-4 group-hover:rotate-12 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-luxury/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
               <span className="text-2xl font-playfair font-bold tracking-wider text-gradient-gold text-shadow-luxury">MACK DADDY'S</span>
