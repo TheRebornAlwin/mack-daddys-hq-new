@@ -117,44 +117,6 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/10 backdrop-blur-2xl border-b border-luxury/20">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <div className="flex items-center group">
-              <img src="/assets/logo.png" alt="Mack Daddy's Logo" className="h-8 mr-4 group-hover:scale-110 transition-transform duration-500" />
-              <span className="text-2xl font-playfair font-bold tracking-wider text-gradient-gold text-shadow-luxury">MACK DADDY'S</span>
-            </div>
-            <div className="hidden md:flex items-center space-x-12">
-              <a href="#home" className="text-gray-300 hover:text-luxury transition-all duration-500 font-medium tracking-wide relative group">
-                Home
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-luxury-gradient group-hover:w-full transition-all duration-500"></span>
-              </a>
-              <a href="#about" className="text-gray-300 hover:text-luxury transition-all duration-500 font-medium tracking-wide relative group">
-                About
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-luxury-gradient group-hover:w-full transition-all duration-500"></span>
-              </a>
-              <a href="#course" className="text-gray-300 hover:text-luxury transition-all duration-500 font-medium tracking-wide relative group">
-                Course
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-luxury-gradient group-hover:w-full transition-all duration-500"></span>
-              </a>
-              <button 
-                onClick={handleCheckoutClick}
-                className="btn-luxury text-black px-8 py-3 rounded font-semibold tracking-wide"
-              >
-                JOIN NOW
-              </button>
-            </div>
-            <div className="md:hidden">
-              <button 
-                onClick={handleCheckoutClick}
-                className="btn-luxury text-black px-6 py-2 rounded font-semibold text-sm"
-              >
-                JOIN
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
 
       {/* Hero Section */}
       <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
