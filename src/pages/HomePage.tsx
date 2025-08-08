@@ -244,9 +244,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Luxury Divider */}
-      <div className="luxury-diagonal"></div>
-
       {/* Meet Sean Section */}
       <section id="about" className="relative py-32 bg-gradient-to-br from-gray-900 to-black">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
