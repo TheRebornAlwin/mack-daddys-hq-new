@@ -124,7 +124,7 @@ export default function HomePage() {
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110 transition-all duration-700"
             style={{
-              backgroundImage: 'url(https://images.pexels.com/photos/1319460/pexels-photo-1319460.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop)',
+              backgroundImage: 'url(/assets/darkbarbershop.jpeg)',
             }}
           >
             <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-black/75 to-black/90"></div>
