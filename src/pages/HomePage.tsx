@@ -119,7 +119,7 @@ export default function HomePage() {
       {/* Navigation */}
 
       {/* Hero Section */}
-      <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
+      <section id="home" className="relative min-h-screen overflow-hidden">
         <div className="absolute inset-0">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110 transition-all duration-700"
@@ -131,7 +131,7 @@ export default function HomePage() {
           </div>
         </div>
         
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pt-32 grid lg:grid-cols-12 gap-16 items-center min-h-screen">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pt-16 grid lg:grid-cols-12 gap-16">
           <div className={`lg:col-span-7 ${isVisible ? 'slide-in-luxury' : 'opacity-0'}`} style={{ transform: 'translateY(-15px)' }}>
             <div className="badge-premium rounded px-6 py-3 mb-12">
               <Crown className="h-4 w-4 text-luxury-gold mr-3" />
@@ -239,7 +239,7 @@ export default function HomePage() {
           </div>
         </div>
         
-        <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce" style={{ transform: 'translateX(-50%) translateY(-15px)' }}>
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce" style={{ transform: 'translateX(-50%) translateY(-15px)' }}>
           <ArrowDown className="h-6 w-6 text-luxury" />
         </div>
       </section>
