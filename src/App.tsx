@@ -8,6 +8,7 @@ import UpsellThankYouPage from './pages/UpsellThankYouPage';
 import TermsPage from './pages/TermsPage';
 import PrivacyPage from './pages/PrivacyPage';
 import ContactPage from './pages/ContactPage';
+import CoursesPage from './pages/CoursesPage';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <Route path="/terms" element={<TermsPage />} />
       <Route path="/privacy" element={<PrivacyPage />} />
       <Route path="/contact" element={<ContactPage />} />
+      <Route path="/courses" element={<CoursesPage />} />
     </Routes>
   );
 }

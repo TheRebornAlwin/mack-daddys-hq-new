@@ -124,7 +124,7 @@ export default function HomePage() {
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110 transition-all duration-700"
             style={{
-              backgroundImage: 'url(/assets/darkbarbershop.jpeg)',
+              backgroundImage: 'url(assets/darkbarbershop.jpeg)',
             }}
           >
             <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-black/75 to-black/90"></div>
@@ -133,6 +133,17 @@ export default function HomePage() {
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pt-16 grid lg:grid-cols-12 gap-16">
           <div className={`lg:col-span-7 ${isVisible ? 'slide-in-luxury' : 'opacity-0'}`} style={{ transform: 'translateY(-15px)' }}>
+            {/* Developer Access Button */}
+            <div className="absolute top-4 right-4 z-50">
+              <button 
+                onClick={() => navigate('/courses')}
+                className="badge-premium rounded px-4 py-2 hover:scale-105 transition-all duration-300"
+              >
+                <BookOpen className="h-4 w-4 text-luxury-gold mr-2 inline" />
+                <span className="text-white font-medium text-sm">Courses</span>
+              </button>
+            </div>
+            
             <div className="badge-premium rounded px-6 py-3 mb-12">
               <Crown className="h-4 w-4 text-luxury-gold mr-3" />
               <span className="text-white font-medium text-sm tracking-wide">MASTER CRAFTSMAN TRAINING</span>
@@ -251,7 +262,7 @@ export default function HomePage() {
             <div className="relative">
               <div className="relative z-10">
                 <img 
-                  src="/assets/seancuttinggirlshair.jpeg"
+                  src="assets/seancuttinggirlshair.jpeg"
                   alt="Sean cutting hair - professional training and mentorship"
                   className="w-full h-[600px] object-cover rounded shadow-2xl"
                 />
