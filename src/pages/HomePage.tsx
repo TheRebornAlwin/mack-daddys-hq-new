@@ -119,7 +119,7 @@ export default function HomePage() {
       {/* Navigation */}
 
       {/* Hero Section */}
-      <section id="home" className="relative min-h-screen overflow-hidden">
+      <section id="home" className="relative overflow-hidden" style={{ minHeight: '120vh' }}>
         <div className="absolute inset-0">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110 transition-all duration-700"
@@ -251,8 +251,8 @@ export default function HomePage() {
             <div className="relative">
               <div className="relative z-10">
                 <img 
-                  src="https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
-                  alt="Professional barber training and mentorship"
+                  src="/assets/seancuttinggirlshair.jpeg"
+                  alt="Sean cutting hair - professional training and mentorship"
                   className="w-full h-[600px] object-cover rounded shadow-2xl"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded"></div>
