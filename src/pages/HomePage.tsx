@@ -119,7 +119,7 @@ export default function HomePage() {
       {/* Navigation */}
 
       {/* Hero Section */}
-      <section id="home" className="relative overflow-hidden" style={{ minHeight: '200vh' }}>
+      <section id="home" className="relative overflow-hidden" style={{ minHeight: '150vh' }}>
         <div className="absolute inset-0">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110 transition-all duration-700"
