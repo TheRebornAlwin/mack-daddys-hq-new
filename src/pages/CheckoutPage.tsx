@@ -49,21 +49,29 @@ export default function CheckoutPage() {
     const saveUserData = async () => {
       if (formData.email && formData.firstName && formData.lastName && !userSaved) {
         try {
-          // First check if user exists in auth.users
-          const { data: authData, error: authError } = await supabase.auth.signUp({
-            email: formData.email,
-            password: 'temp_password_' + Math.random().toString(36),
-            options: {
-              data: {
+          // Save to users table directly
+          const { data, error } = await supabase
+            .from('users')
+            .insert([
+              {
+                email: formData.email,
                 first_name: formData.firstName,
-                last_name: formData.lastName,
-                full_name: `${formData.firstName} ${formData.lastName}`
+                last_name: formData.lastName
               }
-            }
-          });
+            ])
+            .select();
           
-          if (!authError) {
+          if (!error) {
+            console.log('User data saved successfully:', data);
             setUserSaved(true);
+          } else {
+            // If user already exists (email constraint), that's okay
+            if (error.code === '23505') {
+              console.log('User already exists in database');
+              setUserSaved(true);
+            } else {
+              console.error('Error saving user data:', error);
+            }
           }
         } catch (error) {
           console.error('Error saving user data:', error);
@@ -71,7 +79,8 @@ export default function CheckoutPage() {
       }
     };
 
-    const debounceTimer = setTimeout(saveUserData, 500);
+    // Save immediately when all required fields are filled
+    const debounceTimer = setTimeout(saveUserData, 1000);
     return () => clearTimeout(debounceTimer);
   }, [formData.email, formData.firstName, formData.lastName, userSaved]);
 
