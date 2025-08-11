@@ -138,7 +138,7 @@ export default function CheckoutPage() {
           {/* Hero Section */}
           <div className="text-center mb-12">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-luxury-gradient rounded mb-6">
-            <Crown className="h-8 w-8 text-black" />
+              <Crown className="h-8 w-8 text-black" />
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold mb-6 leading-tight">
               Secure Your <span className="text-gradient-gold">Transformation</span>
@@ -378,7 +378,7 @@ The perfect safety net to complement your skills.
             {/* Security Info */}
             <div className="card-luxury rounded-lg p-6 text-center">
               <div className="flex items-center justify-center mb-4">
-              <Shield className="h-6 w-6 text-luxury-gold mr-3" />
+                <Shield className="h-6 w-6 text-luxury-gold mr-3" />
                 <span className="text-gradient-gold font-semibold text-lg">Powered by Stripe</span>
               </div>
               <p className="text-gray-300 text-sm leading-relaxed mb-4 text-center">
