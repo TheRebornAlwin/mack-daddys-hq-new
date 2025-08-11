@@ -1,13 +1,7 @@
-import { createClient } from '@supabase/supabase-js';
+// src/lib/supabase.ts
+import { supabase as shared } from './supabaseClient'; // same folder
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables');
-}
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = shared;
 
 export type User = {
   id: string;
