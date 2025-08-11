@@ -70,6 +70,7 @@ export default function CheckoutPage() {
 
     const debounceTimer = setTimeout(saveUserData, 500);
     return () => clearTimeout(debounceTimer);
+  }, [formData.email, formData.firstName, formData.lastName, userSaved]);
 
   const handleCheckout = () => {
     if (!formData.email || !formData.firstName || !formData.lastName || 
