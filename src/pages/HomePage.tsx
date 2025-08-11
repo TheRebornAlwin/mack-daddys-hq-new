@@ -124,7 +124,7 @@ export default function HomePage() {
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110 transition-all duration-700"
             style={{
-              backgroundImage: 'url(assets/darkbarbershop.jpeg)',
+              backgroundImage: 'url(/images/darkbarbershop.jpeg)',
             }}
           >
             <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-black/75 to-black/90"></div>
@@ -262,7 +262,7 @@ export default function HomePage() {
             <div className="relative">
               <div className="relative z-10">
                 <img 
-                  src="assets/seancuttinggirlshair.jpeg"
+                  src="/images/seancuttinggirlshair.jpeg"
                   alt="Sean cutting hair - professional training and mentorship"
                   className="w-full h-[600px] object-cover rounded shadow-2xl"
                 />
