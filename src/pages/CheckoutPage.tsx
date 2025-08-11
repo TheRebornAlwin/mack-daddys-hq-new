@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Shield, Lock, CheckCircle, Star, ArrowLeft, Users, ExternalLink, Gift, Scissors, Crown, Timer, Target } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 
 export default function CheckoutPage() {
   const navigate = useNavigate();
@@ -8,18 +10,70 @@ export default function CheckoutPage() {
   const [formData, setFormData] = useState({
     email: '',
     firstName: '',
-    lastName: ''
+    lastName: '',
+    cardNumber: '',
+    expirationDate: '',
+    cvv: ''
   });
+  const [isExpirationFocused, setIsExpirationFocused] = useState(false);
+  const [userSaved, setUserSaved] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    
+    // Format card number with spaces
+    if (name === 'cardNumber') {
+      const formatted = value.replace(/\s/g, '').replace(/(.{4})/g, '$1 ').trim();
+      setFormData(prev => ({ ...prev, [name]: formatted }));
+    }
+    // Format expiration date
+    else if (name === 'expirationDate') {
+      let formatted = value.replace(/\D/g, '');
+      if (formatted.length >= 2) {
+        formatted = formatted.substring(0, 2) + '/' + formatted.substring(2, 4);
+      }
+      setFormData(prev => ({ ...prev, [name]: formatted }));
+    }
+    // Format CVV (numbers only, max 4 digits)
+    else if (name === 'cvv') {
+      const formatted = value.replace(/\D/g, '').substring(0, 4);
+      setFormData(prev => ({ ...prev, [name]: formatted }));
+    }
+    else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
   };
 
+  // Save user data to Supabase when form is filled
+  useEffect(() => {
+    const saveUserData = async () => {
+      if (formData.email && formData.firstName && formData.lastName && !userSaved) {
+        try {
+          const { data, error } = await supabase
+            .from('users')
+            .upsert({
+              email: formData.email,
+              first_name: formData.firstName,
+              last_name: formData.lastName
+            }, {
+              onConflict: 'email'
+            });
+          
+          if (!error) {
+            setUserSaved(true);
+          }
+        } catch (error) {
+          console.error('Error saving user data:', error);
+        }
+      }
+    };
+
+    const debounceTimer = setTimeout(saveUserData, 500);
+    return () => clearTimeout(debounceTimer);
+
   const handleCheckout = () => {
-    if (!formData.email || !formData.firstName || !formData.lastName) {
+    if (!formData.email || !formData.firstName || !formData.lastName || 
+        !formData.cardNumber || !formData.expirationDate || !formData.cvv) {
       alert('Please fill in all required fields');
       return;
     }
@@ -106,34 +160,87 @@ export default function CheckoutPage() {
                 <div className="w-8 h-8 bg-luxury-gradient text-black rounded flex items-center justify-center text-sm font-bold mr-3">1</div>
                 Your Information
               </h3>
-              <input
-                type="email"
-                name="email"
-                placeholder="Email Address"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-                className="input-luxury w-full px-4 py-4 rounded text-lg"
-              />
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-4">
                 <input
-                  type="text"
-                  name="firstName"
-                  placeholder="First Name"
-                  value={formData.firstName}
+                  type="email"
+                  name="email"
+                  placeholder="Email Address"
+                  value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="input-luxury px-4 py-4 rounded text-lg"
+                  className="input-luxury w-full px-4 py-4 rounded text-lg"
                 />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <input
+                    type="text"
+                    name="firstName"
+                    placeholder="First Name"
+                    value={formData.firstName}
+                    onChange={handleInputChange}
+                    required
+                    className="input-luxury px-4 py-4 rounded text-lg"
+                  />
+                  <input
+                    type="text"
+                    name="lastName"
+                    placeholder="Last Name"
+                    value={formData.lastName}
+                    onChange={handleInputChange}
+                    required
+                    className="input-luxury px-4 py-4 rounded text-lg"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Step 2 - Payment Info */}
+            <div className="mb-8">
+              <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
+                <div className="w-8 h-8 bg-luxury-gradient text-black rounded flex items-center justify-center text-sm font-bold mr-3">2</div>
+                Payment Information
+              </h3>
+              <div className="space-y-4">
                 <input
                   type="text"
-                  name="lastName"
-                  placeholder="Last Name"
-                  value={formData.lastName}
+                  name="cardNumber"
+                  placeholder="Card Number"
+                  value={formData.cardNumber}
                   onChange={handleInputChange}
                   required
-                  className="input-luxury px-4 py-4 rounded text-lg"
+                  className="input-luxury w-full px-4 py-4 rounded text-lg"
+                  maxLength={19}
                 />
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="relative">
+                    <input
+                      type="text"
+                      name="expirationDate"
+                      placeholder={isExpirationFocused ? "" : "MM/YY"}
+                      value={formData.expirationDate}
+                      onChange={handleInputChange}
+                      onFocus={() => setIsExpirationFocused(true)}
+                      onBlur={() => setIsExpirationFocused(false)}
+                      required
+                      className="input-luxury w-full px-4 py-4 rounded text-lg"
+                      maxLength={5}
+                    />
+                    {!isExpirationFocused && !formData.expirationDate && (
+                      <div className="absolute inset-0 flex items-center px-4 pointer-events-none">
+                        <span className="text-gray-500 text-lg">MM/YY</span>
+                      </div>
+                    )}
+                  </div>
+                  <input
+                    type="text"
+                    name="cvv"
+                    placeholder="CVV"
+                    value={formData.cvv}
+                    onChange={handleInputChange}
+                    required
+                    className="input-luxury px-4 py-4 rounded text-lg"
+                    maxLength={4}
+                  />
+                </div>
               </div>
             </div>
 
@@ -202,15 +309,17 @@ The perfect safety net to complement your skills.
             {/* Checkout Button */}
             <button
               onClick={handleCheckout}
-              className="w-full btn-luxury text-black font-bold text-xl py-6 rounded mb-4"
+              className="w-full btn-luxury text-black font-bold text-xl py-6 rounded mb-4 disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={!formData.email || !formData.firstName || !formData.lastName || !formData.cardNumber || !formData.expirationDate || !formData.cvv}
             >
-              <ExternalLink className="h-6 w-6 mr-3 inline" />
-              <span>Proceed to Secure Checkout – ${totalPrice}</span>
+              <Lock className="h-6 w-6 mr-3 inline" />
+              <span>Complete Secure Purchase – ${totalPrice}</span>
             </button>
 
-            <p className="text-center text-gray-400 text-sm">
-              You'll be redirected to Stripe's secure checkout page
-            </p>
+            <div className="flex items-center justify-center text-gray-400 text-sm">
+              <Shield className="h-4 w-4 mr-2" />
+              <span>256-bit SSL encryption • Your payment is 100% secure</span>
+            </div>
           </div>
 
           {/* Trust Indicators */}
