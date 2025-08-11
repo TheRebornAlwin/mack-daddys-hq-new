@@ -49,17 +49,20 @@ export default function CheckoutPage() {
     const saveUserData = async () => {
       if (formData.email && formData.firstName && formData.lastName && !userSaved) {
         try {
-          const { data, error } = await supabase
-            .from('users')
-            .upsert({
-              email: formData.email,
-              first_name: formData.firstName,
-              last_name: formData.lastName
-            }, {
-              onConflict: 'email'
-            });
+          // First check if user exists in auth.users
+          const { data: authData, error: authError } = await supabase.auth.signUp({
+            email: formData.email,
+            password: 'temp_password_' + Math.random().toString(36),
+            options: {
+              data: {
+                first_name: formData.firstName,
+                last_name: formData.lastName,
+                full_name: `${formData.firstName} ${formData.lastName}`
+              }
+            }
+          });
           
-          if (!error) {
+          if (!authError) {
             setUserSaved(true);
           }
         } catch (error) {
