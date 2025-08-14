@@ -17,7 +17,6 @@ export default function CheckoutPage() {
     cvv: ''
   });
   const [isExpirationFocused, setIsExpirationFocused] = useState(false);
-  const [userSaved, setUserSaved] = useState(false);
   const [clientSecret, setClientSecret] = useState('');
   const [isLoadingPayment, setIsLoadingPayment] = useState(false);
   const [paymentError, setPaymentError] = useState<string | null>(null);
@@ -48,43 +47,6 @@ export default function CheckoutPage() {
     setCardData(prev => ({ ...prev, [name]: formattedValue }));
   };
 
-  // Save user data to Supabase when form is filled
-  useEffect(() => {
-    const saveUserData = async () => {
-      if (formData.email && formData.firstName && formData.lastName && !userSaved) {
-        try {
-          const { data, error } = await supabase
-            .from('users')
-            .insert([
-              {
-                email: formData.email,
-                first_name: formData.firstName,
-                last_name: formData.lastName
-              }
-            ])
-            .select();
-          
-          if (!error) {
-            console.log('User data saved successfully:', data);
-            setUserSaved(true);
-          } else {
-            if (error.code === '23505') {
-              console.log('User already exists in database');
-              setUserSaved(true);
-            } else {
-              console.error('Error saving user data:', error);
-            }
-          }
-        } catch (error) {
-          console.error('Error saving user data:', error);
-        }
-      }
-    };
-
-    const debounceTimer = setTimeout(saveUserData, 1000);
-    return () => clearTimeout(debounceTimer);
-  }, [formData.email, formData.firstName, formData.lastName, userSaved]);
-
   // Create payment intent when user info is complete
   useEffect(() => {
     const createIntent = async () => {
@@ -99,17 +61,20 @@ export default function CheckoutPage() {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              amount: totalPrice * 100,
+              amount: Math.round(totalPrice * 100),
               currency: 'usd',
               description: orderBump ? 'Cutting Mastery Course + Stylist Survival Kit' : 'Cutting Mastery Course',
               customer: {
                 email: formData.email,
-                name: `${formData.firstName} ${formData.lastName}`
+                name: `${formData.firstName} ${formData.lastName}`,
+                firstName: formData.firstName,
+                lastName: formData.lastName
               },
               metadata: {
-                hasOrderBump: orderBump.toString(),
+                has_order_bump: orderBump.toString(),
                 customerName: `${formData.firstName} ${formData.lastName}`,
-                customerEmail: formData.email
+                customerEmail: formData.email,
+                course_type: orderBump ? 'base_plus_bump' : 'base'
               }
             }),
           });
