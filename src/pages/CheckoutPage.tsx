@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Shield, Lock, CheckCircle, Star, ArrowLeft, Gift, Scissors, Crown, Timer } from 'lucide-react';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 import { supabase } from '../lib/supabase';
-import StripeCheckout from '../components/StripeCheckout';
+import { createPaymentIntent } from '../lib/api';
+
+// Initialize Stripe
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '');
 
 export default function CheckoutPage() {
   const navigate = useNavigate();
@@ -12,12 +17,41 @@ export default function CheckoutPage() {
     firstName: '',
     lastName: ''
   });
+  const [cardData, setCardData] = useState({
+    cardNumber: '',
+    expirationDate: '',
+    cvv: ''
+  });
+  const [isExpirationFocused, setIsExpirationFocused] = useState(false);
   const [userSaved, setUserSaved] = useState(false);
-  const [showPayment, setShowPayment] = useState(false);
+  const [clientSecret, setClientSecret] = useState('');
+  const [isLoadingPayment, setIsLoadingPayment] = useState(false);
+  const [paymentError, setPaymentError] = useState<string | null>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    let formattedValue = value;
+
+    if (name === 'cardNumber') {
+      // Format card number with spaces
+      formattedValue = value.replace(/\s/g, '').replace(/(.{4})/g, '$1 ').trim();
+      if (formattedValue.length > 19) formattedValue = formattedValue.slice(0, 19);
+    } else if (name === 'expirationDate') {
+      // Format expiration date as MM/YY
+      formattedValue = value.replace(/\D/g, '').replace(/(\d{2})(\d)/, '$1/$2');
+      if (formattedValue.length > 5) formattedValue = formattedValue.slice(0, 5);
+    } else if (name === 'cvv') {
+      // Only allow numbers for CVV
+      formattedValue = value.replace(/\D/g, '');
+      if (formattedValue.length > 4) formattedValue = formattedValue.slice(0, 4);
+    }
+
+    setCardData(prev => ({ ...prev, [name]: formattedValue }));
   };
 
   // Save user data to Supabase when form is filled
@@ -57,28 +91,100 @@ export default function CheckoutPage() {
     return () => clearTimeout(debounceTimer);
   }, [formData.email, formData.firstName, formData.lastName, userSaved]);
 
-  // Show payment form when user info is complete
+  // Create payment intent when user info is complete
   useEffect(() => {
-    if (formData.email && formData.firstName && formData.lastName) {
-      setShowPayment(true);
-    } else {
-      setShowPayment(false);
+    const createIntent = async () => {
+      if (formData.email && formData.firstName && formData.lastName) {
+        try {
+          setPaymentError(null);
+          const response = await createPaymentIntent({
+            amount: totalPrice * 100,
+            currency: 'usd',
+            description: orderBump ? 'Cutting Mastery Course + Stylist Survival Kit' : 'Cutting Mastery Course',
+            customer: {
+              email: formData.email,
+              name: `${formData.firstName} ${formData.lastName}`
+            },
+            metadata: {
+              hasOrderBump: orderBump.toString(),
+              customerName: `${formData.firstName} ${formData.lastName}`,
+              customerEmail: formData.email
+            }
+          });
+          setClientSecret(response.clientSecret);
+        } catch (error) {
+          console.error('Payment intent creation error:', error);
+          setPaymentError(error instanceof Error ? error.message : 'Failed to initialize payment');
+        }
+      }
+    };
+
+    const debounceTimer = setTimeout(createIntent, 1000);
+    return () => clearTimeout(debounceTimer);
+  }, [formData.email, formData.firstName, formData.lastName, totalPrice, orderBump]);
+
+  const handleCheckout = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!clientSecret) {
+      setPaymentError('Payment not initialized. Please check your information.');
+      return;
     }
-  }, [formData.email, formData.firstName, formData.lastName]);
 
-  const handlePaymentSuccess = (paymentIntent: any) => {
-    const packageType = orderBump ? 'base_plus_bump' : 'base';
-    navigate(`/thank-you?package=${packageType}`);
-  };
+    setIsLoadingPayment(true);
+    setPaymentError(null);
 
-  const handlePaymentError = (error: Error) => {
-    console.error('Payment error:', error);
-    // Error is already displayed by the PaymentForm component
+    try {
+      const stripe = await stripePromise;
+      if (!stripe) {
+        throw new Error('Stripe failed to load');
+      }
+
+      // Create a payment method with the card data
+      const { error: paymentMethodError, paymentMethod } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: {
+          number: cardData.cardNumber.replace(/\s/g, ''),
+          exp_month: parseInt(cardData.expirationDate.split('/')[0]),
+          exp_year: parseInt('20' + cardData.expirationDate.split('/')[1]),
+          cvc: cardData.cvv,
+        },
+        billing_details: {
+          name: `${formData.firstName} ${formData.lastName}`,
+          email: formData.email,
+        },
+      });
+
+      if (paymentMethodError) {
+        throw new Error(paymentMethodError.message || 'Invalid card details');
+      }
+
+      // Confirm the payment
+      const { error: confirmError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: paymentMethod.id,
+      });
+
+      if (confirmError) {
+        throw new Error(confirmError.message || 'Payment failed');
+      }
+
+      if (paymentIntent && paymentIntent.status === 'succeeded') {
+        const packageType = orderBump ? 'base_plus_bump' : 'base';
+        navigate(`/thank-you?package=${packageType}`);
+      }
+    } catch (error) {
+      console.error('Payment error:', error);
+      setPaymentError(error instanceof Error ? error.message : 'Payment failed');
+    } finally {
+      setIsLoadingPayment(false);
+    }
   };
 
   const basePrice = 47;
   const bumpPrice = 27;
   const totalPrice = orderBump ? basePrice + bumpPrice : basePrice;
+  const isFormComplete = formData.email && formData.firstName && formData.lastName;
+  const isCardComplete = cardData.cardNumber && cardData.expirationDate && cardData.cvv;
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
@@ -239,17 +345,107 @@ The perfect safety net to complement your skills.
                 Payment Information
               </h3>
               
-              {/* Stripe Checkout Component */}
-              {showPayment ? (
-                <StripeCheckout
-                  amount={totalPrice * 100} // Convert to cents
-                  currency="usd"
-                  description={orderBump ? 'Cutting Mastery Course + Stylist Survival Kit' : 'Cutting Mastery Course'}
-                  customerEmail={formData.email}
-                  customerName={`${formData.firstName} ${formData.lastName}`}
-                  onSuccess={handlePaymentSuccess}
-                  onError={handlePaymentError}
-                />
+              {/* Payment Form */}
+              {isFormComplete ? (
+                <form onSubmit={handleCheckout} className="space-y-6">
+                  {/* Security Badge */}
+                  <div className="flex items-center justify-center space-x-2 text-sm text-gray-400 mb-6">
+                    <Lock className="h-4 w-4" />
+                    <span>Secured by Stripe</span>
+                  </div>
+
+                  {/* Card Number */}
+                  <div>
+                    <label className="block text-gray-300 font-medium mb-2">
+                      Card Number *
+                    </label>
+                    <input
+                      type="text"
+                      name="cardNumber"
+                      placeholder="1234 5678 9012 3456"
+                      value={cardData.cardNumber}
+                      onChange={handleCardInputChange}
+                      required
+                      className="input-luxury w-full px-4 py-4 rounded text-lg"
+                    />
+                  </div>
+
+                  {/* Expiration and CVV */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-gray-300 font-medium mb-2">
+                        Expiry Date *
+                      </label>
+                      <input
+                        type="text"
+                        name="expirationDate"
+                        placeholder="MM/YY"
+                        value={cardData.expirationDate}
+                        onChange={handleCardInputChange}
+                        onFocus={() => setIsExpirationFocused(true)}
+                        onBlur={() => setIsExpirationFocused(false)}
+                        required
+                        className="input-luxury w-full px-4 py-4 rounded text-lg"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-gray-300 font-medium mb-2">
+                        CVV *
+                      </label>
+                      <input
+                        type="text"
+                        name="cvv"
+                        placeholder="123"
+                        value={cardData.cvv}
+                        onChange={handleCardInputChange}
+                        required
+                        className="input-luxury w-full px-4 py-4 rounded text-lg"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Error Message */}
+                  {paymentError && (
+                    <div className="card-burgundy rounded-lg p-4 border-l-4 border-red-500">
+                      <p className="text-red-400 text-sm">{paymentError}</p>
+                    </div>
+                  )}
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    disabled={isLoadingPayment || !isCardComplete || !clientSecret}
+                    className={`w-full btn-luxury text-black font-bold text-xl py-6 rounded transition-all duration-300 ${
+                      isLoadingPayment || !isCardComplete || !clientSecret
+                        ? 'opacity-50 cursor-not-allowed'
+                        : 'hover:scale-105'
+                    }`}
+                  >
+                    {isLoadingPayment ? (
+                      <div className="flex items-center justify-center">
+                        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-black mr-3"></div>
+                        Processing Payment...
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-center">
+                        <Lock className="h-6 w-6 mr-3" />
+                        Complete Secure Payment – ${totalPrice}
+                      </div>
+                    )}
+                  </button>
+
+                  {/* Trust Indicators */}
+                  <div className="flex items-center justify-center space-x-4 text-xs text-gray-400 pt-4 border-t border-gray-700">
+                    <div className="flex items-center">
+                      <Shield className="h-3 w-3 mr-1" />
+                      <span>SSL Secured</span>
+                    </div>
+                    <div>•</div>
+                    <div>PCI Compliant</div>
+                    <div>•</div>
+                    <div>256-bit Encryption</div>
+                  </div>
+                </form>
               ) : (
                 <div className="text-center py-8">
                   <p className="text-gray-300">Please fill in your information above to continue</p>
@@ -322,7 +518,7 @@ The perfect safety net to complement your skills.
                 <span className="text-gradient-gold font-semibold text-lg">Powered by Stripe</span>
               </div>
               <p className="text-gray-300 text-sm leading-relaxed mb-4 text-center">
-                Your payment is processed securely on this page using Stripe's industry-leading security. 
+                Your payment is processed securely using Stripe's industry-leading security. 
                 Your card details are encrypted and never stored on our servers.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-gray-400">
