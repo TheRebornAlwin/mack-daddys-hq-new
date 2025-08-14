@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Shield, Lock, CheckCircle, Star, ArrowLeft, Users, ExternalLink, Gift, Scissors, Crown, Timer, Target } from 'lucide-react';
+import { Shield, Lock, CheckCircle, Star, ArrowLeft, ExternalLink, Gift, Scissors, Crown, Timer, Target } from 'lucide-react';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 import { supabase } from '../lib/supabase';
+import StripePaymentForm from '../components/StripePaymentForm';
 
 export default function CheckoutPage() {
   const navigate = useNavigate();
@@ -10,38 +12,29 @@ export default function CheckoutPage() {
   const [formData, setFormData] = useState({
     email: '',
     firstName: '',
-    lastName: '',
-    cardNumber: '',
-    expirationDate: '',
-    cvv: ''
+    lastName: ''
   });
-  const [isExpirationFocused, setIsExpirationFocused] = useState(false);
   const [userSaved, setUserSaved] = useState(false);
+  
+  // Stripe-related state
+  const [stripePromise, setStripePromise] = useState<Promise<any> | null>(null);
+  const [clientSecret, setClientSecret] = useState<string>('');
+  const [isLoadingPaymentIntent, setIsLoadingPaymentIntent] = useState(false);
+  const [paymentIntentError, setPaymentIntentError] = useState<string | null>(null);
+
+  // Initialize Stripe
+  useEffect(() => {
+    const publishableKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
+    if (publishableKey) {
+      setStripePromise(loadStripe(publishableKey));
+    } else {
+      setPaymentIntentError('Stripe publishable key is not configured');
+    }
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    
-    // Format card number with spaces
-    if (name === 'cardNumber') {
-      const formatted = value.replace(/\s/g, '').replace(/(.{4})/g, '$1 ').trim();
-      setFormData(prev => ({ ...prev, [name]: formatted }));
-    }
-    // Format expiration date
-    else if (name === 'expirationDate') {
-      let formatted = value.replace(/\D/g, '');
-      if (formatted.length >= 2) {
-        formatted = formatted.substring(0, 2) + '/' + formatted.substring(2, 4);
-      }
-      setFormData(prev => ({ ...prev, [name]: formatted }));
-    }
-    // Format CVV (numbers only, max 4 digits)
-    else if (name === 'cvv') {
-      const formatted = value.replace(/\D/g, '').substring(0, 4);
-      setFormData(prev => ({ ...prev, [name]: formatted }));
-    }
-    else {
-      setFormData(prev => ({ ...prev, [name]: value }));
-    }
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   // Save user data to Supabase when form is filled
@@ -49,7 +42,6 @@ export default function CheckoutPage() {
     const saveUserData = async () => {
       if (formData.email && formData.firstName && formData.lastName && !userSaved) {
         try {
-          // Save to users table directly
           const { data, error } = await supabase
             .from('users')
             .insert([
@@ -65,7 +57,6 @@ export default function CheckoutPage() {
             console.log('User data saved successfully:', data);
             setUserSaved(true);
           } else {
-            // If user already exists (email constraint), that's okay
             if (error.code === '23505') {
               console.log('User already exists in database');
               setUserSaved(true);
@@ -79,42 +70,114 @@ export default function CheckoutPage() {
       }
     };
 
-    // Save immediately when all required fields are filled
     const debounceTimer = setTimeout(saveUserData, 1000);
     return () => clearTimeout(debounceTimer);
   }, [formData.email, formData.firstName, formData.lastName, userSaved]);
 
-  const handleCheckout = () => {
-    if (!formData.email || !formData.firstName || !formData.lastName || 
-        !formData.cardNumber || !formData.expirationDate || !formData.cvv) {
-      alert('Please fill in all required fields');
-      return;
-    }
+  // Create payment intent when form is ready
+  useEffect(() => {
+    const createPaymentIntent = async () => {
+      if (!formData.email || !formData.firstName || !formData.lastName) {
+        return;
+      }
 
-    const basePrice = 47;
-    const bumpPrice = 27;
-    const totalPrice = orderBump ? basePrice + bumpPrice : basePrice;
-    
-    // Determine package type for thank you page
+      try {
+        setIsLoadingPaymentIntent(true);
+        setPaymentIntentError(null);
+
+        const basePrice = 47;
+        const bumpPrice = 27;
+        const totalAmount = (orderBump ? basePrice + bumpPrice : basePrice) * 100; // Convert to cents
+
+        const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/stripe-payment`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            amount: totalAmount,
+            currency: 'usd',
+            description: orderBump ? 'Cutting Mastery Course + Stylist Survival Kit' : 'Cutting Mastery Course',
+            customer: {
+              email: formData.email,
+              name: `${formData.firstName} ${formData.lastName}`
+            },
+            metadata: {
+              has_order_bump: orderBump.toString(),
+              customer_first_name: formData.firstName,
+              customer_last_name: formData.lastName
+            }
+          }),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Failed to create payment intent');
+        }
+
+        const data = await response.json();
+        setClientSecret(data.clientSecret);
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : 'Failed to initialize payment';
+        setPaymentIntentError(errorMessage);
+        console.error('Payment intent creation error:', err);
+      } finally {
+        setIsLoadingPaymentIntent(false);
+      }
+    };
+
+    const debounceTimer = setTimeout(createPaymentIntent, 500);
+    return () => clearTimeout(debounceTimer);
+  }, [formData.email, formData.firstName, formData.lastName, orderBump]);
+
+  const handlePaymentSuccess = (paymentIntent: any) => {
     const packageType = orderBump ? 'base_plus_bump' : 'base';
-    
-    const paymentLinkUrl = orderBump 
-      ? 'https://buy.stripe.com/test_cNi3cw6V7e2cdRff5p2sM01'
-      : 'https://buy.stripe.com/test_aFa3cw2ER7DOeVj1ez2sM02';
-    
-    const urlParams = new URLSearchParams({
-      'prefilled_email': formData.email,
-      'client_reference_id': `${formData.firstName}_${formData.lastName}_${Date.now()}`,
-      'success_url': `${window.location.origin}/thank-you?package=${packageType}`
-    });
-    
-    const fullUrl = `${paymentLinkUrl}?${urlParams.toString()}`;
-    window.location.href = fullUrl;
+    navigate(`/thank-you?package=${packageType}`);
+  };
+
+  const handlePaymentError = (error: Error) => {
+    setPaymentIntentError(error.message);
   };
 
   const basePrice = 47;
   const bumpPrice = 27;
   const totalPrice = orderBump ? basePrice + bumpPrice : basePrice;
+
+  const stripeAppearance = {
+    theme: 'night' as const,
+    variables: {
+      colorPrimary: '#FFD700',
+      colorBackground: '#000000',
+      colorText: '#ffffff',
+      colorDanger: '#ef4444',
+      fontFamily: 'Inter, system-ui, sans-serif',
+      spacingUnit: '4px',
+      borderRadius: '8px',
+    },
+    rules: {
+      '.Tab': {
+        border: '1px solid rgba(255, 215, 0, 0.3)',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      },
+      '.Tab:hover': {
+        backgroundColor: 'rgba(255, 215, 0, 0.1)',
+      },
+      '.Tab--selected': {
+        borderColor: '#FFD700',
+        backgroundColor: 'rgba(255, 215, 0, 0.2)',
+      },
+      '.Input': {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        border: '1px solid rgba(255, 215, 0, 0.3)',
+        color: '#ffffff',
+      },
+      '.Input:focus': {
+        borderColor: '#FFD700',
+        boxShadow: '0 0 0 3px rgba(255, 215, 0, 0.1)',
+      },
+    },
+  };
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
@@ -138,7 +201,7 @@ export default function CheckoutPage() {
               </button>
               
               <div className="flex items-center">
-                <Scissors className="h-7 w-7 text-luxury mr-4" />
+                <Scissors className="h-7 w-7 text-luxury-gold mr-4" />
                 <span className="text-2xl font-playfair font-bold tracking-wider text-luxury">MACK DADDY'S</span>
               </div>
             </div>
@@ -206,57 +269,6 @@ export default function CheckoutPage() {
               </div>
             </div>
 
-            {/* Step 2 - Payment Info */}
-            <div className="mb-8">
-              <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
-                <div className="w-8 h-8 bg-luxury-gradient text-black rounded flex items-center justify-center text-sm font-bold mr-3">2</div>
-                Payment Information
-              </h3>
-              <div className="space-y-4">
-                <input
-                  type="text"
-                  name="cardNumber"
-                  placeholder="Card Number"
-                  value={formData.cardNumber}
-                  onChange={handleInputChange}
-                  required
-                  className="input-luxury w-full px-4 py-4 rounded text-lg"
-                  maxLength={19}
-                />
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="relative">
-                    <input
-                      type="text"
-                      name="expirationDate"
-                      placeholder={isExpirationFocused ? "" : "MM/YY"}
-                      value={formData.expirationDate}
-                      onChange={handleInputChange}
-                      onFocus={() => setIsExpirationFocused(true)}
-                      onBlur={() => setIsExpirationFocused(false)}
-                      required
-                      className="input-luxury w-full px-4 py-4 rounded text-lg"
-                      maxLength={5}
-                    />
-                    {!isExpirationFocused && !formData.expirationDate && (
-                      <div className="absolute inset-0 flex items-center px-4 pointer-events-none">
-                        <span className="text-gray-500 text-lg">MM/YY</span>
-                      </div>
-                    )}
-                  </div>
-                  <input
-                    type="text"
-                    name="cvv"
-                    placeholder="CVV"
-                    value={formData.cvv}
-                    onChange={handleInputChange}
-                    required
-                    className="input-luxury px-4 py-4 rounded text-lg"
-                    maxLength={4}
-                  />
-                </div>
-              </div>
-            </div>
-
             {/* Order Bump - Checked by Default */}
             <div className="card-luxury rounded-lg p-6 mb-8 border-l-4 border-luxury">
               <div className="flex items-start">
@@ -303,7 +315,7 @@ The perfect safety net to complement your skills.
               </div>
               {orderBump && (
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-lg text-gray-300">Business Blueprint:</span>
+                  <span className="text-lg text-gray-300">Stylist Survival Kit:</span>
                   <span className="text-lg text-white">$27</span>
                 </div>
               )}
@@ -319,15 +331,49 @@ The perfect safety net to complement your skills.
               </div>
             </div>
 
-            {/* Checkout Button */}
-            <button
-              onClick={handleCheckout}
-              className="w-full btn-luxury text-black font-bold text-xl py-6 rounded mb-4 disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={!formData.email || !formData.firstName || !formData.lastName || !formData.cardNumber || !formData.expirationDate || !formData.cvv}
-            >
-              <Lock className="h-6 w-6 mr-3 inline" />
-              <span>Complete Secure Purchase – ${totalPrice}</span>
-            </button>
+            {/* Step 2 - Payment Info */}
+            <div className="mb-8">
+              <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
+                <div className="w-8 h-8 bg-luxury-gradient text-black rounded flex items-center justify-center text-sm font-bold mr-3">2</div>
+                Payment Information
+              </h3>
+              
+              {/* Payment Form */}
+              {paymentIntentError ? (
+                <div className="card-burgundy rounded-lg p-6 border-l-4 border-red-500">
+                  <p className="text-red-400">{paymentIntentError}</p>
+                </div>
+              ) : isLoadingPaymentIntent ? (
+                <div className="text-center py-8">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-luxury mx-auto mb-4"></div>
+                  <p className="text-gray-300">Preparing secure payment...</p>
+                </div>
+              ) : !clientSecret ? (
+                <div className="text-center py-8">
+                  <p className="text-gray-300">Please fill in your information above to continue</p>
+                </div>
+              ) : stripePromise ? (
+                <Elements 
+                  stripe={stripePromise} 
+                  options={{ 
+                    clientSecret,
+                    appearance: stripeAppearance
+                  }}
+                >
+                  <StripePaymentForm
+                    amount={totalPrice * 100}
+                    onSuccess={handlePaymentSuccess}
+                    onError={handlePaymentError}
+                    customerEmail={formData.email}
+                    customerName={`${formData.firstName} ${formData.lastName}`}
+                  />
+                </Elements>
+              ) : (
+                <div className="card-burgundy rounded-lg p-6 border-l-4 border-red-500">
+                  <p className="text-red-400">Unable to load payment form</p>
+                </div>
+              )}
+            </div>
 
             <div className="flex items-center justify-center text-gray-400 text-sm">
               <Shield className="h-4 w-4 mr-2" />
@@ -394,8 +440,8 @@ The perfect safety net to complement your skills.
                 <span className="text-gradient-gold font-semibold text-lg">Powered by Stripe</span>
               </div>
               <p className="text-gray-300 text-sm leading-relaxed mb-4 text-center">
-                You'll be securely redirected to Stripe's checkout page to complete your payment. 
-                Stripe is trusted by millions of businesses worldwide.
+                Your payment is processed securely on this page using Stripe's industry-leading security. 
+                Your card details are encrypted and never stored on our servers.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-gray-400">
                 <div className="flex items-center">
