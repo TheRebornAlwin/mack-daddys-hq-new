@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Shield, Lock, CheckCircle, Star, ArrowLeft, Gift, Scissors, Crown, Timer } from 'lucide-react';
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements } from '@stripe/react-stripe-js';
 import { supabase } from '../lib/supabase';
-import { createPaymentIntent } from '../lib/api';
-
-// Initialize Stripe
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '');
 
 export default function CheckoutPage() {
   const navigate = useNavigate();
@@ -97,21 +91,36 @@ export default function CheckoutPage() {
       if (formData.email && formData.firstName && formData.lastName) {
         try {
           setPaymentError(null);
-          const response = await createPaymentIntent({
-            amount: totalPrice * 100,
-            currency: 'usd',
-            description: orderBump ? 'Cutting Mastery Course + Stylist Survival Kit' : 'Cutting Mastery Course',
-            customer: {
-              email: formData.email,
-              name: `${formData.firstName} ${formData.lastName}`
+          
+          const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/stripe-payment`, {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+              'Content-Type': 'application/json',
             },
-            metadata: {
-              hasOrderBump: orderBump.toString(),
-              customerName: `${formData.firstName} ${formData.lastName}`,
-              customerEmail: formData.email
-            }
+            body: JSON.stringify({
+              amount: totalPrice * 100,
+              currency: 'usd',
+              description: orderBump ? 'Cutting Mastery Course + Stylist Survival Kit' : 'Cutting Mastery Course',
+              customer: {
+                email: formData.email,
+                name: `${formData.firstName} ${formData.lastName}`
+              },
+              metadata: {
+                hasOrderBump: orderBump.toString(),
+                customerName: `${formData.firstName} ${formData.lastName}`,
+                customerEmail: formData.email
+              }
+            }),
           });
-          setClientSecret(response.clientSecret);
+          
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Failed to create payment intent');
+          }
+          
+          const data = await response.json();
+          setClientSecret(data.clientSecret);
         } catch (error) {
           console.error('Payment intent creation error:', error);
           setPaymentError(error instanceof Error ? error.message : 'Failed to initialize payment');
@@ -121,7 +130,7 @@ export default function CheckoutPage() {
 
     const debounceTimer = setTimeout(createIntent, 1000);
     return () => clearTimeout(debounceTimer);
-  }, [formData.email, formData.firstName, formData.lastName, totalPrice, orderBump]);
+  }, [formData.email, formData.firstName, formData.lastName, orderBump]);
 
   const handleCheckout = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -135,18 +144,48 @@ export default function CheckoutPage() {
     setPaymentError(null);
 
     try {
-      const stripe = await stripePromise;
+      // Load Stripe dynamically to avoid initialization issues
+      const { loadStripe } = await import('@stripe/stripe-js');
+      const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '');
+      
       if (!stripe) {
-        throw new Error('Stripe failed to load');
+        throw new Error('Stripe failed to load. Please check your connection and try again.');
       }
 
-      // Create a payment method with the card data
+      // Validate card data
+      const cardNumber = cardData.cardNumber.replace(/\s/g, '');
+      const expParts = cardData.expirationDate.split('/');
+      
+      if (cardNumber.length < 13 || cardNumber.length > 19) {
+        throw new Error('Please enter a valid card number');
+      }
+      
+      if (expParts.length !== 2 || !expParts[0] || !expParts[1]) {
+        throw new Error('Please enter a valid expiration date (MM/YY)');
+      }
+      
+      if (cardData.cvv.length < 3 || cardData.cvv.length > 4) {
+        throw new Error('Please enter a valid CVV');
+      }
+
+      const expMonth = parseInt(expParts[0]);
+      const expYear = parseInt('20' + expParts[1]);
+      
+      if (expMonth < 1 || expMonth > 12) {
+        throw new Error('Please enter a valid expiration month');
+      }
+      
+      if (expYear < new Date().getFullYear()) {
+        throw new Error('Card has expired');
+      }
+
+      // Create payment method
       const { error: paymentMethodError, paymentMethod } = await stripe.createPaymentMethod({
         type: 'card',
         card: {
-          number: cardData.cardNumber.replace(/\s/g, ''),
-          exp_month: parseInt(cardData.expirationDate.split('/')[0]),
-          exp_year: parseInt('20' + cardData.expirationDate.split('/')[1]),
+          number: cardNumber,
+          exp_month: expMonth,
+          exp_year: expYear,
           cvc: cardData.cvv,
         },
         billing_details: {
@@ -159,7 +198,7 @@ export default function CheckoutPage() {
         throw new Error(paymentMethodError.message || 'Invalid card details');
       }
 
-      // Confirm the payment
+      // Confirm payment
       const { error: confirmError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
         payment_method: paymentMethod.id,
       });
