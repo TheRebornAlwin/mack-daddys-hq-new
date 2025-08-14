@@ -51,7 +51,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
       const { error, paymentIntent } = await stripe.confirmPayment({
         elements,
         confirmParams: {
-          return_url: `${window.location.origin}/success`,
+          return_url: `${window.location.origin}/thank-you`,
           payment_method_data: {
             billing_details: {
               name: customerName || 'Customer',
@@ -94,7 +94,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Security Badge */}
-      <div className="flex items-center justify-center space-x-2 text-sm text-gray-500 mb-4">
+      <div className="flex items-center justify-center space-x-2 text-sm text-gray-400 mb-4">
         <Lock className="h-4 w-4" />
         <span>Secured by Stripe</span>
       </div>
@@ -145,8 +145,8 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
 
       {/* Error Message */}
       {message && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-          <p className="text-sm text-red-700">{message}</p>
+        <div className="card-burgundy rounded-lg p-4 border-l-4 border-red-500">
+          <p className="text-red-400 text-sm">{message}</p>
         </div>
       )}
 
@@ -155,25 +155,22 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
         <button
           type="submit"
           disabled={isLoading || !stripe || !elements}
-          className={`w-full flex items-center justify-center py-3 px-4 border border-transparent rounded-lg text-sm font-medium text-white ${
+          className={`w-full btn-luxury text-black font-bold text-xl py-6 rounded transition-all duration-300 ${
             isLoading || !stripe || !elements
-              ? 'bg-blue-400 cursor-not-allowed'
-              : 'bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
-          } transition-colors`}
+              ? 'opacity-50 cursor-not-allowed'
+              : 'hover:scale-105'
+          }`}
         >
           {isLoading ? (
-            <>
-              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-              Processing...
-            </>
+            <div className="flex items-center justify-center">
+              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-black mr-3"></div>
+              Processing Payment...
+            </div>
           ) : (
-            <>
-              <CreditCard className="h-5 w-5 mr-2" />
-              Pay ${(amount / 100).toFixed(2)}
-            </>
+            <div className="flex items-center justify-center">
+              <Lock className="h-6 w-6 mr-3" />
+              Complete Secure Payment – ${(amount / 100).toFixed(2)}
+            </div>
           )}
         </button>
 
@@ -181,7 +178,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
           <button
             type="button"
             onClick={onCancel}
-            className="w-full flex items-center justify-center py-2 px-4 text-sm text-gray-600 hover:text-gray-800 transition-colors"
+            className="w-full flex items-center justify-center py-2 px-4 text-gray-400 hover:text-gray-300 transition-colors"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Cancel
@@ -190,8 +187,8 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
       </div>
 
       {/* Trust Badges */}
-      <div className="pt-4 border-t border-gray-200">
-        <div className="flex items-center justify-center space-x-4 text-xs text-gray-500">
+      <div className="pt-4 border-t border-gray-700">
+        <div className="flex items-center justify-center space-x-4 text-xs text-gray-400">
           <div className="flex items-center">
             <Lock className="h-3 w-3 mr-1" />
             <span>SSL Secured</span>

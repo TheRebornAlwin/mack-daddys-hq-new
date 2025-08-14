@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Shield, Lock, CheckCircle, Star, ArrowLeft, ExternalLink, Gift, Scissors, Crown, Timer, Target } from 'lucide-react';
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements } from '@stripe/react-stripe-js';
+import { Shield, Lock, CheckCircle, Star, ArrowLeft, Gift, Scissors, Crown, Timer } from 'lucide-react';
 import { supabase } from '../lib/supabase';
-import StripePaymentForm from '../components/StripePaymentForm';
+import StripeCheckout from '../components/StripeCheckout';
 
 export default function CheckoutPage() {
   const navigate = useNavigate();
@@ -15,22 +13,7 @@ export default function CheckoutPage() {
     lastName: ''
   });
   const [userSaved, setUserSaved] = useState(false);
-  
-  // Stripe-related state
-  const [stripePromise, setStripePromise] = useState<Promise<any> | null>(null);
-  const [clientSecret, setClientSecret] = useState<string>('');
-  const [isLoadingPaymentIntent, setIsLoadingPaymentIntent] = useState(false);
-  const [paymentIntentError, setPaymentIntentError] = useState<string | null>(null);
-
-  // Initialize Stripe
-  useEffect(() => {
-    const publishableKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
-    if (publishableKey) {
-      setStripePromise(loadStripe(publishableKey));
-    } else {
-      setPaymentIntentError('Stripe publishable key is not configured');
-    }
-  }, []);
+  const [showPayment, setShowPayment] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -74,62 +57,14 @@ export default function CheckoutPage() {
     return () => clearTimeout(debounceTimer);
   }, [formData.email, formData.firstName, formData.lastName, userSaved]);
 
-  // Create payment intent when form is ready
+  // Show payment form when user info is complete
   useEffect(() => {
-    const createPaymentIntent = async () => {
-      if (!formData.email || !formData.firstName || !formData.lastName) {
-        return;
-      }
-
-      try {
-        setIsLoadingPaymentIntent(true);
-        setPaymentIntentError(null);
-
-        const basePrice = 47;
-        const bumpPrice = 27;
-        const totalAmount = (orderBump ? basePrice + bumpPrice : basePrice) * 100; // Convert to cents
-
-        const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/stripe-payment`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            amount: totalAmount,
-            currency: 'usd',
-            description: orderBump ? 'Cutting Mastery Course + Stylist Survival Kit' : 'Cutting Mastery Course',
-            customer: {
-              email: formData.email,
-              name: `${formData.firstName} ${formData.lastName}`
-            },
-            metadata: {
-              has_order_bump: orderBump.toString(),
-              customer_first_name: formData.firstName,
-              customer_last_name: formData.lastName
-            }
-          }),
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || 'Failed to create payment intent');
-        }
-
-        const data = await response.json();
-        setClientSecret(data.clientSecret);
-      } catch (err) {
-        const errorMessage = err instanceof Error ? err.message : 'Failed to initialize payment';
-        setPaymentIntentError(errorMessage);
-        console.error('Payment intent creation error:', err);
-      } finally {
-        setIsLoadingPaymentIntent(false);
-      }
-    };
-
-    const debounceTimer = setTimeout(createPaymentIntent, 500);
-    return () => clearTimeout(debounceTimer);
-  }, [formData.email, formData.firstName, formData.lastName, orderBump]);
+    if (formData.email && formData.firstName && formData.lastName) {
+      setShowPayment(true);
+    } else {
+      setShowPayment(false);
+    }
+  }, [formData.email, formData.firstName, formData.lastName]);
 
   const handlePaymentSuccess = (paymentIntent: any) => {
     const packageType = orderBump ? 'base_plus_bump' : 'base';
@@ -137,47 +72,13 @@ export default function CheckoutPage() {
   };
 
   const handlePaymentError = (error: Error) => {
-    setPaymentIntentError(error.message);
+    console.error('Payment error:', error);
+    // Error is already displayed by the PaymentForm component
   };
 
   const basePrice = 47;
   const bumpPrice = 27;
   const totalPrice = orderBump ? basePrice + bumpPrice : basePrice;
-
-  const stripeAppearance = {
-    theme: 'night' as const,
-    variables: {
-      colorPrimary: '#FFD700',
-      colorBackground: '#000000',
-      colorText: '#ffffff',
-      colorDanger: '#ef4444',
-      fontFamily: 'Inter, system-ui, sans-serif',
-      spacingUnit: '4px',
-      borderRadius: '8px',
-    },
-    rules: {
-      '.Tab': {
-        border: '1px solid rgba(255, 215, 0, 0.3)',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      },
-      '.Tab:hover': {
-        backgroundColor: 'rgba(255, 215, 0, 0.1)',
-      },
-      '.Tab--selected': {
-        borderColor: '#FFD700',
-        backgroundColor: 'rgba(255, 215, 0, 0.2)',
-      },
-      '.Input': {
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        border: '1px solid rgba(255, 215, 0, 0.3)',
-        color: '#ffffff',
-      },
-      '.Input:focus': {
-        borderColor: '#FFD700',
-        boxShadow: '0 0 0 3px rgba(255, 215, 0, 0.1)',
-      },
-    },
-  };
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
@@ -338,39 +239,20 @@ The perfect safety net to complement your skills.
                 Payment Information
               </h3>
               
-              {/* Payment Form */}
-              {paymentIntentError ? (
-                <div className="card-burgundy rounded-lg p-6 border-l-4 border-red-500">
-                  <p className="text-red-400">{paymentIntentError}</p>
-                </div>
-              ) : isLoadingPaymentIntent ? (
-                <div className="text-center py-8">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-luxury mx-auto mb-4"></div>
-                  <p className="text-gray-300">Preparing secure payment...</p>
-                </div>
-              ) : !clientSecret ? (
+              {/* Stripe Checkout Component */}
+              {showPayment ? (
+                <StripeCheckout
+                  amount={totalPrice * 100} // Convert to cents
+                  currency="usd"
+                  description={orderBump ? 'Cutting Mastery Course + Stylist Survival Kit' : 'Cutting Mastery Course'}
+                  customerEmail={formData.email}
+                  customerName={`${formData.firstName} ${formData.lastName}`}
+                  onSuccess={handlePaymentSuccess}
+                  onError={handlePaymentError}
+                />
+              ) : (
                 <div className="text-center py-8">
                   <p className="text-gray-300">Please fill in your information above to continue</p>
-                </div>
-              ) : stripePromise ? (
-                <Elements 
-                  stripe={stripePromise} 
-                  options={{ 
-                    clientSecret,
-                    appearance: stripeAppearance
-                  }}
-                >
-                  <StripePaymentForm
-                    amount={totalPrice * 100}
-                    onSuccess={handlePaymentSuccess}
-                    onError={handlePaymentError}
-                    customerEmail={formData.email}
-                    customerName={`${formData.firstName} ${formData.lastName}`}
-                  />
-                </Elements>
-              ) : (
-                <div className="card-burgundy rounded-lg p-6 border-l-4 border-red-500">
-                  <p className="text-red-400">Unable to load payment form</p>
                 </div>
               )}
             </div>

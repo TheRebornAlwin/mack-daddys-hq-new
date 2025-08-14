@@ -169,39 +169,52 @@ const StripeCheckout: React.FC<StripeCheckoutProps> = ({
   const options = {
     clientSecret,
     appearance: {
-      theme: 'stripe' as const,
+      theme: 'night' as const,
       variables: {
-        colorPrimary: '#3b82f6',
-        colorBackground: '#ffffff',
-        colorText: '#1f2937',
+        colorPrimary: '#FFD700',
+        colorBackground: '#000000',
+        colorText: '#ffffff',
         colorDanger: '#ef4444',
-        fontFamily: 'system-ui, sans-serif',
+        fontFamily: 'Inter, system-ui, sans-serif',
         spacingUnit: '4px',
-        borderRadius: '6px',
+        borderRadius: '8px',
+      },
+      rules: {
+        '.Tab': {
+          border: '1px solid rgba(255, 215, 0, 0.3)',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        },
+        '.Tab:hover': {
+          backgroundColor: 'rgba(255, 215, 0, 0.1)',
+        },
+        '.Tab--selected': {
+          borderColor: '#FFD700',
+          backgroundColor: 'rgba(255, 215, 0, 0.2)',
+        },
+        '.Input': {
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          border: '1px solid rgba(255, 215, 0, 0.3)',
+          color: '#ffffff',
+        },
+        '.Input:focus': {
+          borderColor: '#FFD700',
+          boxShadow: '0 0 0 3px rgba(255, 215, 0, 0.1)',
+        },
       },
     },
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <div className="mb-6 text-center">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Complete Payment</h2>
-        <p className="text-gray-600">
-          Total: <span className="font-semibold">${(amount / 100).toFixed(2)}</span>
-        </p>
-      </div>
-
-      <Elements stripe={stripePromise} options={options}>
-        <PaymentForm
-          amount={amount}
-          onSuccess={handlePaymentSuccess}
-          onError={handlePaymentError}
-          onCancel={onCancel}
-          customerEmail={customerEmail}
-          customerName={customerName}
-        />
-      </Elements>
-    </div>
+    <Elements stripe={stripePromise} options={options}>
+      <PaymentForm
+        amount={amount}
+        onSuccess={handlePaymentSuccess}
+        onError={handlePaymentError}
+        onCancel={onCancel}
+        customerEmail={customerEmail}
+        customerName={customerName}
+      />
+    </Elements>
   );
 };
 
