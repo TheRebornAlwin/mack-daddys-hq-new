@@ -1,4 +1,5 @@
 import Stripe from 'npm:stripe@14.21.0';
+import { createClient } from 'npm:@supabase/supabase-js@2.39.3';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -17,6 +18,12 @@ if (!stripeSecretKey) {
 const stripe = new Stripe(stripeSecretKey || '', {
   apiVersion: '2023-10-16',
 });
+
+// Initialize Supabase client with service role key for backend operations
+const supabaseUrl = Deno.env.get('SUPABASE_URL');
+const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+
+const supabase = createClient(supabaseUrl || '', supabaseServiceKey || '');
 
 Deno.serve(async (req) => {
   // Handle CORS preflight requests
@@ -51,7 +58,7 @@ Deno.serve(async (req) => {
       description = 'Mack Daddy\'s Course',
       customer = {},
       metadata = {},
-      hasOrderBump = false
+      has_order_bump = false
     } = await req.json();
 
     // Validate required fields
@@ -68,7 +75,46 @@ Deno.serve(async (req) => {
       );
     }
 
+    // Validate customer data
+    if (!customer.email || !customer.firstName || !customer.lastName) {
+      return new Response(
+        JSON.stringify({ error: 'Customer information is required' }),
+        {
+          status: 400,
+          headers: {
+            ...corsHeaders,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+    }
+
     console.log('Creating payment intent for amount:', amount, currency);
+
+    // Save user data to database using service role
+    try {
+      const { error: userError } = await supabase
+        .from('users')
+        .upsert([
+          {
+            email: customer.email,
+            first_name: customer.firstName,
+            last_name: customer.lastName
+          }
+        ], {
+          onConflict: 'email'
+        });
+      
+      if (userError) {
+        console.error('Error saving user data:', userError);
+        // Don't fail the payment intent creation if user save fails
+      } else {
+        console.log('User data saved successfully');
+      }
+    } catch (error) {
+      console.error('Error saving user data:', error);
+      // Don't fail the payment intent creation if user save fails
+    }
 
     // Create a PaymentIntent with the order amount and currency
     const paymentIntent = await stripe.paymentIntents.create({
@@ -78,9 +124,9 @@ Deno.serve(async (req) => {
       receipt_email: customer.email || undefined,
       metadata: {
         ...metadata,
-        customer_name: String(customer.name || ''),
+        customer_name: String(customer.name || `${customer.firstName} ${customer.lastName}`),
         customer_email: String(customer.email || ''),
-        has_order_bump: hasOrderBump.toString(),
+        has_order_bump: String(has_order_bump || false),
         created_via: 'mack_daddys_course',
         timestamp: new Date().toISOString(),
       },
