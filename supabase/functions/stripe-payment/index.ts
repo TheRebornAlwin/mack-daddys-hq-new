@@ -50,12 +50,14 @@ Deno.serve(async (req) => {
       currency = 'usd',
       description = 'Mack Daddy\'s Course',
       customer = {},
-      metadata = {},
-      hasOrderBump = false
+      metadata = {}
     } = await req.json();
+
+    console.log('Received payment request:', { amount, currency, description, customer });
 
     // Validate required fields
     if (!amount || amount <= 0) {
+      console.error('Invalid amount:', amount);
       return new Response(
         JSON.stringify({ error: 'Invalid payment amount' }),
         {
@@ -68,29 +70,30 @@ Deno.serve(async (req) => {
       );
     }
 
+    // Validate and sanitize customer data
+    const customerEmail = customer.email ? String(customer.email).trim() : undefined;
+    const customerName = customer.name ? String(customer.name).trim() : undefined;
+    
+    console.log('Sanitized customer data:', { customerEmail, customerName });
+
     console.log('Creating payment intent for amount:', amount, currency);
 
     // Create a PaymentIntent with the order amount and currency
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(Number(amount)), // Ensure it's a valid integer
+      amount: parseInt(String(amount)), // Ensure it's a valid integer
       currency: currency.toLowerCase(),
       description,
-      receipt_email: customer.email || undefined,
+      receipt_email: customerEmail,
       metadata: {
-        ...metadata,
-        customer_name: String(customer.name || ''),
-        customer_email: String(customer.email || ''),
-        has_order_bump: hasOrderBump.toString(),
+        customer_name: customerName || '',
+        customer_email: customerEmail || '',
         created_via: 'mack_daddys_course',
-        timestamp: new Date().toISOString(),
+        timestamp: new Date().toISOString()
       },
       // Enable automatic payment methods (includes cards, wallets, etc.)
       automatic_payment_methods: {
-        enabled: true,
-        allow_redirects: 'always',
+        enabled: true
       },
-      // Set up for immediate confirmation
-      confirmation_method: 'automatic',
     });
 
     console.log('Payment intent created:', paymentIntent.id);
