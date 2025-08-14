@@ -72,14 +72,14 @@ Deno.serve(async (req) => {
 
     // Create a PaymentIntent with the order amount and currency
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(amount), // Ensure it's an integer
+      amount: Math.round(Number(amount)), // Ensure it's a valid integer
       currency: currency.toLowerCase(),
       description,
       receipt_email: customer.email || undefined,
       metadata: {
         ...metadata,
-        customer_name: customer.name || '',
-        customer_email: customer.email || '',
+        customer_name: String(customer.name || ''),
+        customer_email: String(customer.email || ''),
         has_order_bump: hasOrderBump.toString(),
         created_via: 'mack_daddys_course',
         timestamp: new Date().toISOString(),
