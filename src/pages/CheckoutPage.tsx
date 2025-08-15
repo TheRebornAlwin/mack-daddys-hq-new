@@ -20,6 +20,7 @@ export default function CheckoutPage() {
   const [clientSecret, setClientSecret] = useState('');
   const [isLoadingPayment, setIsLoadingPayment] = useState(false);
   const [paymentError, setPaymentError] = useState<string | null>(null);
+  const [isCreatingIntent, setIsCreatingIntent] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -50,8 +51,9 @@ export default function CheckoutPage() {
   // Create payment intent when user info is complete
   useEffect(() => {
     const createIntent = async () => {
-      if (formData.email && formData.firstName && formData.lastName) {
+      if (formData.email && formData.firstName && formData.lastName && !isCreatingIntent) {
         try {
+          setIsCreatingIntent(true);
           setPaymentError(null);
           
           const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/stripe-payment`, {
@@ -64,12 +66,10 @@ export default function CheckoutPage() {
               amount: Math.round(totalPrice * 100),
               currency: 'usd',
               description: orderBump ? 'Cutting Mastery Course + Stylist Survival Kit' : 'Cutting Mastery Course',
-              customer: {
-                email: formData.email,
-                name: `${formData.firstName} ${formData.lastName}`,
-                firstName: formData.firstName,
-                lastName: formData.lastName
-              },
+              customerEmail: formData.email,
+              customerName: `${formData.firstName} ${formData.lastName}`,
+              firstName: formData.firstName,
+              lastName: formData.lastName,
               metadata: {
                 has_order_bump: orderBump.toString(),
                 customerName: `${formData.firstName} ${formData.lastName}`,
@@ -89,6 +89,8 @@ export default function CheckoutPage() {
         } catch (error) {
           console.error('Payment intent creation error:', error);
           setPaymentError(error instanceof Error ? error.message : 'Failed to initialize payment');
+        } finally {
+          setIsCreatingIntent(false);
         }
       }
     };
@@ -187,8 +189,8 @@ export default function CheckoutPage() {
   const basePrice = 47;
   const bumpPrice = 27;
   const totalPrice = orderBump ? basePrice + bumpPrice : basePrice;
-  const isFormComplete = formData.email && formData.firstName && formData.lastName;
   const isCardComplete = cardData.cardNumber && cardData.expirationDate && cardData.cvv;
+  const isFormComplete = formData.email && formData.firstName && formData.lastName;
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
@@ -241,7 +243,7 @@ export default function CheckoutPage() {
               Complete Your Purchase
             </h2>
             
-            {/* Step 1 - Contact Info */}
+            {/* Contact Information */}
             <div className="mb-6">
               <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
                 <div className="w-8 h-8 bg-luxury-gradient text-black rounded flex items-center justify-center text-sm font-bold mr-3">1</div>
@@ -278,6 +280,119 @@ export default function CheckoutPage() {
                   />
                 </div>
               </div>
+            </div>
+
+            {/* Payment Information */}
+            <div className="mb-8">
+              <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
+                <div className="w-8 h-8 bg-luxury-gradient text-black rounded flex items-center justify-center text-sm font-bold mr-3">2</div>
+                Payment Information
+              </h3>
+              
+              <form onSubmit={handleCheckout} className="space-y-6">
+                {/* Security Badge */}
+                <div className="flex items-center justify-center space-x-2 text-sm text-gray-400 mb-6">
+                  <Lock className="h-4 w-4" />
+                  <span>Secured by Stripe</span>
+                </div>
+
+                {/* Card Number */}
+                <div>
+                  <label className="block text-gray-300 font-medium mb-2">
+                    Card Number *
+                  </label>
+                  <input
+                    type="text"
+                    name="cardNumber"
+                    placeholder="1234 5678 9012 3456"
+                    value={cardData.cardNumber}
+                    onChange={handleCardInputChange}
+                    required
+                    className="input-luxury w-full px-4 py-4 rounded text-lg"
+                  />
+                </div>
+
+                {/* Expiration and CVV */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-gray-300 font-medium mb-2">
+                      Expiry Date *
+                    </label>
+                    <input
+                      type="text"
+                      name="expirationDate"
+                      placeholder="MM/YY"
+                      value={cardData.expirationDate}
+                      onChange={handleCardInputChange}
+                      onFocus={() => setIsExpirationFocused(true)}
+                      onBlur={() => setIsExpirationFocused(false)}
+                      required
+                      className="input-luxury w-full px-4 py-4 rounded text-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-gray-300 font-medium mb-2">
+                      CVV *
+                    </label>
+                    <input
+                      type="text"
+                      name="cvv"
+                      placeholder="123"
+                      value={cardData.cvv}
+                      onChange={handleCardInputChange}
+                      required
+                      className="input-luxury w-full px-4 py-4 rounded text-lg"
+                    />
+                  </div>
+                </div>
+
+                {/* Error Message */}
+                {paymentError && (
+                  <div className="card-burgundy rounded-lg p-4 border-l-4 border-red-500">
+                    <p className="text-red-400 text-sm">{paymentError}</p>
+                  </div>
+                )}
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  disabled={isLoadingPayment || !isCardComplete || !isFormComplete || !clientSecret}
+                  className={`w-full btn-luxury text-black font-bold text-xl py-6 rounded transition-all duration-300 ${
+                    isLoadingPayment || !isCardComplete || !isFormComplete || !clientSecret
+                      ? 'opacity-50 cursor-not-allowed'
+                      : 'hover:scale-105'
+                  }`}
+                >
+                  {isLoadingPayment ? (
+                    <div className="flex items-center justify-center">
+                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-black mr-3"></div>
+                      Processing Payment...
+                    </div>
+                  ) : isCreatingIntent ? (
+                    <div className="flex items-center justify-center">
+                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-black mr-3"></div>
+                      Preparing Payment...
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-center">
+                      <Lock className="h-6 w-6 mr-3" />
+                      Complete Secure Payment – ${totalPrice}
+                    </div>
+                  )}
+                </button>
+
+                {/* Trust Indicators */}
+                <div className="flex items-center justify-center space-x-4 text-xs text-gray-400 pt-4 border-t border-gray-700">
+                  <div className="flex items-center">
+                    <Shield className="h-3 w-3 mr-1" />
+                    <span>SSL Secured</span>
+                  </div>
+                  <div>•</div>
+                  <div>PCI Compliant</div>
+                  <div>•</div>
+                  <div>256-bit Encryption</div>
+                </div>
+              </form>
             </div>
 
             {/* Order Bump - Checked by Default */}
@@ -318,8 +433,9 @@ The perfect safety net to complement your skills.
               </div>
             </div>
 
-            {/* Total */}
+            {/* Order Summary */}
             <div className="border-t border-gray-700 pt-6 mb-8">
+              <h3 className="text-xl font-semibold text-white mb-4">Order Summary</h3>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-lg text-gray-300">Course:</span>
                 <span className="text-lg text-white">$47</span>
@@ -340,126 +456,6 @@ The perfect safety net to complement your skills.
                   One-time payment • No subscriptions • No hidden fees
                 </p>
               </div>
-            </div>
-
-            {/* Step 2 - Payment Info */}
-            <div className="mb-8">
-              <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
-                <div className="w-8 h-8 bg-luxury-gradient text-black rounded flex items-center justify-center text-sm font-bold mr-3">2</div>
-                Payment Information
-              </h3>
-              
-              {/* Payment Form */}
-              {isFormComplete ? (
-                <form onSubmit={handleCheckout} className="space-y-6">
-                  {/* Security Badge */}
-                  <div className="flex items-center justify-center space-x-2 text-sm text-gray-400 mb-6">
-                    <Lock className="h-4 w-4" />
-                    <span>Secured by Stripe</span>
-                  </div>
-
-                  {/* Card Number */}
-                  <div>
-                    <label className="block text-gray-300 font-medium mb-2">
-                      Card Number *
-                    </label>
-                    <input
-                      type="text"
-                      name="cardNumber"
-                      placeholder="1234 5678 9012 3456"
-                      value={cardData.cardNumber}
-                      onChange={handleCardInputChange}
-                      required
-                      className="input-luxury w-full px-4 py-4 rounded text-lg"
-                    />
-                  </div>
-
-                  {/* Expiration and CVV */}
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-gray-300 font-medium mb-2">
-                        Expiry Date *
-                      </label>
-                      <input
-                        type="text"
-                        name="expirationDate"
-                        placeholder="MM/YY"
-                        value={cardData.expirationDate}
-                        onChange={handleCardInputChange}
-                        onFocus={() => setIsExpirationFocused(true)}
-                        onBlur={() => setIsExpirationFocused(false)}
-                        required
-                        className="input-luxury w-full px-4 py-4 rounded text-lg"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-gray-300 font-medium mb-2">
-                        CVV *
-                      </label>
-                      <input
-                        type="text"
-                        name="cvv"
-                        placeholder="123"
-                        value={cardData.cvv}
-                        onChange={handleCardInputChange}
-                        required
-                        className="input-luxury w-full px-4 py-4 rounded text-lg"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Error Message */}
-                  {paymentError && (
-                    <div className="card-burgundy rounded-lg p-4 border-l-4 border-red-500">
-                      <p className="text-red-400 text-sm">{paymentError}</p>
-                    </div>
-                  )}
-
-                  {/* Submit Button */}
-                  <button
-                    type="submit"
-                    disabled={isLoadingPayment || !isCardComplete || !clientSecret}
-                    className={`w-full btn-luxury text-black font-bold text-xl py-6 rounded transition-all duration-300 ${
-                      isLoadingPayment || !isCardComplete || !clientSecret
-                        ? 'opacity-50 cursor-not-allowed'
-                        : 'hover:scale-105'
-                    }`}
-                  >
-                    {isLoadingPayment ? (
-                      <div className="flex items-center justify-center">
-                        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-black mr-3"></div>
-                        Processing Payment...
-                      </div>
-                    ) : (
-                      <div className="flex items-center justify-center">
-                        <Lock className="h-6 w-6 mr-3" />
-                        Complete Secure Payment – ${totalPrice}
-                      </div>
-                    )}
-                  </button>
-
-                  {/* Trust Indicators */}
-                  <div className="flex items-center justify-center space-x-4 text-xs text-gray-400 pt-4 border-t border-gray-700">
-                    <div className="flex items-center">
-                      <Shield className="h-3 w-3 mr-1" />
-                      <span>SSL Secured</span>
-                    </div>
-                    <div>•</div>
-                    <div>PCI Compliant</div>
-                    <div>•</div>
-                    <div>256-bit Encryption</div>
-                  </div>
-                </form>
-              ) : (
-                <div className="text-center py-8">
-                  <p className="text-gray-300">Please fill in your information above to continue</p>
-                </div>
-              )}
-            </div>
-
-            <div className="flex items-center justify-center text-gray-400 text-sm">
-              <Shield className="h-4 w-4 mr-2" />
-              <span>256-bit SSL encryption • Your payment is 100% secure</span>
             </div>
           </div>
 

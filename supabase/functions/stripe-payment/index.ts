@@ -56,7 +56,10 @@ Deno.serve(async (req) => {
       amount, 
       currency = 'usd',
       description = 'Mack Daddy\'s Course',
-      customer = {},
+      customerEmail,
+      customerName,
+      firstName,
+      lastName,
       metadata = {},
       has_order_bump = false
     } = await req.json();
@@ -76,7 +79,7 @@ Deno.serve(async (req) => {
     }
 
     // Validate customer data
-    if (!customer.email || !customer.firstName || !customer.lastName) {
+    if (!customerEmail || !firstName || !lastName) {
       return new Response(
         JSON.stringify({ error: 'Customer information is required' }),
         {
@@ -97,9 +100,9 @@ Deno.serve(async (req) => {
         .from('users')
         .upsert([
           {
-            email: customer.email,
-            first_name: customer.firstName,
-            last_name: customer.lastName
+            email: customerEmail,
+            first_name: firstName,
+            last_name: lastName
           }
         ], {
           onConflict: 'email'
@@ -121,11 +124,11 @@ Deno.serve(async (req) => {
       amount: Math.round(Number(amount)), // Ensure it's a valid integer
       currency: currency.toLowerCase(),
       description,
-      receipt_email: customer.email || undefined,
+      receipt_email: customerEmail || undefined,
       metadata: {
         ...metadata,
-        customer_name: String(customer.name || `${customer.firstName} ${customer.lastName}`),
-        customer_email: String(customer.email || ''),
+        customer_name: String(customerName || `${firstName} ${lastName}`),
+        customer_email: String(customerEmail || ''),
         has_order_bump: String(has_order_bump || false),
         created_via: 'mack_daddys_course',
         timestamp: new Date().toISOString(),
