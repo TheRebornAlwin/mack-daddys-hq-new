@@ -122,26 +122,24 @@ export default function StripePaymentForm({
                 googlePay: 'auto',
               },
               fields: {
-                billingDetails: {
-                  name: 'auto',
+                name: customerName ? 'never' : 'auto',
+                email: 'never',
                   email: customerEmail ? 'never' : 'auto',
                   phone: 'auto',
                   address: {
                     country: 'auto',
                     postalCode: 'auto',
                   },
-                },
-              },
-              defaultValues: {
-                billingDetails: {
-                  name: customerName,
-                  email: customerEmail || email,
-                },
-              },
-            }}
-          />
-        </div>
-
+      <div>
+        <LinkAuthenticationElement
+          options={{ defaultValues: { email: customerEmail || email } }}
+          onChange={(event) => {
+            if (event.value?.email) {
+              setEmail(event.value.email);
+            }
+          }}
+        />
+      </div>
         {/* Error Message */}
         {message && (
           <div className="card-burgundy rounded-lg p-4 border-l-4 border-red-500">

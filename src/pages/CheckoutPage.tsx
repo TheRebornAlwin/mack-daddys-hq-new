@@ -7,6 +7,18 @@ export default function CheckoutPage() {
   const navigate = useNavigate();
   const [orderBump, setOrderBump] = useState(true);
   const [paymentError, setPaymentError] = useState<string | null>(null);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: ''
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
   const handlePaymentSuccess = (paymentIntent: any) => {
     const packageType = orderBump ? 'base_plus_bump' : 'base';
@@ -20,6 +32,8 @@ export default function CheckoutPage() {
   const basePrice = 47;
   const bumpPrice = 27;
   const totalPrice = orderBump ? basePrice + bumpPrice : basePrice;
+
+  const isFormComplete = formData.firstName && formData.lastName && formData.email;
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
@@ -72,11 +86,58 @@ export default function CheckoutPage() {
               Complete Your Purchase
             </h2>
             
+            {/* Customer Information */}
+            <div className="mb-8">
+              <h3 className="text-xl font-semibold text-white mb-6">Your Information</h3>
+              <div className="grid md:grid-cols-2 gap-6 mb-6">
+                <div>
+                  <label className="block text-gray-300 font-medium mb-2">
+                    First Name *
+                  </label>
+                  <input
+                    type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleInputChange}
+                    required
+                    className="input-luxury w-full px-4 py-3 rounded"
+                    placeholder="Enter your first name"
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-300 font-medium mb-2">
+                    Last Name *
+                  </label>
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleInputChange}
+                    required
+                    className="input-luxury w-full px-4 py-3 rounded"
+                    placeholder="Enter your last name"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-gray-300 font-medium mb-2">
+                  Email Address *
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                  className="input-luxury w-full px-4 py-3 rounded"
+                  placeholder="Enter your email address"
+                />
+              </div>
+            </div>
+
             {/* Payment Information */}
             <div className="mb-8">
-              <h3 className="text-xl font-semibold text-white mb-6 text-center">
-                Enter Your Details & Payment Information
-              </h3>
+              <h3 className="text-xl font-semibold text-white mb-6">Payment Information</h3>
               
               {/* Error Message */}
               {paymentError && (
@@ -85,16 +146,24 @@ export default function CheckoutPage() {
                 </div>
               )}
 
-              {/* Stripe Checkout Component */}
-              <StripeCheckout
-                amount={totalPrice * 100}
-                currency="usd"
-                description={orderBump ? 'Cutting Mastery Course + Stylist Survival Kit' : 'Cutting Mastery Course'}
-                customerEmail=""
-                customerName=""
-                onSuccess={handlePaymentSuccess}
-                onError={handlePaymentError}
-              />
+              {/* Show Stripe Checkout if form is complete */}
+              {isFormComplete ? (
+                <StripeCheckout
+                  amount={totalPrice * 100}
+                  currency="usd"
+                  description={orderBump ? 'Cutting Mastery Course + Stylist Survival Kit' : 'Cutting Mastery Course'}
+                  customerEmail={formData.email}
+                  customerName={`${formData.firstName} ${formData.lastName}`}
+                  firstName={formData.firstName}
+                  lastName={formData.lastName}
+                  onSuccess={handlePaymentSuccess}
+                  onError={handlePaymentError}
+                />
+              ) : (
+                <div className="card-burgundy rounded-lg p-6 text-center border border-luxury/30">
+                  <p className="text-gray-300">Please fill in your information above to continue with payment</p>
+                </div>
+              )}
             </div>
 
             {/* Order Bump - Checked by Default */}
