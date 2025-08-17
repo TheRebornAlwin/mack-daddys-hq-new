@@ -123,23 +123,17 @@ export default function StripePaymentForm({
               },
               fields: {
                 name: customerName ? 'never' : 'auto',
-                email: 'never',
-                  email: customerEmail ? 'never' : 'auto',
-                  phone: 'auto',
-                  address: {
-                    country: 'auto',
-                    postalCode: 'auto',
-                  },
-      <div>
-        <LinkAuthenticationElement
-          options={{ defaultValues: { email: customerEmail || email } }}
-          onChange={(event) => {
-            if (event.value?.email) {
-              setEmail(event.value.email);
-            }
-          }}
-        />
-      </div>
+                email: customerEmail ? 'never' : 'auto',
+                phone: 'auto',
+                address: {
+                  country: 'auto',
+                  postalCode: 'auto',
+                },
+              },
+            }}
+          />
+        </div>
+
         {/* Error Message */}
         {message && (
           <div className="card-burgundy rounded-lg p-4 border-l-4 border-red-500">
