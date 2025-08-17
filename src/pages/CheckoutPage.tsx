@@ -186,7 +186,7 @@ export default function CheckoutPage() {
     }
   };
 
-  const basePrice = 47;
+  const basePrice = 0.97;
   const bumpPrice = 27;
   const totalPrice = orderBump ? basePrice + bumpPrice : basePrice;
   const isCardComplete = cardData.cardNumber && cardData.expirationDate && cardData.cvv;
