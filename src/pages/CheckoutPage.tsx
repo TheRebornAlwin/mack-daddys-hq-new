@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Shield, Lock, CheckCircle, Star, ArrowLeft, Gift, Scissors, Crown, Timer } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import StripeCheckout from '../components/StripeCheckout';
 
 export default function CheckoutPage() {
   const navigate = useNavigate();
@@ -11,185 +11,25 @@ export default function CheckoutPage() {
     firstName: '',
     lastName: ''
   });
-  const [cardData, setCardData] = useState({
-    cardNumber: '',
-    expirationDate: '',
-    cvv: ''
-  });
-  const [isExpirationFocused, setIsExpirationFocused] = useState(false);
-  const [clientSecret, setClientSecret] = useState('');
-  const [isLoadingPayment, setIsLoadingPayment] = useState(false);
   const [paymentError, setPaymentError] = useState<string | null>(null);
-  const [isCreatingIntent, setIsCreatingIntent] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    let formattedValue = value;
-
-    if (name === 'cardNumber') {
-      // Format card number with spaces
-      formattedValue = value.replace(/\s/g, '').replace(/(.{4})/g, '$1 ').trim();
-      if (formattedValue.length > 19) formattedValue = formattedValue.slice(0, 19);
-    } else if (name === 'expirationDate') {
-      // Format expiration date as MM/YY
-      formattedValue = value.replace(/\D/g, '').replace(/(\d{2})(\d)/, '$1/$2');
-      if (formattedValue.length > 5) formattedValue = formattedValue.slice(0, 5);
-    } else if (name === 'cvv') {
-      // Only allow numbers for CVV
-      formattedValue = value.replace(/\D/g, '');
-      if (formattedValue.length > 4) formattedValue = formattedValue.slice(0, 4);
-    }
-
-    setCardData(prev => ({ ...prev, [name]: formattedValue }));
+  const handlePaymentSuccess = (paymentIntent: any) => {
+    const packageType = orderBump ? 'base_plus_bump' : 'base';
+    navigate(`/thank-you?package=${packageType}`);
   };
 
-  // Create payment intent when user info is complete
-  useEffect(() => {
-    const createIntent = async () => {
-      if (formData.email && formData.firstName && formData.lastName && !isCreatingIntent) {
-        try {
-          setIsCreatingIntent(true);
-          setPaymentError(null);
-          
-          const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/stripe-payment`, {
-            method: 'POST',
-            headers: {
-              'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              amount: Math.round(totalPrice * 100),
-              currency: 'usd',
-              description: orderBump ? 'Cutting Mastery Course + Stylist Survival Kit' : 'Cutting Mastery Course',
-              customerEmail: formData.email,
-              customerName: `${formData.firstName} ${formData.lastName}`,
-              firstName: formData.firstName,
-              lastName: formData.lastName,
-              metadata: {
-                has_order_bump: orderBump.toString(),
-                customerName: `${formData.firstName} ${formData.lastName}`,
-                customerEmail: formData.email,
-                course_type: orderBump ? 'base_plus_bump' : 'base'
-              }
-            }),
-          });
-          
-          if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || 'Failed to create payment intent');
-          }
-          
-          const data = await response.json();
-          setClientSecret(data.clientSecret);
-        } catch (error) {
-          console.error('Payment intent creation error:', error);
-          setPaymentError(error instanceof Error ? error.message : 'Failed to initialize payment');
-        } finally {
-          setIsCreatingIntent(false);
-        }
-      }
-    };
-
-    const debounceTimer = setTimeout(createIntent, 1000);
-    return () => clearTimeout(debounceTimer);
-  }, [formData.email, formData.firstName, formData.lastName, orderBump]);
-
-  const handleCheckout = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!clientSecret) {
-      setPaymentError('Payment not initialized. Please check your information.');
-      return;
-    }
-
-    setIsLoadingPayment(true);
-    setPaymentError(null);
-
-    try {
-      // Load Stripe dynamically to avoid initialization issues
-      const { loadStripe } = await import('@stripe/stripe-js');
-      const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '');
-      
-      if (!stripe) {
-        throw new Error('Stripe failed to load. Please check your connection and try again.');
-      }
-
-      // Validate card data
-      const cardNumber = cardData.cardNumber.replace(/\s/g, '');
-      const expParts = cardData.expirationDate.split('/');
-      
-      if (cardNumber.length < 13 || cardNumber.length > 19) {
-        throw new Error('Please enter a valid card number');
-      }
-      
-      if (expParts.length !== 2 || !expParts[0] || !expParts[1]) {
-        throw new Error('Please enter a valid expiration date (MM/YY)');
-      }
-      
-      if (cardData.cvv.length < 3 || cardData.cvv.length > 4) {
-        throw new Error('Please enter a valid CVV');
-      }
-
-      const expMonth = parseInt(expParts[0]);
-      const expYear = parseInt('20' + expParts[1]);
-      
-      if (expMonth < 1 || expMonth > 12) {
-        throw new Error('Please enter a valid expiration month');
-      }
-      
-      if (expYear < new Date().getFullYear()) {
-        throw new Error('Card has expired');
-      }
-
-      // Create payment method
-      const { error: paymentMethodError, paymentMethod } = await stripe.createPaymentMethod({
-        type: 'card',
-        card: {
-          number: cardNumber,
-          exp_month: expMonth,
-          exp_year: expYear,
-          cvc: cardData.cvv,
-        },
-        billing_details: {
-          name: `${formData.firstName} ${formData.lastName}`,
-          email: formData.email,
-        },
-      });
-
-      if (paymentMethodError) {
-        throw new Error(paymentMethodError.message || 'Invalid card details');
-      }
-
-      // Confirm payment
-      const { error: confirmError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: paymentMethod.id,
-      });
-
-      if (confirmError) {
-        throw new Error(confirmError.message || 'Payment failed');
-      }
-
-      if (paymentIntent && paymentIntent.status === 'succeeded') {
-        const packageType = orderBump ? 'base_plus_bump' : 'base';
-        navigate(`/thank-you?package=${packageType}`);
-      }
-    } catch (error) {
-      console.error('Payment error:', error);
-      setPaymentError(error instanceof Error ? error.message : 'Payment failed');
-    } finally {
-      setIsLoadingPayment(false);
-    }
+  const handlePaymentError = (error: Error) => {
+    setPaymentError(error.message);
   };
 
   const basePrice = 47;
   const bumpPrice = 27;
   const totalPrice = orderBump ? basePrice + bumpPrice : basePrice;
-  const isCardComplete = cardData.cardNumber && cardData.expirationDate && cardData.cvv;
   const isFormComplete = formData.email && formData.firstName && formData.lastName;
 
   return (
@@ -289,110 +129,30 @@ export default function CheckoutPage() {
                 Payment Information
               </h3>
               
-              <form onSubmit={handleCheckout} className="space-y-6">
-                {/* Security Badge */}
-                <div className="flex items-center justify-center space-x-2 text-sm text-gray-400 mb-6">
-                  <Lock className="h-4 w-4" />
-                  <span>Secured by Stripe</span>
+              {/* Error Message */}
+              {paymentError && (
+                <div className="card-burgundy rounded-lg p-4 border-l-4 border-red-500 mb-6">
+                  <p className="text-red-400 text-sm">{paymentError}</p>
                 </div>
+              )}
 
-                {/* Card Number */}
-                <div>
-                  <label className="block text-gray-300 font-medium mb-2">
-                    Card Number *
-                  </label>
-                  <input
-                    type="text"
-                    name="cardNumber"
-                    placeholder="1234 5678 9012 3456"
-                    value={cardData.cardNumber}
-                    onChange={handleCardInputChange}
-                    required
-                    className="input-luxury w-full px-4 py-4 rounded text-lg"
-                  />
+              {/* Stripe Checkout Component */}
+              {isFormComplete ? (
+                <StripeCheckout
+                  amount={totalPrice * 100}
+                  currency="usd"
+                  description={orderBump ? 'Cutting Mastery Course + Stylist Survival Kit' : 'Cutting Mastery Course'}
+                  customerEmail={formData.email}
+                  customerName={`${formData.firstName} ${formData.lastName}`}
+                  onSuccess={handlePaymentSuccess}
+                  onError={handlePaymentError}
+                />
+              ) : (
+                <div className="card-burgundy rounded-lg p-6 text-center">
+                  <Lock className="h-8 w-8 text-gray-400 mx-auto mb-4" />
+                  <p className="text-gray-300">Please complete your information above to proceed with payment</p>
                 </div>
-
-                {/* Expiration and CVV */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-gray-300 font-medium mb-2">
-                      Expiry Date *
-                    </label>
-                    <input
-                      type="text"
-                      name="expirationDate"
-                      placeholder="MM/YY"
-                      value={cardData.expirationDate}
-                      onChange={handleCardInputChange}
-                      onFocus={() => setIsExpirationFocused(true)}
-                      onBlur={() => setIsExpirationFocused(false)}
-                      required
-                      className="input-luxury w-full px-4 py-4 rounded text-lg"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-gray-300 font-medium mb-2">
-                      CVV *
-                    </label>
-                    <input
-                      type="text"
-                      name="cvv"
-                      placeholder="123"
-                      value={cardData.cvv}
-                      onChange={handleCardInputChange}
-                      required
-                      className="input-luxury w-full px-4 py-4 rounded text-lg"
-                    />
-                  </div>
-                </div>
-
-                {/* Error Message */}
-                {paymentError && (
-                  <div className="card-burgundy rounded-lg p-4 border-l-4 border-red-500">
-                    <p className="text-red-400 text-sm">{paymentError}</p>
-                  </div>
-                )}
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  disabled={isLoadingPayment || !isCardComplete || !isFormComplete || !clientSecret}
-                  className={`w-full btn-luxury text-black font-bold text-xl py-6 rounded transition-all duration-300 ${
-                    isLoadingPayment || !isCardComplete || !isFormComplete || !clientSecret
-                      ? 'opacity-50 cursor-not-allowed'
-                      : 'hover:scale-105'
-                  }`}
-                >
-                  {isLoadingPayment ? (
-                    <div className="flex items-center justify-center">
-                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-black mr-3"></div>
-                      Processing Payment...
-                    </div>
-                  ) : isCreatingIntent ? (
-                    <div className="flex items-center justify-center">
-                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-black mr-3"></div>
-                      Preparing Payment...
-                    </div>
-                  ) : (
-                    <div className="flex items-center justify-center">
-                      <Lock className="h-6 w-6 mr-3" />
-                      Complete Secure Payment – ${totalPrice}
-                    </div>
-                  )}
-                </button>
-
-                {/* Trust Indicators */}
-                <div className="flex items-center justify-center space-x-4 text-xs text-gray-400 pt-4 border-t border-gray-700">
-                  <div className="flex items-center">
-                    <Shield className="h-3 w-3 mr-1" />
-                    <span>SSL Secured</span>
-                  </div>
-                  <div>•</div>
-                  <div>PCI Compliant</div>
-                  <div>•</div>
-                  <div>256-bit Encryption</div>
-                </div>
-              </form>
+              )}
             </div>
 
             {/* Order Bump - Checked by Default */}
