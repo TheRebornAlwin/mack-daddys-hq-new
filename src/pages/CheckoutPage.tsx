@@ -146,18 +146,24 @@ export default function CheckoutPage() {
                 </div>
               )}
 
-              {/* Stripe Checkout - Always visible */}
-              <StripeCheckout
-                amount={totalPrice * 100}
-                currency="usd"
-                description={orderBump ? 'Cutting Mastery Course + Stylist Survival Kit' : 'Cutting Mastery Course'}
-                customerEmail={formData.email}
-                customerName={`${formData.firstName} ${formData.lastName}`}
-                firstName={formData.firstName}
-                lastName={formData.lastName}
-                onSuccess={handlePaymentSuccess}
-                onError={handlePaymentError}
-              />
+              {/* Show Stripe Checkout if form is complete */}
+              {isFormComplete ? (
+                <StripeCheckout
+                  amount={totalPrice * 100}
+                  currency="usd"
+                  description={orderBump ? 'Cutting Mastery Course + Stylist Survival Kit' : 'Cutting Mastery Course'}
+                  customerEmail={formData.email}
+                  customerName={`${formData.firstName} ${formData.lastName}`}
+                  firstName={formData.firstName}
+                  lastName={formData.lastName}
+                  onSuccess={handlePaymentSuccess}
+                  onError={handlePaymentError}
+                />
+              ) : (
+                <div className="card-burgundy rounded-lg p-6 text-center border border-luxury/30">
+                  <p className="text-gray-300">Please fill in your information above to continue with payment</p>
+                </div>
+              )}
             </div>
 
             {/* Order Bump - Checked by Default */}
