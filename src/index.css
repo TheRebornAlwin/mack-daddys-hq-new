@@ -159,7 +159,7 @@
   }
   
   .card-luxury:hover {
-    border-color: rgba(255, 215, 0, 0.4);
+    border-color: #FFD700;
     box-shadow: 
       0 20px 60px rgba(0, 0, 0, 0.4),
       0 4px 16px rgba(255, 215, 0, 0.2),
@@ -177,10 +177,10 @@
   }
   
   .card-burgundy:hover {
-    border-color: rgba(128, 0, 32, 0.25);
+    border-color: #FFD700;
     box-shadow: 
       0 20px 60px rgba(0, 0, 0, 0.4),
-      0 4px 16px rgba(128, 0, 32, 0.15),
+      0 4px 16px rgba(255, 215, 0, 0.2),
       inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
   
