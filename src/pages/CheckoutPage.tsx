@@ -21,8 +21,17 @@ export default function CheckoutPage() {
   };
 
   const handlePaymentSuccess = (paymentIntent: any) => {
-    const packageType = orderBump ? 'base_plus_bump' : 'base';
-    navigate(`/thank-you?package=${packageType}`);
+    // Save customer data to localStorage for upsell flow
+    localStorage.setItem('customerData', JSON.stringify({
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      hasOrderBump: orderBump,
+      basePaymentIntentId: paymentIntent.id
+    }));
+    
+    // Navigate to upsell page instead of thank you
+    navigate('/special-offer');
   };
 
   const handlePaymentError = (error: Error) => {

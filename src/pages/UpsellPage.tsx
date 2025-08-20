@@ -6,16 +6,20 @@ export default function UpsellPage() {
   const navigate = useNavigate();
 
   const handleUpsellPurchase = () => {
-    const upsellPaymentLink = 'https://buy.stripe.com/test_00w4gAenz9LW28xcXh2sM03';
-    const urlParams = new URLSearchParams({
-      'success_url': `${window.location.origin}/upsell-success?package=base_plus_upsell`
-    });
-    const fullUrl = `${upsellPaymentLink}?${urlParams.toString()}`;
-    window.location.href = fullUrl;
+    // Navigate to our custom upsell checkout page
+    navigate('/upsell-checkout');
   };
 
   const handleDecline = () => {
-    navigate('/thank-you?package=base');
+    // Get customer data from localStorage to determine package type
+    const customerData = localStorage.getItem('customerData');
+    if (customerData) {
+      const data = JSON.parse(customerData);
+      const packageType = data.hasOrderBump ? 'base_plus_bump' : 'base';
+      navigate(`/thank-you?package=${packageType}`);
+    } else {
+      navigate('/thank-you?package=base');
+    }
   };
 
   return (

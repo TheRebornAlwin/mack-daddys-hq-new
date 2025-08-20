@@ -5,6 +5,7 @@ import CheckoutPage from './pages/CheckoutPage';
 import UpsellPage from './pages/UpsellPage';
 import ThankYouPage from './pages/ThankYouPage';
 import UpsellThankYouPage from './pages/UpsellThankYouPage';
+import UpsellCheckoutPage from './pages/UpsellCheckoutPage';
 import TermsPage from './pages/TermsPage';
 import PrivacyPage from './pages/PrivacyPage';
 import ContactPage from './pages/ContactPage';
@@ -24,6 +25,7 @@ function App() {
         <Route path="/success" element={<ThankYouPage />} />
         <Route path="/upsell-success" element={<UpsellThankYouPage />} />
         <Route path="/vip-welcome" element={<UpsellThankYouPage />} />
+        <Route path="/upsell-checkout" element={<UpsellCheckoutPage />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/contact" element={<ContactPage />} />
