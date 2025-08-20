@@ -258,8 +258,8 @@ export default function HomePage() {
       {/* Meet Sean Section */}
       <section id="about" className="relative py-16 sm:py-24 lg:py-32 bg-gradient-to-br from-gray-900 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            <div className="relative lg:col-span-5">
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-20 items-center">
+            <div className="relative lg:col-span-5 lg:pr-8">
               <div className="relative z-10">
                 <img 
                   src="/images/seancuttinggirlshair.jpeg"
@@ -280,83 +280,83 @@ export default function HomePage() {
               <div className="absolute -top-6 -left-6 sm:-top-8 sm:-left-8 lg:-top-12 lg:-left-12 w-16 h-16 sm:w-24 sm:h-24 lg:w-32 lg:h-32 bg-luxury-gradient opacity-20 rounded-full blur-2xl"></div>
             </div>
             
-            <div className="lg:col-span-7 space-y-4 lg:space-y-6 fade-in-luxury mt-8 lg:mt-0">
+            <div className="lg:col-span-7 lg:pl-8 fade-in-luxury mt-8 lg:mt-0">
               <div>
-                <div className="badge-premium rounded px-4 sm:px-5 py-2 mb-4 sm:mb-6 lg:mb-8">
+                <div className="badge-premium rounded px-4 sm:px-5 py-2 mb-6 lg:mb-8">
                   <Award className="h-3 w-3 sm:h-4 sm:w-4 text-luxury-gold mr-2 sm:mr-3" />
                   <span className="text-white font-medium text-xs sm:text-sm tracking-wide">YOUR MASTER INSTRUCTOR</span>
                 </div>
                 
-                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-playfair font-bold mb-6 lg:mb-8 leading-tight">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-playfair font-bold mb-8 lg:mb-10 leading-tight">
                   Meet Sean: <br />
                   <span className="text-gradient-gold">Your Coach & Mentor</span>
                 </h2>
               </div>
               
-              <div className="space-y-4 lg:space-y-5">
-                <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-gray-300">
+              <div className="space-y-6 lg:space-y-8">
+                <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-gray-300 mb-6 lg:mb-8">
                   Sean's been barbering for <span className="text-gradient-gold font-semibold">28+ years</span>, 
                   built a <span className="text-gradient-gold font-semibold">six-figure barbershop from scratch</span>, 
                   and trained over a thousand barbers who started exactly where you are.
                 </p>
                 
-                <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-gray-300">
+                <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-gray-300 mb-8 lg:mb-10">
                   He knows what it's like to fumble with clippers and doubt yourself. Now, he's handing you 
                   the roadmap he wishes he had: <span className="text-gradient-gold font-semibold">real-world techniques</span>, 
                   consultations made simple, and cuts that grow out clean.
                 </p>
                 
-                <div className="card-luxury rounded p-4 sm:p-6 lg:p-8 border-l-4 border-luxury">
+                <div className="card-luxury rounded p-4 sm:p-6 lg:p-8 border-l-4 border-luxury mb-8 lg:mb-12">
                   <p className="text-gradient-gold font-medium italic text-base sm:text-lg">
                     "This isn't barber school theory. This is the real stuff that makes you skilled, 
                     in-demand, and gets you PAID."
                   </p>
                   <p className="text-gray-400 text-xs sm:text-sm mt-2 sm:mt-3 font-medium">— Sean, Master Instructor</p>
                 </div>
-              </div>
               
-              <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:gap-4 mt-6 lg:mt-8">
-                {[
-                  { 
-                    icon: GraduationCap, 
-                    text: "1800+ Barbers", 
-                    subtext: "Trained Successfully",
-                    tooltip: "Over 1,800 successful graduates now working in barbershops and running their own shops across the country"
-                  },
-                  { 
-                    icon: Trophy, 
-                    text: "4.95 Rating", 
-                    subtext: "Student Reviews",
-                    tooltip: "Consistently rated as the #1 barbering course with 97% of barbers reporting significant income increases"
-                  },
-                  { 
-                    icon: Diamond, 
-                    text: "Industry", 
-                    subtext: "Certified Master",
-                    tooltip: "Sean holds advanced certifications from top industry organizations and has trained barbers for major barbershop chains"
-                  },
-                  { 
-                    icon: Briefcase, 
-                    text: "Proven", 
-                    subtext: "Track Record",
-                    tooltip: "30 years of hands-on experience, former successful barbershop owner, and mentor to hundreds of top-earning barbers"
-                  }
-                ].map((item, index) => (
-                  <div 
-                    key={index} 
-                    className="card-luxury rounded-lg p-3 sm:p-4 lg:p-5 group stats-badge"
-                    onMouseEnter={() => showTooltip(`sean-${index}`)}
-                    onMouseLeave={() => hideTooltip(`sean-${index}`)}
-                    onClick={() => setTooltipStates(prev => ({ ...prev, [`sean-${index}`]: !prev[`sean-${index}`] }))}
-                  >
-                    <item.icon className="h-5 w-5 sm:h-6 sm:w-6 lg:h-6 lg:w-6 text-luxury-gold mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300" />
-                    <div className="text-white font-semibold text-sm sm:text-base">{item.text}</div>
-                    <div className="text-gray-400 text-xs sm:text-sm uppercase tracking-wider">{item.subtext}</div>
-                    <div className={`stats-tooltip ${tooltipStates[`sean-${index}`] ? 'show' : ''}`}>
-                      <div className="text-gray-300 leading-relaxed">{item.tooltip}</div>
+                <div className="grid grid-cols-2 gap-4 lg:gap-6">
+                  {[
+                    { 
+                      icon: GraduationCap, 
+                      text: "1800+ Barbers", 
+                      subtext: "Trained Successfully",
+                      tooltip: "Over 1,800 successful graduates now working in barbershops and running their own shops across the country"
+                    },
+                    { 
+                      icon: Trophy, 
+                      text: "4.95 Rating", 
+                      subtext: "Student Reviews",
+                      tooltip: "Consistently rated as the #1 barbering course with 97% of barbers reporting significant income increases"
+                    },
+                    { 
+                      icon: Diamond, 
+                      text: "Industry", 
+                      subtext: "Certified Master",
+                      tooltip: "Sean holds advanced certifications from top industry organizations and has trained barbers for major barbershop chains"
+                    },
+                    { 
+                      icon: Briefcase, 
+                      text: "Proven", 
+                      subtext: "Track Record",
+                      tooltip: "30 years of hands-on experience, former successful barbershop owner, and mentor to hundreds of top-earning barbers"
+                    }
+                  ].map((item, index) => (
+                    <div 
+                      key={index} 
+                      className="card-luxury rounded-lg p-3 sm:p-4 lg:p-5 group stats-badge"
+                      onMouseEnter={() => showTooltip(`sean-${index}`)}
+                      onMouseLeave={() => hideTooltip(`sean-${index}`)}
+                      onClick={() => setTooltipStates(prev => ({ ...prev, [`sean-${index}`]: !prev[`sean-${index}`] }))}
+                    >
+                      <item.icon className="h-5 w-5 sm:h-6 sm:w-6 lg:h-6 lg:w-6 text-luxury-gold mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300" />
+                      <div className="text-white font-semibold text-sm sm:text-base">{item.text}</div>
+                      <div className="text-gray-400 text-xs sm:text-sm uppercase tracking-wider">{item.subtext}</div>
+                      <div className={`stats-tooltip ${tooltipStates[`sean-${index}`] ? 'show' : ''}`}>
+                        <div className="text-gray-300 leading-relaxed">{item.tooltip}</div>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>

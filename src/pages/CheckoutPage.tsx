@@ -331,13 +331,33 @@ The perfect safety net to complement your skills.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
-                onClick={() => navigate('/special-offer')}
+                onClick={() => {
+                  // Set dummy customer data for testing
+                  localStorage.setItem('customerData', JSON.stringify({
+                    firstName: 'Test',
+                    lastName: 'User',
+                    email: 'test@example.com',
+                    hasOrderBump: true,
+                    basePaymentIntentId: 'pi_test_123'
+                  }));
+                  navigate('/special-offer');
+                }}
                 className="badge-burgundy text-white font-medium px-6 py-2 rounded hover:scale-105 transition-all duration-300"
               >
                 Preview Upsell Page
               </button>
               <button 
-                onClick={() => navigate('/thank-you')}
+                onClick={() => {
+                  // Set dummy customer data for testing
+                  localStorage.setItem('customerData', JSON.stringify({
+                    firstName: 'Test',
+                    lastName: 'User',
+                    email: 'test@example.com',
+                    hasOrderBump: true,
+                    basePaymentIntentId: 'pi_test_123'
+                  }));
+                  navigate('/thank-you?package=base_plus_bump');
+                }}
                 className="badge-burgundy text-white font-medium px-6 py-2 rounded hover:scale-105 transition-all duration-300"
               >
                 Preview Thank You Page
