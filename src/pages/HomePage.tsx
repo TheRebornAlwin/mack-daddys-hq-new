@@ -597,7 +597,7 @@ export default function HomePage() {
               { 
                 icon: <Users className="h-6 w-6" />, 
                 text: "Beginner Friendly", 
-                tooltip: "No experience required - we start from the very basics. Perfect for beauty school students or career changers" 
+                tooltip: "No experience required - we start from the very basics. Perfect for barber school students or career changers" 
               }, 
               { 
                 icon: <Diamond className="h-6 w-6" />, 
@@ -607,7 +607,7 @@ export default function HomePage() {
               { 
                 icon: <Trophy className="h-6 w-6" />, 
                 text: "Fast Results", 
-                tooltip: "See improvement in your first week of practice. 89% of students report better cuts within 7 days" 
+                tooltip: "See improvement in your first week of practice. 89% of barbers report better cuts within 7 days" 
               }
             ].map((benefit, index) => (
               <div 
