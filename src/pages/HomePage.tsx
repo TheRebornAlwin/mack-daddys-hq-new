@@ -23,46 +23,46 @@ export default function HomePage() {
   
   const testimonials = [
     {
-      text: "I was cutting hair in my garage for friends and family, barely making $20 per cut. After Sean's course, I'm now charging $85 per cut and booked solid 3 weeks out. Last month I made $4,200 working part-time!",
+      text: "I was cutting hair in my garage for friends and family, barely making $20 per cut. After Sean's course, I'm now charging $85 per cut at my barbershop and booked solid 3 weeks out. Last month I made $4,200 working part-time!",
       name: "Marcus Johnson",
       location: "Tulsa, Oklahoma", 
       achievement: "Went from $20 to $85 per cut using Sean's pricing techniques"
     },
     {
-      text: "I was terrified to touch anyone's hair. Sean's step-by-step approach gave me the confidence to start cutting. Now I'm making $1,800 a week at my local salon and clients specifically request me.",
+      text: "I was terrified to touch anyone's hair. Sean's step-by-step approach gave me the confidence to start cutting. Now I'm making $1,800 a week at my local barbershop and clients specifically request me.",
       name: "Jessica Martinez",
       location: "Boise, Idaho",
       achievement: "Overcame fear, now earning $1,800/week using course methods"
     },
     {
-      text: "Fresh out of beauty school, I was struggling to get clients. Sean's techniques helped me create cuts that people actually wanted. I went from 2 clients a week to fully booked, making $3,500 monthly.",
+      text: "Fresh out of barber school, I was struggling to get clients. Sean's techniques helped me create cuts that people actually wanted. I went from 2 clients a week to fully booked, making $3,500 monthly.",
       name: "Tyler Anderson",
       location: "Grand Rapids, Michigan",
       achievement: "Applied Sean's cutting techniques, now fully booked at $3,500/month"
     },
     {
-      text: "I thought I knew how to cut hair until I took this course. Sean's consultation method alone doubled my client retention. My cuts now grow out perfectly for months.",
+      text: "I thought I knew how to cut hair until I took this course. Sean's consultation method alone doubled my client retention. My cuts now grow out clean for weeks.",
       name: "Sarah Williams",
       location: "Bend, Oregon",
       achievement: "Used Sean's consultation system to double client retention"
     },
     {
-      text: "After 5 years of mediocre cuts, I was ready to quit. Sean's shape and flow system completely changed my technique. I now run my own successful shop with 3 employees.",
+      text: "After 5 years of mediocre cuts, I was ready to quit. Sean's fade and taper system completely changed my technique. I now run my own successful barbershop with 3 barbers.",
       name: "David Chen",
       location: "Chattanooga, Tennessee",
-      achievement: "Used course methods to open successful 3-employee shop"
+      achievement: "Used course methods to open successful 3-barber shop"
     },
     {
-      text: "The shape and flow techniques completely changed how I approach every cut. Now my clients' hair grows out beautifully and they book 8 weeks in advance.",
+      text: "The fade and taper techniques completely changed how I approach every cut. Now my clients' hair grows out clean and they book 8 weeks in advance.",
       name: "Ashley Thompson",
       location: "Fort Collins, Colorado",
       achievement: "Clients now book 8 weeks in advance using Sean's techniques"
     },
     {
-      text: "I was working at Supercuts making minimum wage. After applying Sean's methods, I landed a chair at an upscale salon making $65/hour plus tips.",
+      text: "I was working at a chain shop making minimum wage. After applying Sean's methods, I landed a chair at an upscale barbershop making $65/hour plus tips.",
       name: "Kevin Rodriguez",
       location: "Spokane, Washington",
-      achievement: "Used course skills to land $65/hour salon position"
+      achievement: "Used course skills to land $65/hour barbershop position"
     },
     {
       text: "Sean's finishing techniques made all the difference. My cuts look magazine-ready and clients pay premium prices. I'm making more money working fewer hours.",
@@ -71,13 +71,13 @@ export default function HomePage() {
       achievement: "Charges premium prices using Sean's finishing techniques"
     },
     {
-      text: "I failed my first state board exam because I couldn't cut properly under pressure. Sean's step-by-step system gave me the confidence to pass and now I'm a top performer.",
+      text: "I failed my first state board exam because I couldn't cut properly under pressure. Sean's step-by-step system gave me the confidence to pass and now I'm a top barber.",
       name: "Jordan Parker",
       location: "Sioux Falls, South Dakota",
-      achievement: "Used course system to pass state board and become top performer"
+      achievement: "Used course system to pass state board and become top barber"
     },
     {
-      text: "After 10 years of cutting hair, I thought I had nothing left to learn. Sean's advanced techniques doubled my income and gave me confidence with every texture.",
+      text: "After 10 years of cutting hair, I thought I had nothing left to learn. Sean's advanced fade techniques doubled my income and gave me confidence with every hair type.",
       name: "Brian Foster",
       location: "Billings, Montana",
       achievement: "Doubled income using Sean's advanced cutting techniques"
@@ -158,13 +158,13 @@ export default function HomePage() {
               <span className="block pb-2">
                 <span className="text-gradient-gold text-shadow-luxury pr-0.5">Master</span>
                 <span className="text-white"> </span>
-                <span className="text-gradient-gold text-shadow-luxury pr-0.5">Stylist</span>
+                <span className="text-gradient-gold text-shadow-luxury pr-0.5">Barber</span>
               </span>
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-300 mb-16 leading-relaxed font-light max-w-2xl">
-              Master the art of <span className="text-gradient-gold font-medium">shape, flow, and confidence</span> through 
-              real cutting skills built for real stylists.
+              Master the art of <span className="text-gradient-gold font-medium">precision cuts, fades, and confidence</span> through 
+              real barbering skills built for real barbers.
             </p>
             
             <div className="grid grid-cols-3 gap-8 mb-16">
@@ -178,7 +178,7 @@ export default function HomePage() {
                 <div className="text-sm text-gray-400 uppercase tracking-wider">Students Trained</div>
                 <div className={`stats-tooltip ${tooltipStates.students ? 'show' : ''}`}>
                   <div className="font-semibold text-luxury mb-1">1,927 Success Stories</div>
-                  <div className="text-gray-300 leading-relaxed">Active students across 47 states with an average 340% income increase within 6 months of completion</div>
+                  <div className="text-gray-300 leading-relaxed">Active barbers across 47 states with an average 340% income increase within 6 months of completion</div>
                 </div>
               </div>
               <div 
@@ -191,7 +191,7 @@ export default function HomePage() {
                 <div className="text-sm text-gray-400 uppercase tracking-wider">Years Experience</div>
                 <div className={`stats-tooltip ${tooltipStates.experience ? 'show' : ''}`}>
                   <div className="font-semibold text-luxury mb-1">Master-Level Expertise</div>
-                  <div className="text-gray-300 leading-relaxed">28+ years cutting hair, 15 years training professionals, former shop owner with 6-figure annual revenue</div>
+                  <div className="text-gray-300 leading-relaxed">28+ years cutting hair, 15 years training barbers, former barbershop owner with 6-figure annual revenue</div>
                 </div>
               </div>
               <div 
@@ -204,7 +204,7 @@ export default function HomePage() {
                 <div className="text-sm text-gray-400 uppercase tracking-wider">Average Rating</div>
                 <div className={`stats-tooltip ${tooltipStates.rating ? 'show' : ''}`}>
                   <div className="font-semibold text-luxury mb-1">Exceptional Reviews</div>
-                  <div className="text-gray-300 leading-relaxed">4.95/5 stars from 1,200+ verified student reviews. 97% would recommend to other stylists</div>
+                  <div className="text-gray-300 leading-relaxed">4.95/5 stars from 1,200+ verified barber reviews. 97% would recommend to other barbers</div>
                 </div>
               </div>
             </div>
@@ -297,20 +297,20 @@ export default function HomePage() {
               
               <div className="space-y-8">
                 <p className="text-xl leading-relaxed text-gray-300">
-                  Sean's been cutting for <span className="text-gradient-gold font-semibold">28+ years</span>, 
-                  built a <span className="text-gradient-gold font-semibold">six-figure shop from scratch</span>, 
-                  and trained over a thousand stylists who started exactly where you are.
+                  Sean's been barbering for <span className="text-gradient-gold font-semibold">28+ years</span>, 
+                  built a <span className="text-gradient-gold font-semibold">six-figure barbershop from scratch</span>, 
+                  and trained over a thousand barbers who started exactly where you are.
                 </p>
                 
                 <p className="text-xl leading-relaxed text-gray-300">
-                  He knows what it's like to fumble with scissors and doubt yourself. Now, he's handing you 
+                  He knows what it's like to fumble with clippers and doubt yourself. Now, he's handing you 
                   the roadmap he wishes he had: <span className="text-gradient-gold font-semibold">real-world techniques</span>, 
                   consultations made simple, and cuts that grow out clean.
                 </p>
                 
                 <div className="card-luxury rounded p-8 border-l-4 border-luxury">
                   <p className="text-gradient-gold font-medium italic text-lg">
-                    "This isn't classroom lessons. This is the stuff that makes you skilled, 
+                    "This isn't barber school theory. This is the real stuff that makes you skilled, 
                     in-demand, and gets you PAID."
                   </p>
                   <p className="text-gray-400 text-sm mt-3 font-medium">— Sean, Master Instructor</p>
@@ -323,25 +323,25 @@ export default function HomePage() {
                     icon: GraduationCap, 
                     text: "1800+ Students", 
                     subtext: "Trained Successfully",
-                    tooltip: "Over 1,800 successful graduates now working in salons, barbershops, and running their own businesses across the country"
+                    tooltip: "Over 1,800 successful graduates now working in barbershops and running their own shops across the country"
                   },
                   { 
                     icon: Trophy, 
                     text: "4.95 Rating", 
                     subtext: "Student Reviews",
-                    tooltip: "Consistently rated as the #1 hair cutting course with 97% of students reporting significant income increases"
+                    tooltip: "Consistently rated as the #1 barbering course with 97% of barbers reporting significant income increases"
                   },
                   { 
                     icon: Diamond, 
                     text: "Industry", 
                     subtext: "Certified Master",
-                    tooltip: "Sean holds advanced certifications from top industry organizations and has trained stylists for major salon chains"
+                    tooltip: "Sean holds advanced certifications from top industry organizations and has trained barbers for major barbershop chains"
                   },
                   { 
                     icon: Briefcase, 
                     text: "Proven", 
                     subtext: "Track Record",
-                    tooltip: "30 years of hands-on experience, former successful shop owner, and mentor to hundreds of top-earning stylists"
+                    tooltip: "30 years of hands-on experience, former successful barbershop owner, and mentor to hundreds of top-earning barbers"
                   }
                 ].map((item, index) => (
                   <div 
@@ -371,10 +371,10 @@ export default function HomePage() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-playfair font-bold mb-8 leading-tight">
-              Stop Cutting Hair. Start <span className="text-gradient-gold">Crafting Careers.</span>
+              Stop Just Cutting Hair. Start <span className="text-gradient-gold">Building Your Empire.</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-              Every client is more than a haircut. It's a story. It's confidence. It's a future that YOU helped shape.
+              Every client is more than a haircut. It's respect. It's confidence. It's a brotherhood that YOU helped build.
             </p>
           </div>
           
@@ -390,7 +390,7 @@ export default function HomePage() {
                 <div className="space-y-6">
                   {[
                     "Scissors still feel awkward in your hand",
-                    "Your fades look patchy, your layers feel wrong", 
+                    "Your fades look patchy, your lineups are crooked", 
                     "Every cut feels like guessing",
                     "You're stuck charging bottom dollar",
                     "Clients leave disappointed"
@@ -415,10 +415,10 @@ export default function HomePage() {
                 <div className="space-y-6">
                   {[
                     "Walk into any consultation with complete confidence",
-                    "Create cuts that grow out beautifully for months",
+                    "Create fades and cuts that grow out clean for weeks",
                     "Turn every client into a walking advertisement", 
                     "Charge premium prices for your expertise",
-                    "Build a waiting list of loyal customers"
+                    "Build a waiting list of loyal clients"
                   ].map((item, index) => (
                     <div key={index} className="flex items-start">
                       <CheckCircle className="text-luxury-gold mr-5 h-5 w-5 mt-1 flex-shrink-0" />
@@ -449,7 +449,7 @@ export default function HomePage() {
               What You'll Learn <span className="text-gradient-gold">Inside</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-              A comprehensive curriculum designed to take you from beginner to master craftsman
+              A comprehensive curriculum designed to take you from beginner to master barber
             </p>
           </div>
           
@@ -458,32 +458,32 @@ export default function HomePage() {
               {
                 icon: <Diamond className="h-8 w-8" />,
                 title: "The Art of the Consultation",
-                description: "Turn nervous clients into loyal ones. Learn how to read hair, face shape, and lifestyle within minutes."
+                description: "Turn nervous clients into regulars. Learn how to read hair, face shape, and style preferences within minutes."
               },
               {
                 icon: <Gem className="h-8 w-8" />,
                 title: "The Fundamentals of Cutting", 
-                description: "Master the geometry behind every great cut. Understand angles, tension, and elevation like a pro."
+                description: "Master the geometry behind every great cut. Understand angles, guard work, and blade techniques like a pro."
               },
               {
                 icon: <Crown className="h-8 w-8" />,
-                title: "Creating Shape & Flow",
-                description: "Craft styles that move. Learn how to give your cuts personality and structure that holds."
+                title: "Mastering Fades & Tapers",
+                description: "Perfect seamless fades and crisp tapers. Learn the techniques that separate pros from amateurs."
               },
               {
                 icon: <Trophy className="h-8 w-8" />,
-                title: "Finishing Techniques for Modern Looks",
-                description: "The secret sauce that separates amateur from artist. Texture, movement, and that 'wow' factor."
+                title: "Finishing Techniques & Lineups",
+                description: "The secret sauce that separates amateur from master. Clean lineups, edge work, and that 'wow' factor."
               },
               {
                 icon: <Scissors className="h-8 w-8" />,
                 title: "Cutting for ALL Hair Types",
-                description: "Fine, thick, curly or straight, we've got you. Learn to cut confidently across all textures."
+                description: "Coarse, fine, curly or straight, we've got you. Learn to cut confidently across all hair textures."
               },
               {
                 icon: <GraduationCap className="h-8 w-8" />,
-                title: "Ladies + Gents Cuts",
-                description: "The classics meet modern precision. Styles from the past 30 years adapted for today's looks."
+                title: "Classic & Modern Men's Cuts",
+                description: "The classics meet modern precision. Timeless cuts and today's trending styles for the modern man."
               }
             ].map((module, index) => (
               <div key={index} className="group relative">
