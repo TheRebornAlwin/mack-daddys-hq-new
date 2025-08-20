@@ -4,6 +4,11 @@ import { CheckCircle, ArrowRight, X, ExternalLink, Crown, Diamond, Target, Trend
 
 export default function UpsellPage() {
   const navigate = useNavigate();
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   const handleUpsellPurchase = () => {
     // Navigate to our custom upsell checkout page
@@ -31,7 +36,7 @@ export default function UpsellPage() {
       </div>
 
       <div className="relative z-10 min-h-screen flex items-center justify-center px-4">
-        <div className="max-w-5xl mx-auto text-center">
+        <div className={`max-w-5xl mx-auto text-center ${isVisible ? 'fade-in-luxury' : 'opacity-0'}`}>
           {/* Success Header */}
           <div className="mb-16 pt-20">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-luxury-gradient rounded mb-8 shadow-lg">
@@ -48,7 +53,7 @@ export default function UpsellPage() {
           </div>
 
           {/* Main Offer Card */}
-          <div className="relative max-w-4xl mx-auto mb-12">
+          <div className={`relative max-w-4xl mx-auto mb-12 ${isVisible ? 'slide-in-luxury-delayed' : 'opacity-0'}`}>
             <div className="card-luxury rounded-lg p-12 shadow-2xl">
               <div className="mb-10">
                 <div className="badge-premium rounded-full px-6 py-3 mb-8">
@@ -144,7 +149,7 @@ export default function UpsellPage() {
           </div>
 
           {/* Social Proof */}
-          <div className="max-w-2xl mx-auto">
+          <div className={`max-w-2xl mx-auto ${isVisible ? 'slide-in-luxury-delayed-2' : 'opacity-0'}`}>
             <div className="card-burgundy rounded-lg p-8">
               <div className="flex justify-center mb-4">
                 {[...Array(5)].map((_, i) => (

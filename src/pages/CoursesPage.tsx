@@ -312,7 +312,7 @@ export default function CoursesPage() {
           </div>
 
           {/* Courses Grid */}
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className={`grid lg:grid-cols-2 gap-12 ${isVisible ? 'slide-in-luxury-delayed' : 'opacity-0'}`}>
             {courses.map((course, index) => (
               <div 
                 key={course.id} 
@@ -394,7 +394,7 @@ export default function CoursesPage() {
           </div>
 
           {/* Additional Features */}
-          <div className="mt-20 grid md:grid-cols-3 gap-8">
+          <div className={`mt-20 grid md:grid-cols-3 gap-8 ${isVisible ? 'slide-in-luxury-delayed-2' : 'opacity-0'}`}>
             {[
               {
                 icon: <Users className="h-8 w-8" />,
@@ -485,7 +485,7 @@ export default function CoursesPage() {
           </div>
 
           {/* Modules Grid */}
-          <div className="space-y-8">
+          <div className={`space-y-8 ${isVisible ? 'slide-in-luxury-delayed' : 'opacity-0'}`}>
             {selectedCourse.modules.map((module, index) => (
               <div 
                 key={module.id}
@@ -765,7 +765,7 @@ export default function CoursesPage() {
         </div>
 
         {/* Lessons List */}
-        <div className="space-y-6">
+        <div className={`space-y-6 ${isVisible ? 'slide-in-luxury-delayed' : 'opacity-0'}`}>
           {selectedModule?.lessons.map((lesson, index) => (
             <div 
               key={lesson.id}

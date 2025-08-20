@@ -328,6 +328,7 @@
   
   .fade-in-luxury {
     animation: fadeInLuxury 1s ease-out forwards;
+    opacity: 0;
   }
   
   @keyframes fadeInLuxury {
@@ -343,6 +344,19 @@
   
   .slide-in-luxury {
     animation: slideInLuxury 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+  }
+  
+  .slide-in-luxury-delayed {
+    animation: slideInLuxury 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+    animation-delay: 0.2s;
+  }
+  
+  .slide-in-luxury-delayed-2 {
+    animation: slideInLuxury 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+    animation-delay: 0.4s;
   }
   
   @keyframes slideInLuxury {

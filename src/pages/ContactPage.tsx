@@ -4,6 +4,7 @@ import { ArrowLeft, Mail, Phone, Clock, MessageSquare, Send, MapPin, Headphones,
 
 export default function ContactPage() {
   const navigate = useNavigate();
+  const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -11,6 +12,10 @@ export default function ContactPage() {
     message: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -55,7 +60,7 @@ export default function ContactPage() {
 
       <div className="max-w-6xl mx-auto px-6 py-16">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className={`text-center mb-16 ${isVisible ? 'fade-in-luxury' : 'opacity-0'}`}>
           <div className="inline-flex items-center justify-center w-16 h-16 bg-luxury-gradient rounded mb-6">
             <MessageSquare className="h-8 w-8 text-black" />
           </div>
@@ -67,7 +72,7 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-12">
+        <div className={`grid lg:grid-cols-3 gap-12 ${isVisible ? 'slide-in-luxury-delayed' : 'opacity-0'}`}>
           
           {/* Contact Information */}
           <div className="lg:col-span-1 space-y-8">
@@ -251,7 +256,7 @@ export default function ContactPage() {
         </div>
 
         {/* Additional Support Options */}
-        <div className="mt-16">
+        <div className={`mt-16 ${isVisible ? 'slide-in-luxury-delayed-2' : 'opacity-0'}`}>
           <h2 className="text-3xl font-playfair font-bold text-center mb-12">
             More Ways to <span className="text-gradient-gold">Get Help</span>
           </h2>

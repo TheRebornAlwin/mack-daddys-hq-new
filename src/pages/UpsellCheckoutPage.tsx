@@ -15,8 +15,11 @@ export default function UpsellCheckoutPage() {
   const navigate = useNavigate();
   const [customerData, setCustomerData] = useState<CustomerData | null>(null);
   const [paymentError, setPaymentError] = useState<string | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    setIsVisible(true);
+    
     // Retrieve customer data from localStorage
     const storedData = localStorage.getItem('customerData');
     if (storedData) {
@@ -98,7 +101,7 @@ export default function UpsellCheckoutPage() {
         </div>
 
         {/* Main Content */}
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+        <div className={`max-w-4xl mx-auto px-4 sm:px-6 py-8 ${isVisible ? 'fade-in-luxury' : 'opacity-0'}`}>
           {/* Hero Section */}
           <div className="text-center mb-12">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-luxury-gradient rounded mb-8">
@@ -126,7 +129,7 @@ export default function UpsellCheckoutPage() {
           </div>
 
           {/* Upgrade Offer Summary */}
-          <div className="card-luxury rounded-lg p-8 mb-8 border-l-4 border-luxury">
+          <div className={`card-luxury rounded-lg p-8 mb-8 border-l-4 border-luxury ${isVisible ? 'slide-in-luxury-delayed' : 'opacity-0'}`}>
             <div className="text-center mb-8">
               <div className="badge-premium rounded-full px-6 py-3 mb-6">
                 <Crown className="h-5 w-5 text-luxury-gold mr-2" />
@@ -192,7 +195,7 @@ export default function UpsellCheckoutPage() {
           </div>
 
           {/* Payment Section */}
-          <div className="card-luxury rounded-lg p-6 sm:p-8 mb-8">
+          <div className={`card-luxury rounded-lg p-6 sm:p-8 mb-8 ${isVisible ? 'slide-in-luxury-delayed-2' : 'opacity-0'}`}>
             <h2 className="text-2xl font-playfair font-bold text-white mb-8 text-center flex items-center justify-center">
               <Lightning className="h-6 w-6 text-luxury mr-3" />
               Complete Your Elite Upgrade

@@ -4,6 +4,11 @@ import { CheckCircle, Star, Gift, BookOpen, Users, Home, Crown, Diamond, Target,
 
 export default function UpsellThankYouPage() {
   const navigate = useNavigate();
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
@@ -15,7 +20,7 @@ export default function UpsellThankYouPage() {
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 py-12">
         {/* Success Header */}
-        <div className="text-center mb-20">
+        <div className={`text-center mb-20 ${isVisible ? 'fade-in-luxury' : 'opacity-0'}`}>
           <div className="inline-flex items-center justify-center w-28 h-28 bg-luxury-gradient rounded mb-10">
             <Crown className="h-14 w-14 text-black" />
           </div>
@@ -32,7 +37,7 @@ export default function UpsellThankYouPage() {
         </div>
 
         {/* Complete Package Overview */}
-        <div className="card-luxury rounded-lg p-12 mb-20 shadow-2xl border-l-4 border-luxury">
+        <div className={`card-luxury rounded-lg p-12 mb-20 shadow-2xl border-l-4 border-luxury ${isVisible ? 'slide-in-luxury-delayed' : 'opacity-0'}`}>
           <h3 className="text-3xl font-playfair font-bold text-white mb-12 text-center flex items-center justify-center">
             <Gift className="h-8 w-8 text-luxury-gold mr-4" />
             Your Complete Success Package
@@ -96,7 +101,7 @@ export default function UpsellThankYouPage() {
         </div>
 
         {/* What Happens Next */}
-        <div className="card-luxury rounded-lg p-10 mb-16">
+        <div className={`card-luxury rounded-lg p-10 mb-16 ${isVisible ? 'slide-in-luxury-delayed-2' : 'opacity-0'}`}>
           <h3 className="text-2xl font-playfair font-bold text-white mb-10 text-center">What Happens Next</h3>
           <div className="grid md:grid-cols-3 gap-10">
             {[

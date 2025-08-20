@@ -7,6 +7,7 @@ import { CheckCircle, Play, Mail, BookOpen, Users, Home, Crown, Diamond, Target,
 export default function ThankYouPage() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [isVisible, setIsVisible] = useState(false);
   const [purchaseDetails, setPurchaseDetails] = useState({
     hasBase: true,
     hasBump: false,
@@ -17,6 +18,8 @@ export default function ThankYouPage() {
   });
 
   useEffect(() => {
+    setIsVisible(true);
+    
     // Check URL parameters to determine what was purchased
     const urlParams = new URLSearchParams(location.search);
     const package_type = urlParams.get('package') || 'base';
@@ -78,7 +81,7 @@ export default function ThankYouPage() {
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 py-16">
         {/* Heartfelt Welcome */}
-        <div className="text-center mb-20 pt-16">
+        <div className={`text-center mb-20 pt-16 ${isVisible ? 'fade-in-luxury' : 'opacity-0'}`}>
           <div className="inline-flex items-center justify-center w-24 h-24 bg-luxury-gradient rounded mb-12">
             <Heart className="h-12 w-12 text-black" />
           </div>
@@ -98,7 +101,7 @@ export default function ThankYouPage() {
         </div>
 
         {/* What You Get Right Now */}
-        <div className="card-luxury rounded-lg p-10 mb-16 border-l-4 border-luxury">
+        <div className={`card-luxury rounded-lg p-10 mb-16 border-l-4 border-luxury ${isVisible ? 'slide-in-luxury-delayed' : 'opacity-0'}`}>
           <h2 className="text-3xl font-playfair font-bold text-gradient-gold mb-10 text-center flex items-center justify-center">
             <Gift className="h-8 w-8 text-luxury-gold mr-4" />
             Everything You Get Right Now
@@ -236,7 +239,7 @@ export default function ThankYouPage() {
         </div>
 
         {/* Your Next Steps */}
-        <div className="card-luxury rounded-lg p-10 mb-16">
+        <div className={`card-luxury rounded-lg p-10 mb-16 ${isVisible ? 'slide-in-luxury-delayed-2' : 'opacity-0'}`}>
           <h2 className="text-3xl font-playfair font-bold text-white mb-10 text-center flex items-center justify-center">
             <Target className="h-8 w-8 text-luxury mr-4" />
             Your Journey Starts Now
