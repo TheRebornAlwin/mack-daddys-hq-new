@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Shield, Lock, CheckCircle, Star, ArrowLeft, Crown, Scissors, Timer, TrendingUp, Target, Diamond, Zap, Users, BookOpen, Award, Gift, Rocket, Lightning } from 'lucide-react';
+import { Shield, Lock, CheckCircle, Star, ArrowLeft, Crown, Scissors, Timer, TrendingUp, Target, Diamond, Zap, Users, BookOpen, Award, Gift, Rocket, CloudLightning as Lightning } from 'lucide-react';
 import StripeCheckout from '../components/StripeCheckout';
 
 interface CustomerData {
