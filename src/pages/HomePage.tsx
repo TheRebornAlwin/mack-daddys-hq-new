@@ -258,8 +258,8 @@ export default function HomePage() {
       {/* Meet Sean Section */}
       <section id="about" className="relative py-16 sm:py-24 lg:py-32 bg-gradient-to-br from-gray-900 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <div className="relative">
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <div className="relative lg:col-span-5">
               <div className="relative z-10">
                 <img 
                   src="/images/seancuttinggirlshair.jpeg"
@@ -280,7 +280,7 @@ export default function HomePage() {
               <div className="absolute -top-6 -left-6 sm:-top-8 sm:-left-8 lg:-top-12 lg:-left-12 w-16 h-16 sm:w-24 sm:h-24 lg:w-32 lg:h-32 bg-luxury-gradient opacity-20 rounded-full blur-2xl"></div>
             </div>
             
-            <div className="space-y-6 lg:space-y-8 fade-in-luxury mt-8 lg:mt-0">
+            <div className="lg:col-span-7 space-y-4 lg:space-y-6 fade-in-luxury mt-8 lg:mt-0">
               <div>
                 <div className="badge-premium rounded px-4 sm:px-5 py-2 mb-4 sm:mb-6 lg:mb-8">
                   <Award className="h-3 w-3 sm:h-4 sm:w-4 text-luxury-gold mr-2 sm:mr-3" />
@@ -293,7 +293,7 @@ export default function HomePage() {
                 </h2>
               </div>
               
-              <div className="space-y-4 lg:space-y-6">
+              <div className="space-y-4 lg:space-y-5">
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-gray-300">
                   Sean's been barbering for <span className="text-gradient-gold font-semibold">28+ years</span>, 
                   built a <span className="text-gradient-gold font-semibold">six-figure barbershop from scratch</span>, 
@@ -315,7 +315,7 @@ export default function HomePage() {
                 </div>
               </div>
               
-              <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:gap-4 mt-6 lg:mt-8">
                 {[
                   { 
                     icon: GraduationCap, 
@@ -344,12 +344,12 @@ export default function HomePage() {
                 ].map((item, index) => (
                   <div 
                     key={index} 
-                    className="card-luxury rounded-lg p-3 sm:p-4 lg:p-6 group stats-badge"
+                    className="card-luxury rounded-lg p-3 sm:p-4 lg:p-5 group stats-badge"
                     onMouseEnter={() => showTooltip(`sean-${index}`)}
                     onMouseLeave={() => hideTooltip(`sean-${index}`)}
                     onClick={() => setTooltipStates(prev => ({ ...prev, [`sean-${index}`]: !prev[`sean-${index}`] }))}
                   >
-                    <item.icon className="h-5 w-5 sm:h-6 sm:w-6 lg:h-7 lg:w-7 text-luxury-gold mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300" />
+                    <item.icon className="h-5 w-5 sm:h-6 sm:w-6 lg:h-6 lg:w-6 text-luxury-gold mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300" />
                     <div className="text-white font-semibold text-sm sm:text-base">{item.text}</div>
                     <div className="text-gray-400 text-xs sm:text-sm uppercase tracking-wider">{item.subtext}</div>
                     <div className={`stats-tooltip ${tooltipStates[`sean-${index}`] ? 'show' : ''}`}>
