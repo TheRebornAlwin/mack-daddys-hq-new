@@ -72,7 +72,6 @@ export default function ThankYouPage() {
   }, [location]);
 
   return (
-    <>
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
       {/* Luxury geometric shapes */}
       <div className="fixed inset-0 pointer-events-none z-0">
@@ -474,6 +473,5 @@ export default function ThankYouPage() {
         </div>
       </div>
     </div>
-    </>
   );
 }
