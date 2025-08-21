@@ -233,7 +233,7 @@ export default function ThankYouPage() {
           
           <div className="text-center pt-8 border-t border-luxury/30">
             <p className="text-2xl text-gray-300 mb-2">Total Value: <span className="text-gradient-gold font-bold">${purchaseDetails.totalValue.toLocaleString()}</span></p>
-            <p className="text-3xl font-playfair font-bold text-gradient-gold">Your Investment: Only ${purchaseDetails.totalPaid}</p>
+            <p className="text-2xl text-gray-300 mb-2">Your Investment: Only <span className="text-gradient-gold-price text-3xl font-playfair font-bold">${purchaseDetails.totalPaid}</span></p>
             <p className="text-luxury font-medium mt-2">You saved ${purchaseDetails.savings.toLocaleString()} today!</p>
           </div>
         </div>
@@ -268,7 +268,7 @@ export default function ThankYouPage() {
             ].map((item, index) => (
               <div key={index} className="text-center group">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-luxury-gradient rounded mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-white font-bold text-lg">{item.step}</span>
+                  <span className="text-black font-bold text-lg">{item.step}</span>
                 </div>
                 <div className="text-luxury mb-4 flex justify-center group-hover:scale-110 transition-transform duration-300">
                   {item.icon}
@@ -325,7 +325,7 @@ export default function ThankYouPage() {
               </div>
             </div>
           </div>
-          <div className="card-burgundy rounded-lg p-6">
+          <div className="card-luxury rounded-lg p-6">
             <p className="text-gray-300 leading-relaxed text-center">
               <em>"Welcome to the family! I'm genuinely excited to be part of your journey. Remember, every master was once a beginner. What matters is that you've taken the first step. I'm here to guide you every step of the way."</em>
             </p>
@@ -336,7 +336,6 @@ export default function ThankYouPage() {
         {/* Study Plan & Resources */}
         <div className="card-luxury rounded-lg p-10 mb-16">
           <h2 className="text-2xl font-playfair font-bold text-white mb-8 text-center flex items-center justify-center">
-            <Clock className="h-6 w-6 text-luxury mr-3" />
             Your 30-Day Success Roadmap
           </h2>
           
@@ -370,7 +369,7 @@ export default function ThankYouPage() {
                 ]
               }
             ].map((phase, index) => (
-              <div key={index} className="card-burgundy rounded-lg p-6">
+              <div key={index} className="card-luxury rounded-lg p-6">
                 <div className="text-gradient-gold font-bold text-lg mb-3">{phase.week}</div>
                 <h3 className="text-white font-semibold text-xl mb-4">{phase.title}</h3>
                 <ul className="space-y-2">
@@ -454,6 +453,7 @@ export default function ThankYouPage() {
               Today marks the beginning of something special. In just 30 days, you'll look back at this moment as the turning point in your career. The skills you're about to learn will serve you for life, and the confidence you'll gain will transform not just your cutting, but how you see yourself as a professional.
             </p>
             <div className="card-burgundy rounded-lg p-8 max-w-3xl mx-auto">
+            <div className="card-luxury rounded-lg p-8 max-w-3xl mx-auto">
               <p className="text-gradient-gold font-semibold text-2xl mb-4">
                 🚀 Your transformation starts NOW!
               </p>
