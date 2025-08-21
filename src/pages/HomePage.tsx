@@ -551,20 +551,6 @@ export default function HomePage() {
             >
               <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />
             </button>
-            
-            <div className="flex justify-center mt-8 sm:mt-12 space-x-2 sm:space-x-3">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentTestimonial(index)}
-                  className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
-                    index === currentTestimonial 
-                      ? 'bg-luxury-gradient scale-125' 
-                      : 'bg-gray-600 hover:bg-gray-500'
-                  }`}
-                />
-              ))}
-            </div>
           </div>
         </div>
       </section>
