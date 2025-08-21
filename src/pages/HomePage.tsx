@@ -295,15 +295,13 @@ export default function HomePage() {
               
               <div className="space-y-6 lg:space-y-8">
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-gray-300 mb-6 lg:mb-10">
-                  Sean's been barbering for <span className="text-gradient-gold font-semibold">28+ years</span>, 
-                  built a <span className="text-gradient-gold font-semibold">six-figure barbershop from scratch</span>, 
-                  and trained over a thousand barbers who started exactly where you are.
+                  Sean’s been behind the chair for <span className="text-gradient-gold font-semibold">28+ years,</span>, 
+                  built a <span className="text-gradient-gold font-semibold">six-figure shop from nothing</span>, 
+                  trained over a thousand barbers who started where you are.
                 </p>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-gray-300 mb-8 lg:mb-12">
-                  He knows what it's like to fumble with clippers and doubt yourself. Now, he's handing you 
-                  the roadmap he wishes he had: <span className="text-gradient-gold font-semibold">real-world techniques</span>, 
-                  consultations made simple, and cuts that grow out clean.
+                  He remembers shaky hands and second-guessing every guard change. This course is the map he wishes he had—real shop techniques, simple consultations, and cuts that hold after a week of pillows and hoodies.
                 </p>
                 
                 <div className="card-luxury rounded p-4 sm:p-6 lg:p-8 border-l-4 border-luxury mb-8 lg:mb-14">
