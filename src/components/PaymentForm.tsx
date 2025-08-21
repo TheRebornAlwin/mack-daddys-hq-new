@@ -118,6 +118,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
         <PaymentElement
           options={{
             layout: 'tabs',
+            paymentMethodOrder: ['card', 'paypal', 'apple_pay', 'google_pay'],
             wallets: {
               applePay: 'auto',
               googlePay: 'auto',
@@ -125,7 +126,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
             fields: {
               billingDetails: {
                 name: 'auto',
-                email: customerEmail ? 'never' : 'auto',
+                email: 'auto',
                 phone: 'auto',
                 address: {
                   country: 'auto',
