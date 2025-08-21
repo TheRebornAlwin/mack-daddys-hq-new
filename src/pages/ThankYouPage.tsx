@@ -465,7 +465,7 @@ export default function ThankYouPage() {
           
           <button 
             onClick={() => navigate('/')}
-            className="inline-flex items-center text-gray-400 hover:text-luxury transition-colors duration-300 text-lg group"
+            className="inline-flex items-center text-gray-400 hover:text-luxury transition-colors duration-300 text-lg group mt-8"
           >
             <Home className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform duration-300" />
             Return to Homepage
