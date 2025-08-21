@@ -301,7 +301,7 @@ export default function HomePage() {
                 </p>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-gray-300 mb-8 lg:mb-12">
-                  He remembers shaky hands and second-guessing every guard change. This course is the map he wishes he had—real shop techniques, simple consultations, and cuts that hold after a week of pillows and hoodies.
+                  He remembers shaky hands and second-guessing every guard change. This course is the map he wish he had, with real shop techniques, simple consultations, and cuts that hold after a week of pillows and hoodies.
                 </p>
                 
                 <div className="card-luxury rounded p-4 sm:p-6 lg:p-8 border-l-4 border-luxury mb-8 lg:mb-14">
