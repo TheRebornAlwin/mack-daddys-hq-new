@@ -462,7 +462,6 @@ export default function ThankYouPage() {
               </div>
             </div>
           </div>
-          
           <button 
             onClick={() => navigate('/')}
             className="inline-flex items-center text-gray-400 hover:text-luxury transition-colors duration-300 text-lg group mt-8"
