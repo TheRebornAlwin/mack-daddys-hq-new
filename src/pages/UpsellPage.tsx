@@ -150,7 +150,7 @@ export default function UpsellPage() {
           </div>
 
           {/* Social Proof */}
-          <div className={`max-w-2xl mx-auto ${isVisible ? 'slide-in-luxury-delayed-2' : 'opacity-0'}`}>
+          <div className={`max-w-2xl mx-auto mb-12 ${isVisible ? 'slide-in-luxury-delayed-2' : 'opacity-0'}`}>
             <div className="card-luxury rounded-lg p-8">
               <div className="flex justify-center mb-4">
                 {[...Array(5)].map((_, i) => (
