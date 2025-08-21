@@ -279,7 +279,7 @@ export default function ThankYouPage() {
             ))}
           </div>
           
-          <div className="card-burgundy rounded-lg p-8 text-center">
+          <div className="card-luxury rounded-lg p-8 text-center">
             <h3 className="text-gradient-gold font-bold text-xl mb-4">📧 Important: Your Access Email</h3>
             <p className="text-gray-300 leading-relaxed">
               <strong>Check your inbox in the next 5 minutes.</strong> If you don't see our email, check your spam folder and add our email to your contacts. This ensures you'll receive all course updates and exclusive bonuses.
@@ -452,16 +452,16 @@ export default function ThankYouPage() {
             <p className="text-xl text-gray-300 leading-relaxed max-w-4xl mx-auto mb-8">
               Today marks the beginning of something special. In just 30 days, you'll look back at this moment as the turning point in your career. The skills you're about to learn will serve you for life, and the confidence you'll gain will transform not just your cutting, but how you see yourself as a professional.
             </p>
-              <div className="card-luxury rounded-lg p-6 max-w-3xl mx-auto">
-                <p className="text-gradient-gold font-semibold text-2xl mb-4">
-                  🚀 Your transformation starts NOW!
-                </p>
-                <p className="text-gray-300 text-lg">
-                  Check your email, access your course, and take that first step. We're incredibly excited to watch you grow into the stylist you've always wanted to be.
-                </p>
-              </div>
+            <div className="card-luxury rounded-lg p-6 max-w-3xl mx-auto">
+              <p className="text-gradient-gold font-semibold text-2xl mb-4">
+                🚀 Your transformation starts NOW!
+              </p>
+              <p className="text-gray-300 text-lg">
+                Check your email, access your course, and take that first step. We're incredibly excited to watch you grow into the stylist you've always wanted to be.
+              </p>
             </div>
           </div>
+          
           <button 
             onClick={() => navigate('/')}
             className="inline-flex items-center text-gray-400 hover:text-luxury transition-colors duration-300 text-lg group mt-8"
