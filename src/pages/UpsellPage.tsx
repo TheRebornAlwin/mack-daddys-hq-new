@@ -151,7 +151,7 @@ export default function UpsellPage() {
 
           {/* Social Proof */}
           <div className={`max-w-2xl mx-auto ${isVisible ? 'slide-in-luxury-delayed-2' : 'opacity-0'}`}>
-            <div className="card-burgundy rounded-lg p-8">
+            <div className="card-luxury rounded-lg p-8">
               <div className="flex justify-center mb-4">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="h-5 w-5 text-luxury fill-current" />
