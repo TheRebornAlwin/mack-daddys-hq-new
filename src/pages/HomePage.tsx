@@ -662,9 +662,6 @@ export default function HomePage() {
       <section className="py-16 sm:py-24 lg:py-32 bg-gradient-to-br from-gray-900 to-black relative">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-luxury-gradient rounded mb-6">
-              <HelpCircle className="h-8 w-8 text-black" />
-            </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-playfair font-bold mb-6 sm:mb-8 leading-tight">
  <span className="text-gradient-gold">FAQs</span>
             </h2>
@@ -758,18 +755,20 @@ export default function HomePage() {
                   </h3>
                   <ChevronDown className="h-5 w-5 sm:h-6 sm:w-6 text-luxury-gold transition-transform duration-300 group-open:rotate-180 flex-shrink-0" />
                 </summary>
-                <div className="px-6 sm:px-8 pb-6 sm:pb-8">
-                  <div className="border-t border-luxury/20 pt-6">
-                    <p className="text-gray-300 leading-relaxed text-base sm:text-lg">
-                      {faq.answer.split(/(\b(?:calm plan|clean practice cuts|shop-tested path|guaranteed to win|365 days|lifetime access|Business Mastery System|exact lines)\b)/gi).map((part, partIndex) => {
-                        const isHighlight = /^(calm plan|clean practice cuts|shop-tested path|guaranteed to win|365 days|lifetime access|Business Mastery System|exact lines)$/i.test(part);
-                        return isHighlight ? (
-                          <span key={partIndex} className="text-gradient-gold font-semibold">{part}</span>
-                        ) : (
-                          part
-                        );
-                      })}
-                    </p>
+                <div className="faq-answer">
+                  <div className="px-6 sm:px-8 pb-6 sm:pb-8">
+                    <div className="border-t border-luxury/20 pt-6">
+                      <p className="text-gray-300 leading-relaxed text-base sm:text-lg">
+                        {faq.answer.split(/(\b(?:calm plan|clean practice cuts|shop-tested path|guaranteed to win|365 days|lifetime access|Business Mastery System|exact lines)\b)/gi).map((part, partIndex) => {
+                          const isHighlight = /^(calm plan|clean practice cuts|shop-tested path|guaranteed to win|365 days|lifetime access|Business Mastery System|exact lines)$/i.test(part);
+                          return isHighlight ? (
+                            <span key={partIndex} className="text-gradient-gold font-semibold">{part}</span>
+                          ) : (
+                            part
+                          );
+                        })}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </details>
