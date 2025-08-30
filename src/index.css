@@ -413,19 +413,14 @@
     background: linear-gradient(to bottom, #FFD966, #FFB733);
   }
   
-  /* FAQ Smooth Slide Animation */
+  /* FAQ Smooth Slide Animation - Max Height Method */
   .faq-answer {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.3s ease-out;
+    max-height: 0;
     overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   details[open] .faq-answer {
-    grid-template-rows: 1fr;
-  }
-  
-  .faq-answer > div {
-    min-height: 0;
+    max-height: 1000px;
   }
 }
