@@ -666,7 +666,7 @@ export default function HomePage() {
               <HelpCircle className="h-8 w-8 text-black" />
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-playfair font-bold mb-6 sm:mb-8 leading-tight">
-              Frequently Asked <span className="text-gradient-gold">Questions</span>
+ <span className="text-gradient-gold">FAQs</span>
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
               Real questions from real barbers. Get the answers you need to start your transformation.
