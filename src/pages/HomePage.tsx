@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Scissors, Users, Star, Clock, Award, Shield, ArrowRight, Target, TrendingUp, BookOpen, Zap, Timer, ChevronLeft, ChevronRight, Crown, ArrowDown, CheckCircle, Diamond, Gem, Banknote, GraduationCap, Trophy, Briefcase, X } from 'lucide-react';
+import { Scissors, Users, Star, Clock, Award, Shield, ArrowRight, Target, TrendingUp, BookOpen, Zap, Timer, ChevronLeft, ChevronRight, Crown, ArrowDown, CheckCircle, Diamond, Gem, Banknote, GraduationCap, Trophy, Briefcase, X, ChevronDown, HelpCircle } from 'lucide-react';
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -652,6 +652,143 @@ export default function HomePage() {
                   JOIN THE SUCCESSFUL
                   <ArrowRight className="ml-3 sm:ml-4 h-5 w-5 sm:h-6 sm:w-6" />
                 </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 sm:py-24 lg:py-32 bg-gradient-to-br from-gray-900 to-black relative">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-luxury-gradient rounded mb-6">
+              <HelpCircle className="h-8 w-8 text-black" />
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-playfair font-bold mb-6 sm:mb-8 leading-tight">
+              Frequently Asked <span className="text-gradient-gold">Questions</span>
+            </h2>
+            <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+              Real questions from real barbers. Get the answers you need to start your transformation.
+            </p>
+          </div>
+          
+          <div className="space-y-4 sm:space-y-6">
+            {[
+              {
+                question: "I've never cut hair. Can I actually quickly succeed in this?",
+                answer: "No. We built it for exactly that. You'll learn where to start, what guard to grab, how to set a guide, and when to stop. Day 1 = calm plan, not guesswork."
+              },
+              {
+                question: "How fast before I can charge real money?",
+                answer: "Typical: 5–10 clean practice cuts → start charging mates a small fee → raise as your blends stop stepping. Most motivated students see paid cuts in 2–3 weeks. Your hands + reps decide the exact date."
+              },
+              {
+                question: "What if my hands shake or I get nervous when the clippers touch hair?",
+                answer: "Welcome to the club. We slow you down, show hand position, body angle, and give you a simple checklist so you breathe and build instead of panic and chase."
+              },
+              {
+                question: "Do I need fancy gear?",
+                answer: "Nope. A reliable clipper, guards, lever, scissors, combs, cape, neck strips, a spray bottle, and a mirror. We give you a short \"buy this, skip that\" list inside."
+              },
+              {
+                question: "Can I learn on a mannequin, or do I need real heads?",
+                answer: "Start on a mannequin to get movement and sectioning without fear. Then switch to real people fast (friends/family) so you learn growth patterns and pressure. Do both."
+              },
+              {
+                question: "Does this cover curly/coily hair, or just straight?",
+                answer: "All hair types. You'll learn what changes (tension, approach, weight) and what never does (guides, balance, finish)."
+              },
+              {
+                question: "I'm awkward at the consult. What do I even say?",
+                answer: "Use our script (in the course) and tailor it to your situation! I've been using this for the past 3 decades and it's worked wonders."
+              },
+              {
+                question: "How long are the lessons? Can I watch on my phone?",
+                answer: "Short, tight videos you can pause and copy cut-for-cut. Phone, tablet, laptop, whatever you've got works."
+              },
+              {
+                question: "Will this help me raise prices without losing everyone?",
+                answer: "Yes. We give you a simple ladder: proof → consistency → small raises + clear wording. Clients respect clean work and clear communication."
+              },
+              {
+                question: "Is there a guarantee?",
+                answer: "Yep, 365 days. A full year. Go through it. If you don't feel your cuts and confidence level up, email us and we'll make it right."
+              },
+              {
+                question: "What makes this different from YouTube?",
+                answer: "Sequence and standards. You're not watching random fades with no context, nor learning from a random guy with 2 weeks of experience. You're following a shop-tested path with checks at each step so you're guaranteed to win."
+              },
+              {
+                question: "Do I need a license to cut hair and get paid?",
+                answer: "Depends on your country/state. We teach technique and client experience; you're responsible for local rules. We include a quick \"check your area\" guide so you're prepared."
+              },
+              {
+                question: "Can I open a shop after this?",
+                answer: "Eventually, yes. We recommend you apply to be a barber after practice with our course, then eventually open a shop if it interests you. Details on how to do so is laid out in the Business Mastery System."
+              },
+              {
+                question: "How do I find my first paying clients?",
+                answer: "Start with 5–10 friends/family, post clean before/afters, ask happy clients to tag you, offer limited \"new client\" slots, and rebook on the spot. We give you the exact lines."
+              },
+              {
+                question: "Is support a thing or am I on my own?",
+                answer: "You're not alone. If you're stuck, shoot us a message with photos/video and we'll point you in the right direction. (Keep notes, small tweaks fix big problems.)"
+              },
+              {
+                question: "What if I mess up a cut?",
+                answer: "You will. We all do. We show you how to read your mistakes, fix what's fixable, and turn it into a clean lesson instead of a panic spiral."
+              },
+              {
+                question: "I'm 30+, is it too late to switch careers?",
+                answer: "Not if you work. Craft pays any age. Clients care about how they look walking out, not what year you were born."
+              },
+              {
+                question: "How do I enroll?",
+                answer: "Use any major card at checkout. You get instant, lifetime access and updates."
+              }
+            ].map((faq, index) => (
+              <details 
+                key={index} 
+                className="card-luxury rounded-lg group hover:border-luxury/40 transition-all duration-300"
+              >
+                <summary className="flex items-center justify-between p-6 sm:p-8 cursor-pointer list-none">
+                  <h3 className="text-lg sm:text-xl font-semibold text-white group-hover:text-luxury transition-colors duration-300 pr-4">
+                    {faq.question}
+                  </h3>
+                  <ChevronDown className="h-5 w-5 sm:h-6 sm:w-6 text-luxury-gold transition-transform duration-300 group-open:rotate-180 flex-shrink-0" />
+                </summary>
+                <div className="px-6 sm:px-8 pb-6 sm:pb-8">
+                  <div className="border-t border-luxury/20 pt-6">
+                    <p className="text-gray-300 leading-relaxed text-base sm:text-lg">
+                      {faq.answer.split(/(\b(?:calm plan|clean practice cuts|shop-tested path|guaranteed to win|365 days|lifetime access|Business Mastery System|exact lines)\b)/gi).map((part, partIndex) => {
+                        const isHighlight = /^(calm plan|clean practice cuts|shop-tested path|guaranteed to win|365 days|lifetime access|Business Mastery System|exact lines)$/i.test(part);
+                        return isHighlight ? (
+                          <span key={partIndex} className="text-gradient-gold font-semibold">{part}</span>
+                        ) : (
+                          part
+                        );
+                      })}
+                    </p>
+                  </div>
+                </div>
+              </details>
+            ))}
+          </div>
+          
+          <div className="text-center mt-12 sm:mt-16">
+            <div className="card-luxury rounded-lg p-6 sm:p-8 max-w-3xl mx-auto">
+              <h3 className="text-xl sm:text-2xl font-playfair font-bold text-gradient-gold mb-4">
+                Still Have Questions?
+              </h3>
+              <p className="text-gray-300 mb-6 leading-relaxed">
+                We're here to help you succeed. Reach out to our support team for personalized answers.
+              </p>
+              <button 
+                onClick={() => navigate('/contact')}
+                className="btn-luxury text-black font-bold px-8 py-4 rounded text-lg hover:scale-105 transition-transform duration-300"
+              >
+                Contact Support
               </button>
             </div>
           </div>
