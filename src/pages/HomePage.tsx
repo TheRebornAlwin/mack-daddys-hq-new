@@ -7,6 +7,7 @@ export default function HomePage() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [tooltipStates, setTooltipStates] = useState<Record<string, boolean>>({});
+  const [openFaqId, setOpenFaqId] = useState<number | null>(null);
   
   useEffect(() => {
     setIsVisible(true);
@@ -114,6 +115,9 @@ export default function HomePage() {
     setTooltipStates(prev => ({ ...prev, [id]: false }));
   };
 
+  const handleFaqClick = (index: number) => {
+    setOpenFaqId(openFaqId === index ? null : index);
+  };
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
       {/* Navigation */}
@@ -745,17 +749,22 @@ export default function HomePage() {
                 answer: "Use any major card at checkout. You get instant, lifetime access and updates."
               }
             ].map((faq, index) => (
-              <details 
+              <div 
                 key={index} 
-                className="card-luxury rounded-lg group hover:border-luxury/40 transition-all duration-300"
+                className="card-luxury rounded-lg group hover:border-luxury/40 transition-all duration-300 overflow-hidden"
               >
-                <summary className="flex items-center justify-between p-6 sm:p-8 cursor-pointer list-none">
+                <div 
+                  className="flex items-center justify-between p-6 sm:p-8 cursor-pointer"
+                  onClick={() => handleFaqClick(index)}
+                >
                   <h3 className="text-lg sm:text-xl font-semibold text-white group-hover:text-luxury transition-colors duration-300 pr-4">
                     {faq.question}
                   </h3>
-                  <ChevronDown className="h-5 w-5 sm:h-6 sm:w-6 text-luxury-gold transition-transform duration-300 group-open:rotate-180 flex-shrink-0" />
-                </summary>
-                <div className="faq-answer">
+                  <ChevronDown className={`h-5 w-5 sm:h-6 sm:w-6 text-luxury-gold transition-transform duration-300 flex-shrink-0 ${
+                    openFaqId === index ? 'rotate-180' : ''
+                  }`} />
+                </div>
+                <div className={`faq-answer ${openFaqId === index ? 'open' : ''}`}>
                   <div className="px-6 sm:px-8 pb-6 sm:pb-8">
                     <div className="border-t border-luxury/20 pt-6">
                       <p className="text-gray-300 leading-relaxed text-base sm:text-lg">
@@ -771,7 +780,7 @@ export default function HomePage() {
                     </div>
                   </div>
                 </div>
-              </details>
+              </div>
             ))}
           </div>
           
