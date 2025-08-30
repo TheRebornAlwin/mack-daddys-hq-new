@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Scissors, Users, Star, Clock, Award, Shield, ArrowRight, Target, TrendingUp, BookOpen, Zap, Timer, ChevronLeft, ChevronRight, Crown, ArrowDown, CheckCircle, Diamond, Gem, Banknote, GraduationCap, Trophy, Briefcase, X, ChevronDown, HelpCircle } from 'lucide-react';
 
