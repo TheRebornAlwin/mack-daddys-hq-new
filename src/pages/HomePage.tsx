@@ -677,7 +677,7 @@ export default function HomePage() {
             {[
               {
                 question: "I've never cut hair. Can I actually quickly succeed in this?",
-                answer: "No. We built it for exactly that. You'll learn where to start, what guard to grab, how to set a guide, and when to stop. Day 1 = calm plan, not guesswork."
+                answer: "Yes. We built it for exactly that. You'll learn where to start, what guard to grab, how to set a guide, and when to stop. Day 1 = calm plan, not guesswork."
               },
               {
                 question: "How fast before I can charge real money?",
