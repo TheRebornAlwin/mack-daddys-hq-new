@@ -228,7 +228,7 @@ export default function HomePage() {
           
           <div className={`lg:col-span-5 mt-8 lg:mt-0 flex flex-col items-end justify-between gap-y-8 ${isVisible ? 'fade-in-luxury' : 'opacity-0'}`}>
             <div className="relative">
-              <div className="card-luxury rounded-lg p-2 max-w-md">
+              <div className="card-luxury rounded-lg p-2 w-[28rem]">
                 <div className="relative bg-gray-900 rounded-lg overflow-hidden aspect-video h-48 w-full">
                 </div>
               </div>
