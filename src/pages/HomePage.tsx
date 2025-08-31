@@ -136,7 +136,7 @@ export default function HomePage() {
         </div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-16 grid lg:grid-cols-12 gap-8 lg:gap-16 items-center">
-          <div className={`lg:col-span-7 ${isVisible ? 'slide-in-luxury' : 'opacity-0'}`} style={{ transform: 'translateY(-15px)' }}>
+          <div className={`lg:col-span-7 lg:self-start ${isVisible ? 'slide-in-luxury' : 'opacity-0'}`} style={{ transform: 'translateY(-50px)' }}>
             {/* Developer Access Button */}
             <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-50">
               <button 
@@ -228,26 +228,8 @@ export default function HomePage() {
           
           <div className={`lg:col-span-5 mt-8 lg:mt-0 flex flex-col items-end justify-between gap-y-8 ${isVisible ? 'fade-in-luxury' : 'opacity-0'}`}>
             <div className="relative">
-              <div className="card-luxury rounded-lg p-6 sm:p-8 lg:p-10">
-                <div className="text-center mb-8">
-                  <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-luxury-gradient rounded mb-4 sm:mb-6">
-                    <Scissors className="h-6 w-6 sm:h-8 sm:w-8 text-black" />
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-playfair font-bold text-white mb-2 sm:mb-3">Course Preview</h3>
-                  <p className="text-sm sm:text-base text-gray-400">See what's inside</p>
-                </div>
-                <div className="space-y-3 sm:space-y-5">
-                  {[
-                    "Master Consultation Techniques",
-                    "Shape & Flow Fundamentals", 
-                    "Advanced Cutting Methods",
-                    "Business Building Strategies"
-                  ].map((item, index) => (
-                    <div key={index} className="flex items-center text-gray-300">
-                      <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-luxury-gold mr-3 sm:mr-4 flex-shrink-0" />
-                      <span className="font-medium text-sm sm:text-base">{item}</span>
-                    </div>
-                  ))}
+              <div className="card-luxury rounded-lg p-2 max-w-md mx-auto w-full">
+                <div className="relative bg-gray-900 rounded-lg overflow-hidden aspect-video h-48 w-full">
                 </div>
               </div>
             </div>
