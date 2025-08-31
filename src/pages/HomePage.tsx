@@ -118,6 +118,7 @@ export default function HomePage() {
   const handleFaqClick = (index: number) => {
     setOpenFaqId(openFaqId === index ? null : index);
   };
+  
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
       {/* Navigation */}
@@ -531,50 +532,51 @@ export default function HomePage() {
               Success Stories From <span className="text-gradient-gold">Real Students</span>
             </h2>
           </div>
-        <div className={`lg:col-span-5 mt-8 lg:mt-24 flex flex-col items-end justify-between gap-y-8 ${isVisible ? 'fade-in-luxury' : 'opacity-0'}`}>
-          <div className="relative">
-            <div className="card-luxury rounded-lg p-6 sm:p-10 lg:p-16 text-center overflow-hidden">
-              <div className="flex justify-center mb-6 sm:mb-8">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 text-luxury fill-current" />
-                ))}
-              </div>
-              
-              <div className="relative max-w-full overflow-hidden">
-                <div 
-                  className="flex transition-transform duration-500 ease-in-out"
-                  style={{ transform: `translateX(-${currentTestimonial * 100}%)` }}
-                >
-                  {testimonials.map((testimonial, index) => (
-                    <div key={index} className="w-full flex-shrink-0 px-2 sm:px-4">
-                      <blockquote className="text-base sm:text-lg lg:text-2xl font-light mb-6 sm:mb-8 lg:mb-10 leading-relaxed max-w-4xl mx-auto text-gray-300">
-                        "{testimonial.text}"
-                      </blockquote>
-                      <div className="mb-4 sm:mb-6">
-                        <p className="text-gradient-gold font-bold text-lg sm:text-xl mb-1">{testimonial.name}</p>
-                        <p className="text-gray-500 mb-3 sm:mb-4 text-sm sm:text-base">{testimonial.location}</p>
-                        <div className="badge-premium rounded px-3 sm:px-5 py-1 sm:py-2">
-                          <p className="text-white font-medium text-xs sm:text-sm">{testimonial.achievement}</p>
-                        </div>
-                      </div>
-                    </div>
+          <div className={`lg:col-span-5 mt-8 lg:mt-24 flex flex-col items-end justify-between gap-y-8 ${isVisible ? 'fade-in-luxury' : 'opacity-0'}`}>
+            <div className="relative">
+              <div className="card-luxury rounded-lg p-6 sm:p-10 lg:p-16 text-center overflow-hidden">
+                <div className="flex justify-center mb-6 sm:mb-8">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 text-luxury fill-current" />
                   ))}
                 </div>
+                
+                <div className="relative max-w-full overflow-hidden">
+                  <div 
+                    className="flex transition-transform duration-500 ease-in-out"
+                    style={{ transform: `translateX(-${currentTestimonial * 100}%)` }}
+                  >
+                    {testimonials.map((testimonial, index) => (
+                      <div key={index} className="w-full flex-shrink-0 px-2 sm:px-4">
+                        <blockquote className="text-base sm:text-lg lg:text-2xl font-light mb-6 sm:mb-8 lg:mb-10 leading-relaxed max-w-4xl mx-auto text-gray-300">
+                          "{testimonial.text}"
+                        </blockquote>
+                        <div className="mb-4 sm:mb-6">
+                          <p className="text-gradient-gold font-bold text-lg sm:text-xl mb-1">{testimonial.name}</p>
+                          <p className="text-gray-500 mb-3 sm:mb-4 text-sm sm:text-base">{testimonial.location}</p>
+                          <div className="badge-premium rounded px-3 sm:px-5 py-1 sm:py-2">
+                            <p className="text-white font-medium text-xs sm:text-sm">{testimonial.achievement}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
+              
+              <button 
+                onClick={prevTestimonial}
+                className="absolute left-2 sm:left-4 lg:left-6 top-1/2 transform -translate-y-1/2 card-luxury hover:bg-luxury/10 text-white p-2 sm:p-3 lg:p-4 rounded transition-all duration-300 hover:scale-110"
+              >
+                <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />
+              </button>
+              <button 
+                onClick={nextTestimonial}
+                className="absolute right-2 sm:right-4 lg:right-6 top-1/2 transform -translate-y-1/2 card-luxury hover:bg-luxury/10 text-white p-2 sm:p-3 lg:p-4 rounded transition-all duration-300 hover:scale-110"
+              >
+                <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />
+              </button>
             </div>
-            
-            <button 
-              onClick={prevTestimonial}
-              className="absolute left-2 sm:left-4 lg:left-6 top-1/2 transform -translate-y-1/2 card-luxury hover:bg-luxury/10 text-white p-2 sm:p-3 lg:p-4 rounded transition-all duration-300 hover:scale-110"
-            >
-              <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />
-            </button>
-            <button 
-              onClick={nextTestimonial}
-              className="absolute right-2 sm:right-4 lg:right-6 top-1/2 transform -translate-y-1/2 card-luxury hover:bg-luxury/10 text-white p-2 sm:p-3 lg:p-4 rounded transition-all duration-300 hover:scale-110"
-            >
-              <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />
-            </button>
           </div>
         </div>
       </section>
@@ -659,7 +661,8 @@ export default function HomePage() {
                 <div className="inline-block bg-gradient-to-r from-gray-900 to-black rounded-xl p-4 sm:p-6 lg:p-8 border border-luxury/30">
                   <div className="flex items-center justify-center mb-3 sm:mb-4">
                     <Timer className="h-4 w-4 sm:h-5 sm:w-5 text-luxury-gold mr-2 sm:mr-3" />
-              <div className="relative bg-gray-900 rounded-lg overflow-hidden aspect-video h-72 w-full">
+                  </div>
+                  <div className="relative bg-gray-900 rounded-lg overflow-hidden aspect-video h-72 w-full">
                   </div>
                   <div className="text-center">
                     <p className="text-white font-medium mb-2 text-sm sm:text-base">Price increases to $297 after 2,000 barbers</p>
@@ -687,7 +690,7 @@ export default function HomePage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16 lg:mb-20">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-playfair font-bold mb-6 sm:mb-8 leading-tight">
- <span className="text-gradient-gold">FAQs</span>
+              <span className="text-gradient-gold">FAQs</span>
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
               Real questions from real barbers. Get the answers you need to start your transformation.
