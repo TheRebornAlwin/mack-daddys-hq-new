@@ -168,7 +168,8 @@ export default function HomePage() {
             </h1>
             
             <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 sm:mb-16 leading-relaxed font-light max-w-2xl">
-              Master the art of precision cuts and fades as you level up your skills and join the ranks of <span className="text-gradient-gold font-medium">world-class barbers.</span>
+              Master the art of <span className="text-gradient-gold font-medium">precision cuts, fades, and confidence</span> through 
+              real barbering skills built for real barbers.
             </p>
             
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 mb-8 sm:mb-16">
@@ -229,7 +230,7 @@ export default function HomePage() {
           <div className={`lg:col-span-5 mt-8 lg:mt-0 flex flex-col items-end justify-between gap-y-8 ${isVisible ? 'fade-in-luxury' : 'opacity-0'}`}>
             <div className="relative">
               <div className="card-luxury rounded-lg p-2 w-[28rem]">
-                <div className="relative bg-gray-900 rounded-lg overflow-hidden h-80 w-full">
+                <div className="relative bg-gray-900 rounded-lg overflow-hidden aspect-video h-48 w-full">
                 </div>
               </div>
             </div>
@@ -240,10 +241,10 @@ export default function HomePage() {
                 <div className="mb-6">
                   <Quote className="h-8 w-8 sm:h-10 sm:w-10 text-luxury-gold mb-4" />
                   <h3 className="text-lg sm:text-xl font-bold text-white mb-4 leading-tight">
-                    "BUILT A <span className="underline text-gradient-gold">SIX FIGURE BARBERSHOP</span> FROM MACK DADDY'S COURSE, REALLY A GAME CHANGER"
+                    "LEARNED SO MUCH FROM MACK DADDY'S ACADEMY REALLY A <span className="underline text-gradient-gold">GAME CHANGER</span>"
                   </h3>
                   <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-6">
-                    "Best course for those aspiring barbers who want to learn and make loads of money doing what they love. It helped me grow as a person so much and gave me a career for life. So thankful for Mack Daddy’s!"
+                    "Best academy for those barbers who wants to become someone and achieve something in life. It actually helped me grow a lot as a barber and as a man. So thankful to Mack Daddy's!"
                   </p>
                 </div>
                 <div className="flex items-center justify-between">
@@ -527,7 +528,7 @@ export default function HomePage() {
               Success Stories From <span className="text-gradient-gold">Real Students</span>
             </h2>
           </div>
-          <div className={`lg:col-span-5 mt-8 lg:mt-16 flex flex-col items-end justify-between gap-y-8 ${isVisible ? 'fade-in-luxury' : 'opacity-0'}`}>
+          <div className={`lg:col-span-5 mt-8 lg:mt-24 flex flex-col items-end justify-between gap-y-8 ${isVisible ? 'fade-in-luxury' : 'opacity-0'}`}>
             <div className="relative">
               <div className="card-luxury rounded-lg p-6 sm:p-10 lg:p-16 text-center overflow-hidden">
                 <div className="flex justify-center mb-6 sm:mb-8">
@@ -657,7 +658,7 @@ export default function HomePage() {
                   <div className="flex items-center justify-center mb-3 sm:mb-4">
                     <Timer className="h-4 w-4 sm:h-5 sm:w-5 text-luxury-gold mr-2 sm:mr-3" />
                   </div>
-                  <div className="relative bg-gray-900 rounded-lg overflow-hidden h-[18rem] w-full">
+                  <div className="relative bg-gray-900 rounded-lg overflow-hidden aspect-video h-72 w-full">
                   </div>
                   <div className="text-center">
                     <p className="text-white font-medium mb-2 text-sm sm:text-base">Price increases to $297 after 2,000 barbers</p>

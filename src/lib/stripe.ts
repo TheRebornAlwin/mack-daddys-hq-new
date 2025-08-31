@@ -16,7 +16,7 @@ export const stripeConfig = {
       colorDanger: '#ef4444',
       fontFamily: 'Inter, system-ui, sans-serif',
       spacingUnit: '4px',
-      borderRadius: '0.5rem',
+      borderRadius: '8px',
     },
     rules: {
       '.Tab': {
@@ -37,7 +37,7 @@ export const stripeConfig = {
       },
       '.Input:focus': {
         borderColor: '#FFD700',
-        boxShadow: '0 0 0 0.1875rem rgba(255, 215, 0, 0.1)',
+        boxShadow: '0 0 0 3px rgba(255, 215, 0, 0.1)',
       },
     },
   },
