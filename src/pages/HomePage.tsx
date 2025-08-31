@@ -262,10 +262,6 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        
-        <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <ArrowDown className="h-5 w-5 sm:h-6 sm:w-6 text-luxury" />
-        </div>
       </section>
 
       {/* Meet Sean Section */}
