@@ -230,7 +230,7 @@ export default function HomePage() {
           <div className={`lg:col-span-5 mt-8 lg:mt-0 flex flex-col items-end justify-between gap-y-8 ${isVisible ? 'fade-in-luxury' : 'opacity-0'}`}>
             <div className="relative">
               <div className="card-luxury rounded-lg p-2 w-[28rem]">
-                <div className="relative bg-gray-900 rounded-lg overflow-hidden aspect-video h-48 w-full">
+                <div className="relative bg-gray-900 rounded-lg overflow-hidden h-96 w-full">
                 </div>
               </div>
             </div>
@@ -658,7 +658,7 @@ export default function HomePage() {
                   <div className="flex items-center justify-center mb-3 sm:mb-4">
                     <Timer className="h-4 w-4 sm:h-5 sm:w-5 text-luxury-gold mr-2 sm:mr-3" />
                   </div>
-                  <div className="relative bg-gray-900 rounded-lg overflow-hidden aspect-video h-72 w-full">
+                  <div className="relative bg-gray-900 rounded-lg overflow-hidden h-[18rem] w-full">
                   </div>
                   <div className="text-center">
                     <p className="text-white font-medium mb-2 text-sm sm:text-base">Price increases to $297 after 2,000 barbers</p>

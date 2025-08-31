@@ -1,0 +1,15 @@
+/* src/styles/mobile-fluid-scale.css */
+
+/* Stop iOS Safari from inflating text */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+/* ===== MOBILE ONLY (≤900px) ===== */
+@media (max-width: 900px) {
+  /* 390px → 16px baseline: 16/390 * 100 = 4.1025641vw */
+  html {
+    font-size: clamp(14px, 4.1025641vw, 18px) !important;
+  }
+
+  /* Media should respect layout fluidly */
+  img, video, svg, canvas { max-width: 100%; height: auto; }
+}
