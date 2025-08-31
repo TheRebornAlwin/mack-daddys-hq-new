@@ -377,7 +377,7 @@ export default function HomePage() {
               Stop Just Cutting Hair. Start <span className="text-gradient-gold">Building Your Empire.</span>
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-              Every client is more than a haircut. It's respect. It's confidence. It's connections that YOU helped build.
+              Every client is more than a haircut. It's confidence and connections that YOU helped build along your journey to being a $130K+ barbershop owner.
             </p>
           </div>
           
