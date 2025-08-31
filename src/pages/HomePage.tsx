@@ -243,7 +243,7 @@ export default function HomePage() {
                     "BUILT A <span className="underline text-gradient-gold">SIX FIGURE BARBERSHOP</span> FROM MACK DADDY'S COURSE, REALLY A GAME CHANGER"
                   </h3>
                   <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-6">
-                    "Best academy for those barbers who wants to become someone and achieve something in life. It actually helped me grow a lot as a barber and as a man. So thankful to Mack Daddy's!"
+                    "Best course for those aspiring barbers who want to learn and make loads of money doing what they love. It helped me grow as a person so much and gave me a career for life. So thankful for Mack Daddy’s!"
                   </p>
                 </div>
                 <div className="flex items-center justify-between">
