@@ -531,7 +531,7 @@ export default function HomePage() {
               Success Stories From <span className="text-gradient-gold">Real Students</span>
             </h2>
           </div>
-          
+        <div className={`lg:col-span-5 mt-8 lg:mt-24 flex flex-col items-end justify-between gap-y-8 ${isVisible ? 'fade-in-luxury' : 'opacity-0'}`}>
           <div className="relative">
             <div className="card-luxury rounded-lg p-6 sm:p-10 lg:p-16 text-center overflow-hidden">
               <div className="flex justify-center mb-6 sm:mb-8">
@@ -659,7 +659,7 @@ export default function HomePage() {
                 <div className="inline-block bg-gradient-to-r from-gray-900 to-black rounded-xl p-4 sm:p-6 lg:p-8 border border-luxury/30">
                   <div className="flex items-center justify-center mb-3 sm:mb-4">
                     <Timer className="h-4 w-4 sm:h-5 sm:w-5 text-luxury-gold mr-2 sm:mr-3" />
-                    <span className="text-gradient-gold font-bold text-base sm:text-lg">Limited Time Pricing</span>
+              <div className="relative bg-gray-900 rounded-lg overflow-hidden aspect-video h-72 w-full">
                   </div>
                   <div className="text-center">
                     <p className="text-white font-medium mb-2 text-sm sm:text-base">Price increases to $297 after 2,000 barbers</p>
