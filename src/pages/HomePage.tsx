@@ -266,7 +266,7 @@ export default function HomePage() {
                 </div>
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-white font-bold text-sm sm:text-base">KEITH BOBST</p>
+                    <p className="text-white font-bold text-sm sm:text-base">RUSELL LAMBARD</p>
                     <p className="text-gray-400 text-xs sm:text-sm">Mack Daddy's Academy Student</p>
                   </div>
                   <div className="flex">
