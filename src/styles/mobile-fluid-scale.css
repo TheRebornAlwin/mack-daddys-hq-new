@@ -11,5 +11,42 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   }
 
   /* Media should respect layout fluidly */
-  img, video, svg, canvas { max-width: 100%; height: auto; }
+  img, video, svg, canvas { 
+    max-width: 100%; 
+    height: auto; 
+  }
+  
+  /* Ensure proper touch targets */
+  button, input, select, textarea, [role="button"] {
+    min-height: 2.75rem;
+  }
+  
+  /* Fix any viewport issues */
+  body, html {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  /* Improve mobile text rendering */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Mobile-specific container adjustments */
+  .container, .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl, .max-w-3xl, .max-w-2xl {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Ensure cards don't get too small */
+  .card-luxury, .card-burgundy {
+    min-height: 3rem;
+  }
+  
+  /* Mobile navigation improvements */
+  nav button, .nav-item {
+    min-height: 3rem;
+    padding: 0.75rem 1rem;
+  }
 }

@@ -429,6 +429,69 @@
 /* MUST BE LAST so it wins on mobile */
 @import "./styles/mobile-fluid-scale.css";
 
+/* Additional mobile optimizations */
+@media (max-width: 900px) {
+  /* Ensure touch targets are adequate */
+  button, input, select, textarea, [role="button"] {
+    min-height: 2.75rem; /* 44px at 16px base */
+  }
+  
+  /* Prevent horizontal scroll */
+  body, html {
+    overflow-x: hidden;
+  }
+  
+  /* Improve text readability on mobile */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Fix any remaining px padding/margins that might cause issues */
+  .card-luxury, .card-burgundy {
+    padding: 1.5rem !important;
+  }
+  
+  /* Ensure buttons are thumb-friendly */
+  .btn-luxury {
+    min-height: 3rem;
+    padding: 0.875rem 1.5rem !important;
+  }
+  
+  /* Mobile-specific spacing adjustments */
+  .space-y-8 > * + * {
+    margin-top: 1.5rem !important;
+  }
+  
+  .space-y-12 > * + * {
+    margin-top: 2rem !important;
+  }
+  
+  .space-y-16 > * + * {
+    margin-top: 2.5rem !important;
+  }
+  
+  .space-y-20 > * + * {
+    margin-top: 3rem !important;
+  }
+  
+  /* Mobile grid adjustments */
+  .grid {
+    gap: 1rem !important;
+  }
+  
+  /* Ensure adequate spacing around text */
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2 !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  p {
+    line-height: 1.6 !important;
+    margin-bottom: 1rem !important;
+  }
+}
+
 /* Backup duplicate (belt & suspenders) */
 @media (max-width: 900px) {
   html { font-size: clamp(14px, 4.1025641vw, 18px) !important; }
