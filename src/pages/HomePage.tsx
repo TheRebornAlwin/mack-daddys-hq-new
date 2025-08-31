@@ -230,7 +230,7 @@ export default function HomePage() {
           <div className={`lg:col-span-5 mt-8 lg:mt-0 flex flex-col items-end justify-between gap-y-8 ${isVisible ? 'fade-in-luxury' : 'opacity-0'}`}>
             <div className="relative">
               <div className="card-luxury rounded-lg p-2 w-[28rem]">
-                <div className="relative bg-gray-900 rounded-lg overflow-hidden h-96 w-full">
+                <div className="relative bg-gray-900 rounded-lg overflow-hidden h-80 w-full">
                 </div>
               </div>
             </div>
@@ -528,7 +528,7 @@ export default function HomePage() {
               Success Stories From <span className="text-gradient-gold">Real Students</span>
             </h2>
           </div>
-          <div className={`lg:col-span-5 mt-8 lg:mt-24 flex flex-col items-end justify-between gap-y-8 ${isVisible ? 'fade-in-luxury' : 'opacity-0'}`}>
+          <div className={`lg:col-span-5 mt-8 lg:mt-16 flex flex-col items-end justify-between gap-y-8 ${isVisible ? 'fade-in-luxury' : 'opacity-0'}`}>
             <div className="relative">
               <div className="card-luxury rounded-lg p-6 sm:p-10 lg:p-16 text-center overflow-hidden">
                 <div className="flex justify-center mb-6 sm:mb-8">
