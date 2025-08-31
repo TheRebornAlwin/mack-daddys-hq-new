@@ -374,7 +374,7 @@ export default function HomePage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16 lg:mb-20">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-playfair font-bold mb-6 sm:mb-8 leading-tight">
-              Stop Just Cutting Hair. Start <span className="text-gradient-gold">Building Your Empire.</span>
+              Not Your Regular Course.<br></br><span className="text-gradient-gold">Learn to Charge $100 for a Taper.</span>
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
               Every client is more than a haircut. It's confidence and connections that YOU helped build along your journey to being a $130K+ barbershop owner.
