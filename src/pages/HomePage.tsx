@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Scissors, Users, Star, Clock, Award, Shield, ArrowRight, Target, TrendingUp, BookOpen, Zap, Timer, ChevronLeft, ChevronRight, Crown, ArrowDown, CheckCircle, Diamond, Gem, Banknote, GraduationCap, Trophy, Briefcase, X, ChevronDown, HelpCircle } from 'lucide-react';
+import { Scissors, Users, Star, Clock, Award, Shield, ArrowRight, Target, TrendingUp, BookOpen, Zap, Timer, ChevronLeft, ChevronRight, Crown, ArrowDown, CheckCircle, Diamond, Gem, Banknote, GraduationCap, Trophy, Briefcase, X, ChevronDown, HelpCircle, Quote } from 'lucide-react';
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -226,9 +226,9 @@ export default function HomePage() {
             </div>
           </div>
           
-          <div className={`lg:col-span-5 mt-8 lg:mt-0 ${isVisible ? 'fade-in-luxury' : 'opacity-0'}`}>
+          <div className={`lg:col-span-5 mt-8 lg:mt-0 flex flex-col items-end justify-between gap-y-8 ${isVisible ? 'fade-in-luxury' : 'opacity-0'}`}>
             <div className="relative">
-              <div className="card-luxury rounded-lg p-6 sm:p-8 lg:p-10 float-luxury">
+              <div className="card-luxury rounded-lg p-6 sm:p-8 lg:p-10">
                 <div className="text-center mb-8">
                   <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-luxury-gradient rounded mb-4 sm:mb-6">
                     <Scissors className="h-6 w-6 sm:h-8 sm:w-8 text-black" />
@@ -248,6 +248,32 @@ export default function HomePage() {
                       <span className="font-medium text-sm sm:text-base">{item}</span>
                     </div>
                   ))}
+                </div>
+              </div>
+            </div>
+            
+            {/* Hero Testimonial */}
+            <div className="relative">
+              <div className="card-luxury rounded-lg p-6 sm:p-8 lg:p-10 max-w-md">
+                <div className="mb-6">
+                  <Quote className="h-8 w-8 sm:h-10 sm:w-10 text-luxury-gold mb-4" />
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-4 leading-tight">
+                    "LEARNED SO MUCH FROM MACK DADDY'S ACADEMY REALLY A <span className="underline text-gradient-gold">GAME CHANGER</span>"
+                  </h3>
+                  <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-6">
+                    "Best academy for those barbers who wants to become someone and achieve something in life. It actually helped me grow a lot as a barber and as a man. So thankful to Mack Daddy's!"
+                  </p>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-white font-bold text-sm sm:text-base">KEITH BOBST</p>
+                    <p className="text-gray-400 text-xs sm:text-sm">Mack Daddy's Academy Student</p>
+                  </div>
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-4 w-4 sm:h-5 sm:w-5 text-luxury fill-current" />
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -299,7 +325,7 @@ export default function HomePage() {
               
               <div className="space-y-6 lg:space-y-8">
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-gray-300 mb-6 lg:mb-10">
-                  Sean’s been behind the chair for <span className="text-gradient-gold font-semibold">28+ years,</span>
+                  Sean's been behind the chair for <span className="text-gradient-gold font-semibold">28+ years,</span>
                   built a <span className="text-gradient-gold font-semibold">six-figure shop from nothing</span>, 
                   trained over a thousand barbers who started where you are.
                 </p>
@@ -499,6 +525,18 @@ export default function HomePage() {
                 </div>
               </div>
             ))}
+          </div>
+          
+          <div className="text-center mt-12 sm:mt-16">
+            <button 
+              onClick={handleCheckoutClick}
+              className="btn-luxury text-black font-bold text-lg sm:text-xl px-8 sm:px-12 py-4 sm:py-6 rounded hover:scale-105 transition-transform duration-300"
+            >
+              <span className="flex items-center justify-center">
+                START YOUR TRANSFORMATION
+                <ArrowRight className="ml-3 h-5 w-5 sm:h-6 sm:w-6" />
+              </span>
+            </button>
           </div>
         </div>
       </section>
