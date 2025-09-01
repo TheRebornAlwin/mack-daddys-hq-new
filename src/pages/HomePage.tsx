@@ -814,7 +814,7 @@ export default function HomePage() {
                 onClick={() => navigate('/contact')}
                 className="btn-luxury text-black font-bold px-8 py-4 rounded text-lg hover:scale-105 transition-transform duration-300"
               >
-                Contact Support
+                Contact Us
               </button>
             </div>
           </div>
