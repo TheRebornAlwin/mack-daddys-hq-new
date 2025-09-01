@@ -276,6 +276,8 @@ export default function HomePage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded"></div>
               </div>
+              
+              <div className="absolute -bottom-6 -right-6 sm:-bottom-8 sm:-right-8 lg:-bottom-12 lg:-right-12 rounded p-4 sm:p-6 lg:p-8 shadow-2xl z-20" style={{background: 'linear-gradient(135deg, #FFD54F 0%, #FFCA28 50%, #FFB300 100%)'}}>
                 <div className="text-center">
                   <div className="text-2xl sm:text-3xl lg:text-4xl font-playfair font-bold text-black mb-1 sm:mb-2">28+</div>
                   <div className="text-black/90 text-xs sm:text-sm font-medium uppercase tracking-wider">Years Mastering</div>
@@ -654,6 +656,8 @@ export default function HomePage() {
                 <div className="inline-block bg-gradient-to-r from-gray-900 to-black rounded-xl p-4 sm:p-6 lg:p-8 border border-luxury/30">
                   <div className="flex items-center justify-center mb-3 sm:mb-4">
                     <Timer className="h-4 w-4 sm:h-5 sm:w-5 text-luxury-gold mr-2 sm:mr-3" />
+                  </div>
+                  <div className="relative bg-gray-900 rounded-lg overflow-hidden aspect-video h-72 w-full">
                   </div>
                   <div className="text-center">
                     <p className="text-white font-medium mb-2 text-sm sm:text-base">Price increases to $297 after 2,000 barbers</p>
