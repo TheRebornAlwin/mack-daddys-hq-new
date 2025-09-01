@@ -223,7 +223,7 @@ export default function HomePage() {
                   trained over a thousand barbers who started where you are.
                 </p>
                 
-                <p className="text-xl leading-relaxed text-gray-300">
+                <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-gray-300 mb-8 lg:mb-12">
                   He remembers shaky hands and second-guessing every guard change. This course is the map he wish he had, with real shop techniques, simple consultations, and cuts that hold after a week of pillows and hoodies.
                 </p>
                 
