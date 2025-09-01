@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TestimonialsSection from '../components/TestimonialsSection';
 import { useNavigate } from 'react-router-dom';
-import { Scissors, Users, Star, Clock, Award, Shield, ArrowRight, Target, TrendingUp, BookOpen, Zap, Timer, ChevronLeft, ChevronRight, Crown, ArrowDown, CheckCircle, Diamond, Gem, Banknote, GraduationCap, Trophy, Briefcase, X, ChevronDown, HelpCircle, Quote } from 'lucide-react';
+import { Scissors, Users, Star, Clock, Award, Shield, ArrowRight, Target, TrendingUp, BookOpen, Zap, Timer, ChevronLeft, ChevronRight, Crown, ArrowDown, CheckCircle, Diamond, Gem, Banknote, GraduationCap, Trophy, Briefcase, X, ChevronDown, HelpCircle, Quote, Lock } from 'lucide-react';
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -639,6 +639,25 @@ export default function HomePage() {
               </div>
             </div>
 
+          </div>
+          
+          {/* Trust Badges */}
+          <div className="mt-16 grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+            <div className="card-luxury rounded-lg p-6 text-center border border-green-500/30">
+              <Shield className="h-8 w-8 text-green-400 mx-auto mb-4" />
+              <h4 className="text-gradient-gold font-bold text-lg mb-2">365-Day Money-Back Guarantee</h4>
+              <p className="text-gray-300 text-sm">
+                Not satisfied? Get a full refund within 365 days, no questions asked.
+              </p>
+            </div>
+            
+            <div className="card-luxury rounded-lg p-6 text-center border border-luxury/30">
+              <Lock className="h-8 w-8 text-luxury-gold mx-auto mb-4" />
+              <h4 className="text-gradient-gold font-bold text-lg mb-2">Secure Checkout</h4>
+              <p className="text-gray-300 text-sm">
+                Your payment is protected by bank-level SSL encryption and Stripe security.
+              </p>
+            </div>
           </div>
         </div>
       </section>
