@@ -80,7 +80,7 @@ export default function HomePage() {
               <span className="block pb-2">
                 <span className="text-gradient-gold text-shadow-luxury pr-0.5">Master</span>
                 <span className="text-white"> </span>
-                <span className="text-gradient-gold text-shadow-luxury pr-0.5">Stylist</span>
+                <span className="text-gradient-gold text-shadow-luxury pr-0.5">Barber</span>
               </span>
             </h1>
             
