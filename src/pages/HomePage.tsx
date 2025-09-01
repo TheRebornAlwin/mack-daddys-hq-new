@@ -420,7 +420,7 @@ export default function HomePage() {
                     "Walk into any consultation with complete confidence",
                     "Create fades and cuts that grow out clean for weeks",
                     "Turn every client into a walking advertisement", 
-                    "Charge premium prices for your expertise",
+                    "Charge $60+ for simple cuts",
                     "Build a waiting list of loyal clients"
                   ].map((item, index) => (
                     <div key={index} className="flex items-start">
