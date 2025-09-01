@@ -655,8 +655,6 @@ export default function HomePage() {
                   <div className="flex items-center justify-center mb-3 sm:mb-4">
                     <Timer className="h-4 w-4 sm:h-5 sm:w-5 text-luxury-gold mr-2 sm:mr-3" />
                   </div>
-                  <div className="relative bg-gray-900 rounded-lg overflow-hidden aspect-video h-72 w-full">
-                  </div>
                   <div className="text-center">
                     <p className="text-white font-medium mb-2 text-sm sm:text-base">Price increases to $297 after 2,000 barbers</p>
                     <p className="text-gray-400 text-sm sm:text-base">Current enrollment: <span className="text-gradient-gold font-bold">1,927 barbers</span></p>
