@@ -21,23 +21,23 @@ export default function TestimonialsSection() {
       name: "Marcus Johnson",
       location: "Tulsa, Oklahoma",
       achievement: "Owns a $100K+ barbershop",
-      imageUrl: "/assets/bin1.jpg"
+      imageUrl: "/images/bin1.jpg"
     },
     {
       id: 2,
-      text: "I was terrified to touch anyone's hair. Sean's step-by-step approach gave me the confidence to start cutting. Now I'm making $1,800 a week at my local salon and clients specifically request me.",
+      text: "I was terrified to touch anyone's hair. Sean's step-by-step approach gave me the confidence to start cutting. Now I'm making $1,800 a week at my local barbershop and clients specifically request me.",
       name: "Jake Martinez",
       location: "Boise, Idaho",
       achievement: "Charges $60+ on an average cut",
-      imageUrl: "/assets/bin2.jpg"
+      imageUrl: "/images/bin2.jpg"
     },
     {
       id: 3,
-      text: "Fresh out of beauty school, I was struggling to get clients. Sean's techniques helped me create cuts that people actually wanted. I went from 2 clients a week to fully booked, making $3,500 monthly.",
+      text: "Fresh out of barber school, I was struggling to get clients. Sean's techniques helped me create cuts that people actually wanted. I went from 2 clients a week to fully booked, making $3,500 monthly.",
       name: "Tyler Anderson",
       location: "Grand Rapids, Michigan",
       achievement: "Opened a barbershop that makes $7K monthly and growing",
-      imageUrl: "/assets/bin3.jpg"
+      imageUrl: "/images/bin3.jpg"
     },
     {
       id: 4,
@@ -45,31 +45,31 @@ export default function TestimonialsSection() {
       name: "Samuel Williams",
       location: "Bend, Oregon",
       achievement: "Doubled client retention using Sean's methods",
-      imageUrl: "/assets/bin4.jpg"
+      imageUrl: "/images/bin4.jpg"
     },
     {
       id: 5,
-      text: "After 5 years of mediocre cuts, I was ready to quit. Sean's shape and flow system completely changed my technique. I now run my own successful shop with 3 employees.",
+      text: "After 5 years of mediocre cuts, I was ready to quit. Sean's fade and taper system completely changed my technique. I now run my own successful barbershop with 3 barbers.",
       name: "David Chen",
       location: "Chattanooga, Tennessee",
-      achievement: "Runs a successful 3-employee barbershop",
-      imageUrl: "/assets/bin5.jpg"
+      achievement: "Runs a successful 3-barber barbershop",
+      imageUrl: "/images/bin5.jpg"
     },
     {
       id: 6,
-      text: "The shape and flow techniques completely changed how I approach every cut. Now my clients' hair grows out beautifully and they book 8 weeks in advance.",
+      text: "The fade and taper techniques completely changed how I approach every cut. Now my clients' hair grows out clean and they book 8 weeks in advance.",
       name: "Anthony Thompson",
       location: "Fort Collins, Colorado",
       achievement: "Clients book 8 weeks in advance",
-      imageUrl: "/assets/bin6.jpg"
+      imageUrl: "/images/bin6.jpg"
     },
     {
       id: 7,
-      text: "I was working at Supercuts making minimum wage. After applying Sean's methods, I landed a chair at an upscale salon making $65/hour plus tips.",
+      text: "I was working at a chain shop making minimum wage. After applying Sean's methods, I landed a chair at an upscale barbershop making $65/hour plus tips.",
       name: "Kevin Rodriguez",
       location: "Spokane, Washington",
-      achievement: "Makes $65/hour plus tips at upscale salon",
-      imageUrl: "/assets/bin7.jpg"
+      achievement: "Makes $65/hour plus tips at upscale barbershop",
+      imageUrl: "/images/bin7.jpg"
     },
     {
       id: 8,
@@ -77,23 +77,23 @@ export default function TestimonialsSection() {
       name: "Michael Davis",
       location: "Burlington, Vermont",
       achievement: "Charges premium prices for magazine-ready cuts",
-      imageUrl: "/assets/bin8.jpg"
+      imageUrl: "/images/bin8.jpg"
     },
     {
       id: 9,
-      text: "I failed my first state board exam because I couldn't cut properly under pressure. Sean's step-by-step system gave me the confidence to pass and now I'm a top performer.",
+      text: "I failed my first state board exam because I couldn't cut properly under pressure. Sean's step-by-step system gave me the confidence to pass and now I'm a top barber.",
       name: "Jordan Parker",
       location: "Sioux Falls, South Dakota",
-      achievement: "Top performer after passing state board",
-      imageUrl: "/assets/bin9.jpg"
+      achievement: "Top barber after passing state board",
+      imageUrl: "/images/bin9.jpg"
     },
     {
       id: 10,
-      text: "After 10 years of cutting hair, I thought I had nothing left to learn. Sean's advanced techniques doubled my income and gave me confidence with every texture.",
+      text: "After 10 years of cutting hair, I thought I had nothing left to learn. Sean's advanced fade techniques doubled my income and gave me confidence with every hair type.",
       name: "Brian Foster",
       location: "Billings, Montana",
-      achievement: "Doubled income using advanced techniques",
-      imageUrl: "/assets/bin10.jpg"
+      achievement: "Doubled income using advanced cutting techniques",
+      imageUrl: "/images/bin10.jpg"
     }
   ];
 
@@ -163,31 +163,16 @@ export default function TestimonialsSection() {
                 <div className="absolute -top-4 -left-4 w-12 h-12 bg-luxury-gradient rounded flex items-center justify-center">
                   <Quote className="h-6 w-6 text-black" />
                 </div>
-                
+            className="absolute -left-8 top-1/2 transform -translate-y-1/2 z-20 w-12 h-12 bg-luxury-gradient rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg"
                 {/* Stars */}
                 <div className="flex justify-center mb-8">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="h-6 w-6 text-luxury fill-current" />
                   ))}
-                </div>
+            className="absolute -right-8 top-1/2 transform -translate-y-1/2 z-20 w-12 h-12 bg-luxury-gradient rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg"
                 
                 {/* Testimonial Text */}
                 <blockquote className="text-xl font-light mb-8 leading-relaxed text-gray-300 text-center">
-                  "{currentTestimonialData.text}"
-                </blockquote>
-                
-                {/* Author Info */}
-                <div className="text-center">
-                  <p className="text-gradient-gold font-bold text-xl mb-1">
-                    {currentTestimonialData.name}
-                  </p>
-                  <p className="text-gray-500 text-lg">
-                    {currentTestimonialData.location}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
