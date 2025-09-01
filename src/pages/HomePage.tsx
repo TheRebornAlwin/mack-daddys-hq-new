@@ -241,7 +241,7 @@ export default function HomePage() {
                 {[
                   { 
                     icon: GraduationCap, 
-                    text: "1800+ Students", 
+                    text: "1800+ Barbers", 
                     subtext: "Trained Successfully",
                     tooltip: "Over 1,800 successful graduates now working in salons, barbershops, and running their own businesses across the country"
                   },
