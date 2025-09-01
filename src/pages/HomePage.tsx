@@ -85,8 +85,7 @@ export default function HomePage() {
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-300 mb-16 leading-relaxed font-light max-w-2xl">
-              Master the art of <span className="text-gradient-gold font-medium">shape, flow, and confidence</span> through 
-              real cutting skills built for real stylists.
+              Master the art of precision cuts and fades as you level up your skills and join the ranks of <span className="text-gradient-gold font-medium">world-class barbers.</span>
             </p>
             
             <div className="grid grid-cols-3 gap-8 mb-16">
