@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Shield, Scale, FileText, AlertCircle, CheckCircle, Crown, Scissors } from 'lucide-react';
 

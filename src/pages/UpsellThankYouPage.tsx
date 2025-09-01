@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle, Star, Gift, BookOpen, Users, Home, Crown, Diamond, Target, TrendingUp, Scissors } from 'lucide-react';
 

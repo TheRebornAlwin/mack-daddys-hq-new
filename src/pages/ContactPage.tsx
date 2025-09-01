@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Mail, Phone, Clock, MessageSquare, Send, MapPin, Headphones, Scissors, CheckCircle } from 'lucide-react';
 
