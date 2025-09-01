@@ -21,7 +21,7 @@ export default function TestimonialsSection() {
       name: "Marcus Johnson",
       location: "Tulsa, Oklahoma",
       achievement: "Owns a $100K+ barbershop",
-      imageUrl: "/assets/bin1.jpg"
+      imageUrl: "/images/bin1.jpg"
     },
     {
       id: 2,
@@ -29,7 +29,7 @@ export default function TestimonialsSection() {
       name: "Jake Martinez",
       location: "Boise, Idaho",
       achievement: "Charges $60+ on an average cut",
-      imageUrl: "/assets/bin2.jpg"
+      imageUrl: "/images/bin2.jpg"
     },
     {
       id: 3,
@@ -37,7 +37,7 @@ export default function TestimonialsSection() {
       name: "Tyler Anderson",
       location: "Grand Rapids, Michigan",
       achievement: "Opened a barbershop that makes $7K monthly and growing",
-      imageUrl: "/assets/bin3.jpg"
+      imageUrl: "/images/bin3.jpg"
     },
     {
       id: 4,
@@ -45,7 +45,7 @@ export default function TestimonialsSection() {
       name: "Samuel Williams",
       location: "Bend, Oregon",
       achievement: "Doubled client retention using Sean's methods",
-      imageUrl: "/assets/bin4.jpg"
+      imageUrl: "/images/bin4.jpg"
     },
     {
       id: 5,
@@ -53,7 +53,7 @@ export default function TestimonialsSection() {
       name: "David Chen",
       location: "Chattanooga, Tennessee",
       achievement: "Runs a successful 3-employee barbershop",
-      imageUrl: "/assets/bin5.jpg"
+      imageUrl: "/images/bin5.jpg"
     },
     {
       id: 6,
@@ -61,7 +61,7 @@ export default function TestimonialsSection() {
       name: "Anthony Thompson",
       location: "Fort Collins, Colorado",
       achievement: "Clients book 8 weeks in advance",
-      imageUrl: "/assets/bin6.jpg"
+      imageUrl: "/images/bin6.jpg"
     },
     {
       id: 7,
@@ -69,7 +69,7 @@ export default function TestimonialsSection() {
       name: "Kevin Rodriguez",
       location: "Spokane, Washington",
       achievement: "Makes $65/hour plus tips at upscale salon",
-      imageUrl: "/assets/bin7.jpg"
+      imageUrl: "/images/bin7.jpg"
     },
     {
       id: 8,
@@ -77,7 +77,7 @@ export default function TestimonialsSection() {
       name: "Michael Davis",
       location: "Burlington, Vermont",
       achievement: "Charges premium prices for magazine-ready cuts",
-      imageUrl: "/assets/bin8.jpg"
+      imageUrl: "/images/bin8.jpg"
     },
     {
       id: 9,
@@ -85,7 +85,7 @@ export default function TestimonialsSection() {
       name: "Jordan Parker",
       location: "Sioux Falls, South Dakota",
       achievement: "Top performer after passing state board",
-      imageUrl: "/assets/bin9.jpg"
+      imageUrl: "/images/bin9.jpg"
     },
     {
       id: 10,
@@ -93,7 +93,7 @@ export default function TestimonialsSection() {
       name: "Brian Foster",
       location: "Billings, Montana",
       achievement: "Doubled income using advanced techniques",
-      imageUrl: "/assets/bin10.jpg"
+      imageUrl: "/images/bin10.jpg"
     }
   ];
 
