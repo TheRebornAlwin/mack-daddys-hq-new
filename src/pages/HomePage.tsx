@@ -243,7 +243,7 @@ export default function HomePage() {
                     "BUILT A <span className="underline text-gradient-gold">SIX FIGURE BARBERSHOP</span> FROM MACK DADDY'S COURSE, REALLY A GAME CHANGER"
                   </h3>
                   <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-6">
-                    "Best course for those aspiring barbers who want to learn and make loads of money doing what they love. It helped me grow as a person so much and gave me a career for life. So thankful for Mack Daddy’s!"
+                    "Best course for those aspiring barbers who want to learn and make loads of money doing what they love. It helped me grow as a person so much and gave me a career for life. So thankful for Mack Daddy's!"
                   </p>
                 </div>
                 <div className="flex items-center justify-between">
@@ -811,7 +811,9 @@ export default function HomePage() {
                 We're here to help you succeed. Reach out to our support team for personalized answers.
               </p>
               <button 
-                onClick={() => navigate('/contact')}
+                onClick={() => {
+                  window.open('mailto:mackdaddysbpmac@gmail.com', '_blank');
+                }}
                 className="btn-luxury text-black font-bold px-8 py-4 rounded text-lg hover:scale-105 transition-transform duration-300"
               >
                 Contact Us
