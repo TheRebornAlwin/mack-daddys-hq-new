@@ -303,7 +303,7 @@ export default function HomePage() {
               
               <div className="space-y-6 lg:space-y-8">
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-gray-300 mb-6 lg:mb-10">
-                  Sean's been behind the chair for <span className="text-gradient-gold font-semibold">28+ years,</span>
+                  Sean's been behind the chair for <span className="text-gradient-gold font-semibold">28+ years, </span>
                   built a <span className="text-gradient-gold font-semibold">six-figure shop from nothing</span>, 
                   trained over a thousand barbers who started where you are.
                 </p>
