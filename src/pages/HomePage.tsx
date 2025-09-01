@@ -535,11 +535,11 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             
             {/* Left Content */}
-            <div className="text-center lg:text-left">
+            <div className="text-center">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold mb-6 leading-tight">
                 Get Access Now
               </h2>
-              <p className="text-lg lg:text-xl text-gray-300 mb-12 leading-relaxed">
+              <p className="text-lg lg:text-xl text-gray-300 mb-12 leading-relaxed text-center">
                 Level Up to Barber Mastery with Mack Daddy's Academy! Your One-Stop 
                 Destination for Everything You Need. Join the Journey Today!
               </p>
@@ -565,9 +565,7 @@ export default function HomePage() {
                     "Downloadable Practice Guides"
                   ].map((feature, index) => (
                     <div key={index} className="flex items-start text-left">
-                      <div className="w-5 h-5 bg-luxury-gradient rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
-                        <div className="w-2 h-2 bg-black rounded-full"></div>
-                      </div>
+                      <CheckCircle className="h-5 w-5 text-gradient-gold mr-3 mt-0.5 flex-shrink-0" />
                       <span className="text-gray-300 text-sm lg:text-base">{feature}</span>
                     </div>
                   ))}
@@ -575,42 +573,33 @@ export default function HomePage() {
               </div>
 
               {/* CTA Section */}
-              <div className="text-center lg:text-left">
+              <div className="text-center">
                 <h3 className="text-2xl lg:text-3xl font-playfair font-bold text-white mb-6">
                   Become a Master Barber Today
                 </h3>
                 
                 {/* Price Display */}
-                <div className="mb-8">
-                  <div className="flex items-baseline justify-center lg:justify-start mb-2">
-                    <span className="text-5xl lg:text-6xl font-bold text-gradient-gold-price">$47</span>
-                    <span className="text-xl lg:text-2xl text-gray-400 ml-2">one-time</span>
+                <div className="mb-8 text-center">
+                  <div className="flex items-baseline justify-center mb-2">
+                    <span className="text-6xl lg:text-7xl font-bold text-gradient-gold-price">$47</span>
+                    <span className="text-xl lg:text-2xl text-gray-400 ml-4">Regular price: $297</span>
                   </div>
-                  <p className="text-gray-400 text-sm">
-                    <span className="line-through">Regular price: $297</span> • Limited time offer
+                  <p className="text-gray-400 text-sm text-center">
+                    one-time • Limited time offer
                   </p>
                 </div>
 
                 {/* Main CTA Button */}
                 <button 
                   onClick={handleCheckoutClick}
-                  className="w-full lg:w-auto btn-luxury text-black font-bold text-xl lg:text-2xl px-12 lg:px-16 py-6 lg:py-8 rounded-lg mb-8 hover:scale-105 transition-all duration-300 shadow-2xl"
+                  className="btn-luxury text-black font-bold text-xl lg:text-2xl px-12 lg:px-16 py-6 lg:py-8 rounded-lg mb-8 hover:scale-105 transition-all duration-300 shadow-2xl mx-auto block"
                 >
                   GET ACCESS NOW
                 </button>
 
-                {/* Payment Icons */}
-                <div className="flex items-center justify-center lg:justify-start space-x-4 mb-6">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-8 h-5 bg-blue-600 rounded text-white text-xs flex items-center justify-center font-bold">VISA</div>
-                    <div className="w-8 h-5 bg-red-500 rounded text-white text-xs flex items-center justify-center font-bold">MC</div>
-                    <div className="w-8 h-5 bg-blue-500 rounded text-white text-xs flex items-center justify-center font-bold">PP</div>
-                    <div className="w-8 h-5 bg-blue-400 rounded text-white text-xs flex items-center justify-center font-bold">AE</div>
-                  </div>
-                </div>
 
                 {/* Security Text */}
-                <div className="flex items-center justify-center lg:justify-start">
+                <div className="flex items-center justify-center">
                   <Shield className="h-4 w-4 text-green-400 mr-2" />
                   <p className="text-green-400 text-sm font-medium">
                     All orders are 100% SAFE using our SECURE SSL encrypted server
@@ -623,9 +612,10 @@ export default function HomePage() {
             <div className="relative lg:order-last order-first">
               <div className="relative">
                 <img
-                  src="https://images.pexels.com/photos/1570807/pexels-photo-1570807.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  src="/images/bin11.jpg"
                   alt="Professional barber at work"
                   className="w-full h-96 lg:h-[500px] object-cover rounded-lg shadow-2xl"
+                  style={{ marginTop: '-2rem' }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-lg"></div>
                 
@@ -662,109 +652,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section className="py-16 sm:py-24 lg:py-32 bg-black relative">
-        <div className="max-w-5xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 sm:mb-16 lg:mb-20">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-playfair font-bold mb-6 sm:mb-8 leading-tight">
-              Transform Your Life <span className="text-gradient-gold">Today</span>
-            </h2>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-              Whether you're still in school, fresh in the shop, or struggling to charge your worth, 
-              this course gives you the skills to change your life behind the chair.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-12 sm:mb-16 lg:mb-20">
-            {[
-              { 
-                icon: <Clock className="h-6 w-6" />, 
-                text: "Learn Forever", 
-                tooltip: "Never lose access - learn at your own pace forever. Includes all future updates and bonus content at no extra cost" 
-              },
-              { 
-                icon: <Users className="h-6 w-6" />, 
-                text: "Beginner Friendly", 
-                tooltip: "No experience required - we start from the very basics. Perfect for beauty school students or career changers" 
-              }, 
-              { 
-                icon: <Diamond className="h-6 w-6" />, 
-                text: "Learn Your Way", 
-                tooltip: "Go as fast or slow as you need - it's your journey. Average completion time is 2-4 weeks" 
-              },
-              { 
-                icon: <Trophy className="h-6 w-6" />, 
-                text: "Fast Results", 
-                tooltip: "See improvement in your first week of practice. 89% of students report better cuts within 7 days" 
-              }
-            ].map((benefit, index) => (
-              <div 
-                key={index} 
-                className="card-luxury rounded-lg p-4 sm:p-6 lg:p-8 group relative stats-badge"
-                onMouseEnter={() => showTooltip(`benefit-${index}`)}
-                onMouseLeave={() => hideTooltip(`benefit-${index}`)}
-                onClick={() => setTooltipStates(prev => ({ ...prev, [`benefit-${index}`]: !prev[`benefit-${index}`] }))}
-              >
-                <div className="flex flex-col items-center text-center">
-                  <div className="text-luxury mb-3 sm:mb-4 group-hover:text-white transition-colors duration-300 group-hover:scale-110 transform duration-300">
-                    {benefit.icon}
-                  </div>
-                  <span className="text-gray-200 font-medium text-sm sm:text-base group-hover:text-white transition-colors duration-300">
-                    {benefit.text}
-                  </span>
-                </div>
-                <div className={`stats-tooltip ${tooltipStates[`benefit-${index}`] ? 'show' : ''}`}>
-                  <div className="text-gray-300 leading-relaxed">{benefit.tooltip}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <div className="relative max-w-3xl mx-auto">
-            <div className="card-luxury rounded-lg p-8 sm:p-12 lg:p-16 shadow-2xl">
-              <div className="mb-8 sm:mb-12">
-                <div className="flex flex-col sm:flex-row items-center justify-center mb-4 sm:mb-6 gap-2 sm:gap-6">
-                  <span className="text-gray-400 text-lg sm:text-2xl">Regular Price:</span>
-                  <span className="text-gray-400 text-2xl sm:text-3xl line-through">$297</span>
-                </div>
-                <div className="flex flex-col sm:flex-row items-center justify-center mb-6 sm:mb-8 gap-2 sm:gap-6">
-                  <span className="text-gradient-gold text-lg sm:text-2xl lg:text-3xl font-medium">Limited Time Price:</span>
-                  <span className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gradient-gold-price text-shadow-luxury">$47</span>
-                </div>
-                
-                <div className="badge-safety rounded-full px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 mb-6 sm:mb-8">
-                  <Shield className="h-4 w-4 sm:h-5 sm:w-5 text-green-400 mr-2 sm:mr-3" />
-                  <span className="text-green-100 font-medium text-sm sm:text-base">365-DAY MONEY-BACK GUARANTEE</span>
-                </div>
-              </div>
-              
-              <div className="text-center mb-6 sm:mb-8">
-                <div className="inline-block bg-gradient-to-r from-gray-900 to-black rounded-xl p-4 sm:p-6 lg:p-8 border border-luxury/30">
-                  <div className="flex items-center justify-center mb-3 sm:mb-4">
-                    <Timer className="h-4 w-4 sm:h-5 sm:w-5 text-luxury-gold mr-2 sm:mr-3" />
-                  </div>
-                  <div className="relative bg-gray-900 rounded-lg overflow-hidden aspect-video h-72 w-full">
-                  </div>
-                  <div className="text-center">
-                    <p className="text-white font-medium mb-2 text-sm sm:text-base">Price increases to $297 after 2,000 barbers</p>
-                    <p className="text-gray-400 text-sm sm:text-base">Current enrollment: <span className="text-gradient-gold font-bold">1,927 barbers</span></p>
-                  </div>
-                </div>
-              </div>
-              
-              <button 
-                onClick={handleCheckoutClick}
-                className="w-full btn-luxury text-black font-bold text-lg sm:text-xl lg:text-2xl py-4 sm:py-6 lg:py-8 rounded"
-              >
-                <span className="flex items-center justify-center">
-                  JOIN THE SUCCESSFUL
-                  <ArrowRight className="ml-3 sm:ml-4 h-5 w-5 sm:h-6 sm:w-6" />
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* FAQ Section */}
       <section className="py-16 sm:py-24 lg:py-32 bg-gradient-to-br from-gray-900 to-black relative">
