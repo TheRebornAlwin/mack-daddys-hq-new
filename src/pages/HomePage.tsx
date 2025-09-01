@@ -276,8 +276,6 @@ export default function HomePage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded"></div>
               </div>
-              
-              <div className="absolute -bottom-6 -right-6 sm:-bottom-8 sm:-right-8 lg:-bottom-12 lg:-right-12 rounded p-4 sm:p-6 lg:p-8 shadow-2xl z-20" style={{background: 'linear-gradient(135deg, #FFD54F 0%, #FFCA28 50%, #FFB300 100%)'}}>
                 <div className="text-center">
                   <div className="text-2xl sm:text-3xl lg:text-4xl font-playfair font-bold text-black mb-1 sm:mb-2">28+</div>
                   <div className="text-black/90 text-xs sm:text-sm font-medium uppercase tracking-wider">Years Mastering</div>
