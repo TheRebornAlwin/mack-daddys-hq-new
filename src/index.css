@@ -159,7 +159,7 @@
   }
   
   .card-luxury:hover {
-    border-color: rgba(255, 215, 0, 0.4);
+    border-color: #FFD700;
     box-shadow: 
       0 20px 60px rgba(0, 0, 0, 0.4),
       0 4px 16px rgba(255, 215, 0, 0.2),
@@ -177,10 +177,10 @@
   }
   
   .card-burgundy:hover {
-    border-color: rgba(128, 0, 32, 0.25);
+    border-color: rgba(128, 0, 32, 0.8);
     box-shadow: 
       0 20px 60px rgba(0, 0, 0, 0.4),
-      0 4px 16px rgba(128, 0, 32, 0.15),
+      0 4px 16px rgba(128, 0, 32, 0.3),
       inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
   
@@ -328,6 +328,7 @@
   
   .fade-in-luxury {
     animation: fadeInLuxury 1s ease-out forwards;
+    opacity: 0;
   }
   
   @keyframes fadeInLuxury {
@@ -343,6 +344,19 @@
   
   .slide-in-luxury {
     animation: slideInLuxury 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+  }
+  
+  .slide-in-luxury-delayed {
+    animation: slideInLuxury 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+    animation-delay: 0.2s;
+  }
+  
+  .slide-in-luxury-delayed-2 {
+    animation: slideInLuxury 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+    animation-delay: 0.4s;
   }
   
   @keyframes slideInLuxury {
@@ -397,5 +411,17 @@
   
   ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(to bottom, #FFD966, #FFB733);
+  }
+  
+  /* FAQ Smooth Slide Animation - Max Height Method */
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .faq-answer.open {
+    max-height: 1000px;
+    transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
