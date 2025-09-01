@@ -224,9 +224,7 @@ export default function HomePage() {
                 </p>
                 
                 <p className="text-xl leading-relaxed text-gray-300">
-                  He knows what it's like to fumble with scissors and doubt yourself. Now, he's handing you 
-                  the roadmap he wishes he had: <span className="text-gradient-gold font-semibold">real-world techniques</span>, 
-                  consultations made simple, and cuts that grow out clean.
+                  He remembers shaky hands and second-guessing every guard change. This course is the map he wish he had, with real shop techniques, simple consultations, and cuts that hold after a week of pillows and hoodies.
                 </p>
                 
                 <div className="card-luxury rounded p-8 border-l-4 border-luxury">
