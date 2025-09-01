@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import TestimonialsSection from '../components/TestimonialsSection';
 import { useNavigate } from 'react-router-dom';
 import { Scissors, Users, Star, Clock, Award, Shield, ArrowRight, Target, TrendingUp, BookOpen, Zap, Timer, ChevronLeft, ChevronRight, Crown, ArrowDown, CheckCircle, Diamond, Gem, Banknote, GraduationCap, Trophy, Briefcase, X, ChevronDown, HelpCircle, Quote } from 'lucide-react';
 
@@ -519,62 +520,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-16 sm:py-24 lg:py-32 bg-gradient-to-br from-gray-900 to-black relative overflow-hidden">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-playfair font-bold mb-6 sm:mb-8 leading-tight">
-              Success Stories From <span className="text-gradient-gold">Real Students</span>
-            </h2>
-          </div>
-          <div className={`lg:col-span-5 mt-8 lg:mt-24 flex flex-col items-end justify-between gap-y-8 ${isVisible ? 'fade-in-luxury' : 'opacity-0'}`}>
-            <div className="relative">
-              <div className="card-luxury rounded-lg p-6 sm:p-10 lg:p-16 text-center overflow-hidden">
-                <div className="flex justify-center mb-6 sm:mb-8">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 text-luxury fill-current" />
-                  ))}
-                </div>
-                
-                <div className="relative max-w-full overflow-hidden">
-                  <div 
-                    className="flex transition-transform duration-500 ease-in-out"
-                    style={{ transform: `translateX(-${currentTestimonial * 100}%)` }}
-                  >
-                    {testimonials.map((testimonial, index) => (
-                      <div key={index} className="w-full flex-shrink-0 px-2 sm:px-4">
-                        <blockquote className="text-base sm:text-lg lg:text-2xl font-light mb-6 sm:mb-8 lg:mb-10 leading-relaxed max-w-4xl mx-auto text-gray-300">
-                          "{testimonial.text}"
-                        </blockquote>
-                        <div className="mb-4 sm:mb-6">
-                          <p className="text-gradient-gold font-bold text-lg sm:text-xl mb-1">{testimonial.name}</p>
-                          <p className="text-gray-500 mb-3 sm:mb-4 text-sm sm:text-base">{testimonial.location}</p>
-                          <div className="badge-premium rounded px-3 sm:px-5 py-1 sm:py-2">
-                            <p className="text-white font-medium text-xs sm:text-sm">{testimonial.achievement}</p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              
-              <button 
-                onClick={prevTestimonial}
-                className="absolute left-2 sm:left-4 lg:left-6 top-1/2 transform -translate-y-1/2 card-luxury hover:bg-luxury/10 text-white p-2 sm:p-3 lg:p-4 rounded transition-all duration-300 hover:scale-110"
-              >
-                <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />
-              </button>
-              <button 
-                onClick={nextTestimonial}
-                className="absolute right-2 sm:right-4 lg:right-6 top-1/2 transform -translate-y-1/2 card-luxury hover:bg-luxury/10 text-white p-2 sm:p-3 lg:p-4 rounded transition-all duration-300 hover:scale-110"
-              >
-                <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Success Stories Section - Replace existing testimonials */}
+      <TestimonialsSection />
 
       {/* Pricing Section */}
       <section className="py-16 sm:py-24 lg:py-32 bg-black relative">
