@@ -294,7 +294,7 @@ export default function HomePage() {
               Learn To <span className="text-gradient-gold">Charge $100 for a <i>Taper.</i></span>
             </h2>
             <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-              Every client is more than a haircut. It's a story. It's confidence. It's a future that YOU helped shape.
+              Every client is more than a haircut. It's confidence and connections that YOU helped build along your journey to being a $130K+ barbershop owner.
             </p>
           </div>
           
