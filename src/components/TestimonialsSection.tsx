@@ -20,80 +20,80 @@ export default function TestimonialsSection() {
       text: "I was cutting hair in my garage for friends and family, barely making $20 per cut. After Sean's course, I'm now charging $85 per cut and booked solid 3 weeks out. Last month I made $4,200 working part-time!",
       name: "Marcus Johnson",
       location: "Tulsa, Oklahoma",
-      achievement: "Went from $20 to $85 per cut using Sean's pricing techniques",
-      imageUrl: "https://images.pexels.com/photos/1319460/pexels-photo-1319460.jpeg?auto=compress&cs=tinysrgb&w=400"
+      achievement: "Owns a $100K+ barbershop",
+      imageUrl: "/assets/bin1.jpg"
     },
     {
       id: 2,
       text: "I was terrified to touch anyone's hair. Sean's step-by-step approach gave me the confidence to start cutting. Now I'm making $1,800 a week at my local salon and clients specifically request me.",
-      name: "Jessica Martinez",
+      name: "Jake Martinez",
       location: "Boise, Idaho",
-      achievement: "Overcame fear, now earning $1,800/week using course methods",
-      imageUrl: "https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&cs=tinysrgb&w=400"
+      achievement: "Charges $60+ on an average cut",
+      imageUrl: "/assets/bin2.jpg"
     },
     {
       id: 3,
       text: "Fresh out of beauty school, I was struggling to get clients. Sean's techniques helped me create cuts that people actually wanted. I went from 2 clients a week to fully booked, making $3,500 monthly.",
       name: "Tyler Anderson",
       location: "Grand Rapids, Michigan",
-      achievement: "Applied Sean's cutting techniques, now fully booked at $3,500/month",
-      imageUrl: "https://images.pexels.com/photos/1570807/pexels-photo-1570807.jpeg?auto=compress&cs=tinysrgb&w=400"
+      achievement: "Opened a barbershop that makes $7K monthly and growing",
+      imageUrl: "/assets/bin3.jpg"
     },
     {
       id: 4,
       text: "I thought I knew how to cut hair until I took this course. Sean's consultation method alone doubled my client retention. My cuts now grow out perfectly for months.",
-      name: "Sarah Williams",
+      name: "Samuel Williams",
       location: "Bend, Oregon",
-      achievement: "Used Sean's consultation system to double client retention",
-      imageUrl: "https://images.pexels.com/photos/3992656/pexels-photo-3992656.jpeg?auto=compress&cs=tinysrgb&w=400"
+      achievement: "Doubled client retention using Sean's methods",
+      imageUrl: "/assets/bin4.jpg"
     },
     {
       id: 5,
       text: "After 5 years of mediocre cuts, I was ready to quit. Sean's shape and flow system completely changed my technique. I now run my own successful shop with 3 employees.",
       name: "David Chen",
       location: "Chattanooga, Tennessee",
-      achievement: "Used course methods to open successful 3-employee shop",
-      imageUrl: "https://images.pexels.com/photos/1570806/pexels-photo-1570806.jpeg?auto=compress&cs=tinysrgb&w=400"
+      achievement: "Runs a successful 3-employee barbershop",
+      imageUrl: "/assets/bin5.jpg"
     },
     {
       id: 6,
       text: "The shape and flow techniques completely changed how I approach every cut. Now my clients' hair grows out beautifully and they book 8 weeks in advance.",
-      name: "Ashley Thompson",
+      name: "Anthony Thompson",
       location: "Fort Collins, Colorado",
-      achievement: "Clients now book 8 weeks in advance using Sean's techniques",
-      imageUrl: "https://images.pexels.com/photos/3992660/pexels-photo-3992660.jpeg?auto=compress&cs=tinysrgb&w=400"
+      achievement: "Clients book 8 weeks in advance",
+      imageUrl: "/assets/bin6.jpg"
     },
     {
       id: 7,
       text: "I was working at Supercuts making minimum wage. After applying Sean's methods, I landed a chair at an upscale salon making $65/hour plus tips.",
       name: "Kevin Rodriguez",
       location: "Spokane, Washington",
-      achievement: "Used course skills to land $65/hour salon position",
-      imageUrl: "https://images.pexels.com/photos/1570808/pexels-photo-1570808.jpeg?auto=compress&cs=tinysrgb&w=400"
+      achievement: "Makes $65/hour plus tips at upscale salon",
+      imageUrl: "/assets/bin7.jpg"
     },
     {
       id: 8,
       text: "Sean's finishing techniques made all the difference. My cuts look magazine-ready and clients pay premium prices. I'm making more money working fewer hours.",
-      name: "Michelle Davis",
+      name: "Michael Davis",
       location: "Burlington, Vermont",
-      achievement: "Charges premium prices using Sean's finishing techniques",
-      imageUrl: "https://images.pexels.com/photos/3992663/pexels-photo-3992663.jpeg?auto=compress&cs=tinysrgb&w=400"
+      achievement: "Charges premium prices for magazine-ready cuts",
+      imageUrl: "/assets/bin8.jpg"
     },
     {
       id: 9,
       text: "I failed my first state board exam because I couldn't cut properly under pressure. Sean's step-by-step system gave me the confidence to pass and now I'm a top performer.",
       name: "Jordan Parker",
       location: "Sioux Falls, South Dakota",
-      achievement: "Used course system to pass state board and become top performer",
-      imageUrl: "https://images.pexels.com/photos/3992661/pexels-photo-3992661.jpeg?auto=compress&cs=tinysrgb&w=400"
+      achievement: "Top performer after passing state board",
+      imageUrl: "/assets/bin9.jpg"
     },
     {
       id: 10,
       text: "After 10 years of cutting hair, I thought I had nothing left to learn. Sean's advanced techniques doubled my income and gave me confidence with every texture.",
       name: "Brian Foster",
       location: "Billings, Montana",
-      achievement: "Doubled income using Sean's advanced cutting techniques",
-      imageUrl: "https://images.pexels.com/photos/1570809/pexels-photo-1570809.jpeg?auto=compress&cs=tinysrgb&w=400"
+      achievement: "Doubled income using advanced techniques",
+      imageUrl: "/assets/bin10.jpg"
     }
   ];
 
@@ -198,25 +198,10 @@ export default function TestimonialsSection() {
           </button>
           <button 
             onClick={nextTestimonial}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 card-luxury hover:bg-luxury/10 text-white p-4 rounded-full transition-all duration-300 hover:scale-110 z-10"
+            className="absolute right-8 top-1/2 transform -translate-y-1/2 card-luxury hover:bg-luxury/10 text-white p-4 rounded-full transition-all duration-300 hover:scale-110 z-10"
           >
             <ChevronRight className="h-6 w-6" />
           </button>
-
-          {/* Dot Indicators */}
-          <div className="flex justify-center mt-12 space-x-3">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentTestimonial(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentTestimonial 
-                    ? 'bg-luxury-gradient scale-125' 
-                    : 'bg-gray-600 hover:bg-gray-500'
-                }`}
-              />
-            ))}
-          </div>
         </div>
       </div>
     </section>
