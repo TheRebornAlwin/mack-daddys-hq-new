@@ -523,6 +523,126 @@ export default function HomePage() {
       {/* Success Stories Section - Replace existing testimonials */}
       <TestimonialsSection />
 
+      {/* Final CTA Section - Modeled after the screenshot */}
+      <section className="py-20 bg-gradient-to-br from-black via-gray-900 to-black relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="luxury-shape luxury-shape-1 top-20 right-20 opacity-20"></div>
+          <div className="luxury-shape luxury-shape-2 bottom-20 left-20 opacity-20" style={{ animationDelay: '4s' }}></div>
+        </div>
+
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            
+            {/* Left Content */}
+            <div className="text-center lg:text-left">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold mb-6 leading-tight">
+                Get Access Now
+              </h2>
+              <p className="text-lg lg:text-xl text-gray-300 mb-12 leading-relaxed">
+                Level Up to Barber Mastery with Mack Daddy's Academy! Your One-Stop 
+                Destination for Everything You Need. Join the Journey Today!
+              </p>
+
+              {/* Included Features */}
+              <div className="mb-12">
+                <h3 className="text-xl lg:text-2xl font-bold text-gradient-gold mb-8">
+                  Included in your Mack Daddy's Academy Membership
+                </h3>
+                <div className="grid md:grid-cols-2 gap-4 lg:gap-6">
+                  {[
+                    "28+ Years of Expert Knowledge",
+                    "Complete Shape & Flow System", 
+                    "Advanced Consultation Techniques",
+                    "All Hair Types Cutting Methods",
+                    "Modern Finishing Techniques",
+                    "Premium Pricing Strategies",
+                    "Client Retention Secrets",
+                    "Business Growth Blueprint",
+                    "Lifetime Access & Updates",
+                    "Private Community Access",
+                    "Monthly Live Q&A Sessions",
+                    "Downloadable Practice Guides"
+                  ].map((feature, index) => (
+                    <div key={index} className="flex items-start text-left">
+                      <div className="w-5 h-5 bg-luxury-gradient rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                        <div className="w-2 h-2 bg-black rounded-full"></div>
+                      </div>
+                      <span className="text-gray-300 text-sm lg:text-base">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* CTA Section */}
+              <div className="text-center lg:text-left">
+                <h3 className="text-2xl lg:text-3xl font-playfair font-bold text-white mb-6">
+                  Become a Master Barber Today
+                </h3>
+                
+                {/* Price Display */}
+                <div className="mb-8">
+                  <div className="flex items-baseline justify-center lg:justify-start mb-2">
+                    <span className="text-5xl lg:text-6xl font-bold text-gradient-gold-price">$47</span>
+                    <span className="text-xl lg:text-2xl text-gray-400 ml-2">one-time</span>
+                  </div>
+                  <p className="text-gray-400 text-sm">
+                    <span className="line-through">Regular price: $297</span> • Limited time offer
+                  </p>
+                </div>
+
+                {/* Main CTA Button */}
+                <button 
+                  onClick={handleCheckoutClick}
+                  className="w-full lg:w-auto btn-luxury text-black font-bold text-xl lg:text-2xl px-12 lg:px-16 py-6 lg:py-8 rounded-lg mb-8 hover:scale-105 transition-all duration-300 shadow-2xl"
+                >
+                  GET ACCESS NOW
+                </button>
+
+                {/* Payment Icons */}
+                <div className="flex items-center justify-center lg:justify-start space-x-4 mb-6">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-8 h-5 bg-blue-600 rounded text-white text-xs flex items-center justify-center font-bold">VISA</div>
+                    <div className="w-8 h-5 bg-red-500 rounded text-white text-xs flex items-center justify-center font-bold">MC</div>
+                    <div className="w-8 h-5 bg-blue-500 rounded text-white text-xs flex items-center justify-center font-bold">PP</div>
+                    <div className="w-8 h-5 bg-blue-400 rounded text-white text-xs flex items-center justify-center font-bold">AE</div>
+                  </div>
+                </div>
+
+                {/* Security Text */}
+                <div className="flex items-center justify-center lg:justify-start">
+                  <Shield className="h-4 w-4 text-green-400 mr-2" />
+                  <p className="text-green-400 text-sm font-medium">
+                    All orders are 100% SAFE using our SECURE SSL encrypted server
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Image */}
+            <div className="relative lg:order-last order-first">
+              <div className="relative">
+                <img
+                  src="https://images.pexels.com/photos/1570807/pexels-photo-1570807.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  alt="Professional barber at work"
+                  className="w-full h-96 lg:h-[500px] object-cover rounded-lg shadow-2xl"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-lg"></div>
+                
+                {/* Floating Badge */}
+                <div className="absolute top-6 right-6">
+                  <div className="badge-premium rounded-lg px-4 py-3">
+                    <Crown className="h-5 w-5 text-luxury-gold mr-2" />
+                    <span className="text-white font-bold text-sm">MASTER LEVEL</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       {/* Pricing Section */}
       <section className="py-16 sm:py-24 lg:py-32 bg-black relative">
         <div className="max-w-5xl mx-auto text-center px-4 sm:px-6 lg:px-8">

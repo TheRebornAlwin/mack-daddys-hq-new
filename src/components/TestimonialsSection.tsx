@@ -1,5 +1,5 @@
-import React from 'react';
-import { Star, Quote } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface Testimonial {
   id: string;
@@ -7,7 +7,7 @@ interface Testimonial {
   role: string;
   content: string;
   rating: number;
-  image?: string;
+  imageUrl: string;
   achievement?: string;
 }
 
@@ -18,6 +18,7 @@ const testimonials: Testimonial[] = [
     role: 'Professional Stylist',
     content: "Sean's course completely transformed my cutting technique. I went from struggling with basic cuts to confidently creating stunning styles that my clients absolutely love. The shape and flow system is pure genius!",
     rating: 5,
+    imageUrl: 'https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&cs=tinysrgb&w=600',
     achievement: 'Now earning $8,500/month'
   },
   {
@@ -26,6 +27,7 @@ const testimonials: Testimonial[] = [
     role: 'Salon Owner',
     content: "I've been cutting hair for 10 years, but Sean's methods opened my eyes to techniques I never knew existed. My clients are blown away by the difference, and I'm booked solid for months.",
     rating: 5,
+    imageUrl: 'https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=600',
     achievement: 'Opened his own successful salon'
   },
   {
@@ -34,6 +36,7 @@ const testimonials: Testimonial[] = [
     role: 'Recent Graduate',
     content: "As someone new to the industry, this course gave me the confidence I needed. The step-by-step approach made everything so clear. I landed my dream job within weeks of completing the course!",
     rating: 5,
+    imageUrl: 'https://images.pexels.com/photos/3992656/pexels-photo-3992656.jpeg?auto=compress&cs=tinysrgb&w=600',
     achievement: 'Hired at top salon in 3 weeks'
   },
   {
@@ -42,6 +45,7 @@ const testimonials: Testimonial[] = [
     role: 'Career Changer',
     content: "I switched careers at 35 and was terrified I was too old to learn. Sean's teaching style made everything click. Now I'm making more than I ever did in my corporate job!",
     rating: 5,
+    imageUrl: 'https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg?auto=compress&cs=tinysrgb&w=600',
     achievement: 'Career change success story'
   },
   {
@@ -50,6 +54,7 @@ const testimonials: Testimonial[] = [
     role: 'Freelance Stylist',
     content: "The business training was a game-changer. I learned how to price my services properly and build a loyal client base. My income has tripled since taking this course!",
     rating: 5,
+    imageUrl: 'https://images.pexels.com/photos/3992660/pexels-photo-3992660.jpeg?auto=compress&cs=tinysrgb&w=600',
     achievement: 'Tripled her income in 6 months'
   },
   {
@@ -58,11 +63,79 @@ const testimonials: Testimonial[] = [
     role: 'Barber Shop Owner',
     content: "Sean's techniques work for both men's and women's cuts. My barber shop now offers premium services, and clients are willing to pay top dollar for the quality we deliver.",
     rating: 5,
+    imageUrl: 'https://images.pexels.com/photos/1570807/pexels-photo-1570807.jpeg?auto=compress&cs=tinysrgb&w=600',
     achievement: 'Expanded to premium services'
+  },
+  {
+    id: '7',
+    name: 'Rachel P.',
+    role: 'Beauty School Graduate',
+    content: "This course filled all the gaps that beauty school left. Sean's real-world experience and practical tips made me feel prepared for anything. I'm now the top stylist at my salon!",
+    rating: 5,
+    imageUrl: 'https://images.pexels.com/photos/3992663/pexels-photo-3992663.jpeg?auto=compress&cs=tinysrgb&w=600',
+    achievement: 'Top performer at prestigious salon'
+  },
+  {
+    id: '8',
+    name: 'Tony B.',
+    role: 'Master Barber',
+    content: "Even after 15 years in the business, Sean taught me techniques that revolutionized my approach. My clients notice the difference immediately, and word-of-mouth has exploded my business.",
+    rating: 5,
+    imageUrl: 'https://images.pexels.com/photos/1043473/pexels-photo-1043473.jpeg?auto=compress&cs=tinysrgb&w=600',
+    achievement: 'Doubled client base in 4 months'
+  },
+  {
+    id: '9',
+    name: 'Lisa H.',
+    role: 'Salon Manager',
+    content: "I implemented Sean's training across our entire team. The improvement in cut quality and client satisfaction has been incredible. We've raised our prices and clients are happier than ever.",
+    rating: 5,
+    imageUrl: 'https://images.pexels.com/photos/3992659/pexels-photo-3992659.jpeg?auto=compress&cs=tinysrgb&w=600',
+    achievement: 'Increased salon revenue by 60%'
+  },
+  {
+    id: '10',
+    name: 'Miguel S.',
+    role: 'Independent Stylist',
+    content: "Sean's course gave me the confidence to go independent. The business strategies alone paid for the course ten times over. I'm now booked 8 weeks out and charging premium rates.",
+    rating: 5,
+    imageUrl: 'https://images.pexels.com/photos/1516681/pexels-photo-1516681.jpeg?auto=compress&cs=tinysrgb&w=600',
+    achievement: 'Built 6-figure independent practice'
   }
 ];
 
 export default function TestimonialsSection() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  // Auto-advance testimonials every 5 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextTestimonial();
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [currentIndex]);
+
+  const nextTestimonial = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setTimeout(() => {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+      setIsAnimating(false);
+    }, 250);
+  };
+
+  const prevTestimonial = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setTimeout(() => {
+      setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+      setIsAnimating(false);
+    }, 250);
+  };
+
+  const currentTestimonial = testimonials[currentIndex];
+
   return (
     <section className="py-20 bg-black relative overflow-hidden">
       {/* Background Elements */}
@@ -85,97 +158,114 @@ export default function TestimonialsSection() {
           </p>
         </div>
 
-        {/* Testimonials Slider Container - Fixed Layout */}
-        <div className="relative">
-          {/* Scroll Indicator */}
-          <div className="text-center mb-6">
-            <p className="text-gray-400 text-sm flex items-center justify-center">
-              <span className="mr-2">Scroll to see more stories</span>
-              <div className="flex space-x-1">
-                <div className="w-2 h-2 bg-luxury rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
+        {/* Testimonial Carousel */}
+        <div className="relative max-w-6xl mx-auto">
+          {/* Navigation Arrows */}
+          <button
+            onClick={prevTestimonial}
+            disabled={isAnimating}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-luxury-gradient rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+            style={{ marginLeft: '-3rem' }}
+          >
+            <ChevronLeft className="h-6 w-6 text-black" />
+          </button>
+
+          <button
+            onClick={nextTestimonial}
+            disabled={isAnimating}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-luxury-gradient rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+            style={{ marginRight: '-3rem' }}
+          >
+            <ChevronRight className="h-6 w-6 text-black" />
+          </button>
+
+          {/* Testimonial Content */}
+          <div className={`grid lg:grid-cols-2 gap-8 lg:gap-12 items-center transition-opacity duration-500 ${isAnimating ? 'opacity-0' : 'opacity-100'}`}>
+            
+            {/* Image Side */}
+            <div className="relative">
+              <div className="aspect-square rounded-lg overflow-hidden shadow-2xl">
+                <img
+                  src={currentTestimonial.imageUrl}
+                  alt={`${currentTestimonial.name} - ${currentTestimonial.role}`}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                
+                {/* Achievement Badge */}
+                {currentTestimonial.achievement && (
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <div className="badge-premium rounded-full px-4 py-2 text-center">
+                      <span className="text-white text-sm font-medium">{currentTestimonial.achievement}</span>
+                    </div>
+                  </div>
+                )}
               </div>
-            </p>
-          </div>
-
-          {/* Testimonials Horizontal Scroll Container */}
-          <div className="overflow-x-auto pb-6 scrollbar-hide">
-            <div className="flex space-x-6 min-w-max">
-              {testimonials.map((testimonial, index) => (
-                <div 
-                  key={testimonial.id}
-                  className={`flex-shrink-0 w-80 sm:w-96 card-luxury rounded-lg p-8 group hover:transform hover:-translate-y-2 transition-all duration-300 slide-in-luxury`}
-                  style={{ animationDelay: `${index * 150}ms` }}
-                >
-                  {/* Rating Stars */}
-                  <div className="flex justify-center mb-6">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 text-luxury fill-current" />
-                    ))}
-                  </div>
-
-                  {/* Quote Icon */}
-                  <div className="flex justify-center mb-6">
-                    <Quote className="h-8 w-8 text-luxury-gold opacity-50" />
-                  </div>
-
-                  {/* Testimonial Content */}
-                  <blockquote className="text-gray-300 text-lg leading-relaxed mb-8 text-center italic">
-                    "{testimonial.content}"
-                  </blockquote>
-
-                  {/* Author Info */}
-                  <div className="text-center border-t border-gray-700 pt-6">
-                    <h4 className="text-gradient-gold font-bold text-lg mb-1">
-                      {testimonial.name}
-                    </h4>
-                    <p className="text-gray-400 text-sm mb-2">{testimonial.role}</p>
-                    {testimonial.achievement && (
-                      <div className="badge-premium rounded-full px-4 py-2">
-                        <span className="text-white text-xs font-medium">{testimonial.achievement}</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
             </div>
+
+            {/* Quote Side */}
+            <div className="relative">
+              <div className="card-luxury rounded-lg p-8 lg:p-12 shadow-2xl">
+                {/* Rating Stars */}
+                <div className="flex justify-center lg:justify-start mb-6">
+                  {[...Array(currentTestimonial.rating)].map((_, i) => (
+                    <Star key={i} className="h-5 w-5 text-luxury fill-current" />
+                  ))}
+                </div>
+
+                {/* Quote Icon */}
+                <div className="flex justify-center lg:justify-start mb-6">
+                  <Quote className="h-8 w-8 text-luxury-gold opacity-50" />
+                </div>
+
+                {/* Testimonial Content */}
+                <blockquote className="text-gray-300 text-lg lg:text-xl leading-relaxed mb-8 text-center lg:text-left">
+                  "{currentTestimonial.content}"
+                </blockquote>
+
+                {/* Author Info */}
+                <div className="text-center lg:text-left border-t border-gray-700 pt-6">
+                  <h4 className="text-gradient-gold font-bold text-xl mb-1">
+                    {currentTestimonial.name}
+                  </h4>
+                  <p className="text-gray-400 text-sm">{currentTestimonial.role}</p>
+                </div>
+              </div>
+            </div>
+
           </div>
 
-          {/* Navigation Hint */}
-          <div className="text-center mt-8">
+          {/* Testimonial Indicators */}
+          <div className="flex justify-center mt-8 space-x-2">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  if (!isAnimating) {
+                    setIsAnimating(true);
+                    setTimeout(() => {
+                      setCurrentIndex(index);
+                      setIsAnimating(false);
+                    }, 250);
+                  }
+                }}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === currentIndex 
+                    ? 'bg-luxury-gradient scale-125' 
+                    : 'bg-gray-600 hover:bg-gray-500'
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Progress Text */}
+          <div className="text-center mt-4">
             <p className="text-gray-400 text-sm">
-              ← Scroll horizontally to read more success stories →
+              {currentIndex + 1} of {testimonials.length} success stories
             </p>
-          </div>
-        </div>
-
-        {/* Call to Action */}
-        <div className="text-center mt-16 slide-in-luxury-delayed-2">
-          <div className="card-luxury rounded-lg p-8 max-w-2xl mx-auto border-l-4 border-luxury">
-            <h3 className="text-2xl font-playfair font-bold text-gradient-gold mb-4">
-              Ready to Write Your Own Success Story?
-            </h3>
-            <p className="text-gray-300 mb-6 leading-relaxed">
-              Join thousands of students who've transformed their careers with Sean's proven system.
-            </p>
-            <button className="btn-luxury text-black font-bold px-8 py-4 rounded text-lg hover:scale-105 transition-transform duration-300">
-              Start Your Transformation Today
-            </button>
           </div>
         </div>
       </div>
-
-      {/* Custom Scrollbar Styles */}
-      <style jsx>{`
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
     </section>
   );
 }
