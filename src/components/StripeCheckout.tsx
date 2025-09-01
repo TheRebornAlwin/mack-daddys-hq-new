@@ -10,8 +10,6 @@ interface StripeCheckoutProps {
   description?: string;
   customerEmail?: string;
   customerName?: string;
-  firstName?: string;
-  lastName?: string;
   onSuccess?: (paymentIntent: any) => void;
   onError?: (error: Error) => void;
   onCancel?: () => void;
@@ -23,8 +21,6 @@ const StripeCheckout: React.FC<StripeCheckoutProps> = ({
   description = 'Payment',
   customerEmail = '',
   customerName = '',
-  firstName = '',
-  lastName = '',
   onSuccess,
   onError,
   onCancel
@@ -65,12 +61,9 @@ const StripeCheckout: React.FC<StripeCheckoutProps> = ({
             amount,
             currency,
             description,
-            customerEmail,
-            firstName,
-            lastName,
-            metadata: {
-              customer_name: customerName,
-              description
+            customer: {
+              email: customerEmail,
+              name: customerName
             }
           }),
         });

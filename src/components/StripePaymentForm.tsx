@@ -122,21 +122,21 @@ export default function StripePaymentForm({
                 googlePay: 'auto',
               },
               fields: {
-               billingDetails: {
-                 name: 'auto',
-                 email: 'auto',
-                 phone: 'auto',
-                 address: {
-                   country: 'auto',
-                   postalCode: 'auto',
-                 },
-               },
-             },
-             defaultValues: {
-               billingDetails: {
-                 name: customerName,
-                 email: customerEmail || email,
-               },
+                billingDetails: {
+                  name: 'auto',
+                  email: customerEmail ? 'never' : 'auto',
+                  phone: 'auto',
+                  address: {
+                    country: 'auto',
+                    postalCode: 'auto',
+                  },
+                },
+              },
+              defaultValues: {
+                billingDetails: {
+                  name: customerName,
+                  email: customerEmail || email,
+                },
               },
             }}
           />

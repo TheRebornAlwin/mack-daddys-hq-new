@@ -4,11 +4,6 @@ import { ArrowLeft, Shield, Scale, FileText, AlertCircle, CheckCircle, Crown, Sc
 
 export default function TermsPage() {
   const navigate = useNavigate();
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
@@ -34,7 +29,7 @@ export default function TermsPage() {
 
       <div className="max-w-4xl mx-auto px-6 py-16">
         {/* Header */}
-        <div className={`text-center mb-16 ${isVisible ? 'fade-in-luxury' : 'opacity-0'}`}>
+        <div className="text-center mb-16">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-luxury-gradient rounded mb-6">
             <Scale className="h-8 w-8 text-black" />
           </div>
@@ -47,7 +42,7 @@ export default function TermsPage() {
         </div>
 
         {/* Content */}
-        <div className={`card-luxury rounded-lg p-8 md:p-12 space-y-12 ${isVisible ? 'slide-in-luxury-delayed' : 'opacity-0'}`}>
+        <div className="card-luxury rounded-lg p-8 md:p-12 space-y-12">
           
           {/* Agreement Section */}
           <section>
