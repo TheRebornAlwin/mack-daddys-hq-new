@@ -230,9 +230,8 @@ export default function HomePage() {
                 </p>
                 
                 <div className="card-luxury rounded p-8 border-l-4 border-luxury">
-                  <p className="text-gradient-gold font-medium italic text-lg">
-                    "This isn't classroom lessons. This is the stuff that makes you skilled, 
-                    in-demand, and gets you PAID."
+                  <p className="text-gradient-gold font-medium italic text-base sm:text-lg">
+                    "This is a beginner friendly, step-by-step guide that makes you skilled, in-demand, and gets you PAID."
                   </p>
                   <p className="text-gray-400 text-sm mt-3 font-medium">— Sean, Master Instructor</p>
                 </div>
