@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Scissors, Users, Star, Clock, Award, Shield, ArrowRight, Target, TrendingUp, BookOpen, Zap, Timer, ChevronLeft, ChevronRight, Crown, ArrowDown, CheckCircle, Diamond, Gem, Banknote, GraduationCap, Trophy, Briefcase, X } from 'lucide-react';
+import TestimonialsSection from '../components/TestimonialsSection';
 
 export default function HomePage() {
   const navigate = useNavigate();
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [tooltipStates, setTooltipStates] = useState<Record<string, boolean>>({});
   
@@ -21,84 +21,6 @@ export default function HomePage() {
     return now.toLocaleDateString('en-US', options);
   };
   
-  const testimonials = [
-    {
-      text: "I was cutting hair in my garage for friends and family, barely making $20 per cut. After Sean's course, I'm now charging $85 per cut and booked solid 3 weeks out. Last month I made $4,200 working part-time!",
-      name: "Marcus Johnson",
-      location: "Tulsa, Oklahoma", 
-      achievement: "Went from $20 to $85 per cut using Sean's pricing techniques"
-    },
-    {
-      text: "I was terrified to touch anyone's hair. Sean's step-by-step approach gave me the confidence to start cutting. Now I'm making $1,800 a week at my local salon and clients specifically request me.",
-      name: "Jessica Martinez",
-      location: "Boise, Idaho",
-      achievement: "Overcame fear, now earning $1,800/week using course methods"
-    },
-    {
-      text: "Fresh out of beauty school, I was struggling to get clients. Sean's techniques helped me create cuts that people actually wanted. I went from 2 clients a week to fully booked, making $3,500 monthly.",
-      name: "Tyler Anderson",
-      location: "Grand Rapids, Michigan",
-      achievement: "Applied Sean's cutting techniques, now fully booked at $3,500/month"
-    },
-    {
-      text: "I thought I knew how to cut hair until I took this course. Sean's consultation method alone doubled my client retention. My cuts now grow out perfectly for months.",
-      name: "Sarah Williams",
-      location: "Bend, Oregon",
-      achievement: "Used Sean's consultation system to double client retention"
-    },
-    {
-      text: "After 5 years of mediocre cuts, I was ready to quit. Sean's shape and flow system completely changed my technique. I now run my own successful shop with 3 employees.",
-      name: "David Chen",
-      location: "Chattanooga, Tennessee",
-      achievement: "Used course methods to open successful 3-employee shop"
-    },
-    {
-      text: "The shape and flow techniques completely changed how I approach every cut. Now my clients' hair grows out beautifully and they book 8 weeks in advance.",
-      name: "Ashley Thompson",
-      location: "Fort Collins, Colorado",
-      achievement: "Clients now book 8 weeks in advance using Sean's techniques"
-    },
-    {
-      text: "I was working at Supercuts making minimum wage. After applying Sean's methods, I landed a chair at an upscale salon making $65/hour plus tips.",
-      name: "Kevin Rodriguez",
-      location: "Spokane, Washington",
-      achievement: "Used course skills to land $65/hour salon position"
-    },
-    {
-      text: "Sean's finishing techniques made all the difference. My cuts look magazine-ready and clients pay premium prices. I'm making more money working fewer hours.",
-      name: "Michelle Davis",
-      location: "Burlington, Vermont",
-      achievement: "Charges premium prices using Sean's finishing techniques"
-    },
-    {
-      text: "I failed my first state board exam because I couldn't cut properly under pressure. Sean's step-by-step system gave me the confidence to pass and now I'm a top performer.",
-      name: "Jordan Parker",
-      location: "Sioux Falls, South Dakota",
-      achievement: "Used course system to pass state board and become top performer"
-    },
-    {
-      text: "After 10 years of cutting hair, I thought I had nothing left to learn. Sean's advanced techniques doubled my income and gave me confidence with every texture.",
-      name: "Brian Foster",
-      location: "Billings, Montana",
-      achievement: "Doubled income using Sean's advanced cutting techniques"
-    }
-  ];
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 8000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const nextTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const prevTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
-
   const handleCheckoutClick = () => {
     navigate('/checkout');
     setTimeout(() => {
@@ -505,74 +427,7 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-32 bg-gradient-to-br from-gray-900 to-black relative overflow-hidden">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-playfair font-bold mb-8 leading-tight">
-              Success Stories From <span className="text-gradient-gold">Real Students</span>
-            </h2>
-          </div>
-          
-          <div className="relative">
-            <div className="card-luxury rounded-lg p-16 text-center overflow-hidden">
-              <div className="flex justify-center mb-8">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-6 w-6 text-luxury fill-current" />
-                ))}
-              </div>
-              
-              <div className="relative max-w-full overflow-hidden">
-                <div 
-                  className="flex transition-transform duration-500 ease-in-out"
-                  style={{ transform: `translateX(-${currentTestimonial * 100}%)` }}
-                >
-                  {testimonials.map((testimonial, index) => (
-                    <div key={index} className="w-full flex-shrink-0 px-4">
-                      <blockquote className="text-2xl font-light mb-10 leading-relaxed max-w-4xl mx-auto text-gray-300">
-                        "{testimonial.text}"
-                      </blockquote>
-                      <div className="mb-6">
-                        <p className="text-gradient-gold font-bold text-xl mb-1">{testimonial.name}</p>
-                        <p className="text-gray-500 mb-4">{testimonial.location}</p>
-                        <div className="badge-premium rounded px-5 py-2">
-                          <p className="text-white font-medium text-sm">{testimonial.achievement}</p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-            
-            <button 
-              onClick={prevTestimonial}
-              className="absolute left-6 top-1/2 transform -translate-y-1/2 card-luxury hover:bg-luxury/10 text-white p-4 rounded transition-all duration-300 hover:scale-110"
-            >
-              <ChevronLeft className="h-6 w-6" />
-            </button>
-            <button 
-              onClick={nextTestimonial}
-              className="absolute right-6 top-1/2 transform -translate-y-1/2 card-luxury hover:bg-luxury/10 text-white p-4 rounded transition-all duration-300 hover:scale-110"
-            >
-              <ChevronRight className="h-6 w-6" />
-            </button>
-            
-            <div className="flex justify-center mt-12 space-x-3">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentTestimonial(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentTestimonial 
-                      ? 'bg-luxury-gradient scale-125' 
-                      : 'bg-gray-600 hover:bg-gray-500'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <TestimonialsSection />
 
       {/* Pricing Section */}
       <section className="py-32 bg-black relative">
@@ -672,6 +527,105 @@ export default function HomePage() {
                   <ArrowRight className="ml-4 h-6 w-6" />
                 </span>
               </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA Section - Modeled after screenshot */}
+      <section className="py-32 bg-gradient-to-br from-black via-gray-900 to-black relative overflow-hidden">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            
+            {/* Content Side */}
+            <div className="text-center lg:text-left">
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-playfair font-bold mb-8 leading-tight">
+                Get Access <span className="text-gradient-gold">Now</span>
+              </h2>
+              <p className="text-xl text-gray-300 mb-12 leading-relaxed">
+                Transform Your Skills with Mack Daddy's Academy! Your One-Stop 
+                Destination for Everything You Need. Join the Journey Today!
+              </p>
+              
+              {/* Included Features */}
+              <div className="mb-12">
+                <h3 className="text-2xl font-playfair font-bold text-gradient-gold mb-8">
+                  Included in your Mack Daddy's Academy Membership
+                </h3>
+                <div className="grid md:grid-cols-2 gap-4 text-left">
+                  {[
+                    "70+ Educational videos",
+                    "Full Walk Throughs With Sean",
+                    "Tips on Station Setup", 
+                    "Detailed Cutting Techniques",
+                    "Instant Access To All Courses",
+                    "How To Price Services",
+                    "Tips for Growing Your Clientele",
+                    "How To Build Your Brand"
+                  ].map((feature, index) => (
+                    <div key={index} className="flex items-start">
+                      <CheckCircle className="h-5 w-5 text-luxury-gold mr-3 mt-1 flex-shrink-0" />
+                      <span className="text-gray-300">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Become a Member */}
+              <div className="mb-12">
+                <h3 className="text-3xl font-playfair font-bold text-white mb-6">
+                  Become a Master Barber Today
+                </h3>
+                <div className="flex items-baseline justify-center lg:justify-start mb-8">
+                  <span className="text-6xl md:text-7xl font-bold text-gradient-gold">$47</span>
+                  <span className="text-2xl text-gray-400 ml-2">one-time</span>
+                </div>
+              </div>
+              
+              {/* CTA Button */}
+              <button 
+                onClick={handleCheckoutClick}
+                className="w-full max-w-md btn-luxury text-black font-bold text-2xl py-6 rounded-lg mb-8 hover:scale-105 transition-all duration-300"
+              >
+                GET ACCESS NOW
+              </button>
+              
+              {/* Payment Methods */}
+              <div className="flex items-center justify-center lg:justify-start space-x-4 mb-6">
+                <div className="bg-blue-600 text-white px-3 py-1 rounded text-sm font-bold">VISA</div>
+                <div className="bg-red-600 text-white px-3 py-1 rounded text-sm font-bold">MC</div>
+                <div className="bg-blue-500 text-white px-3 py-1 rounded text-sm font-bold">PayPal</div>
+                <div className="bg-blue-700 text-white px-3 py-1 rounded text-sm font-bold">AMEX</div>
+              </div>
+              
+              {/* Security Text */}
+              <div className="flex items-center justify-center lg:justify-start">
+                <Shield className="h-5 w-5 text-green-400 mr-2" />
+                <p className="text-green-400 text-sm font-medium">
+                  All orders are 100% SAFE using our SECURE SSL encrypted server
+                </p>
+              </div>
+            </div>
+            
+            {/* Image Side */}
+            <div className="relative">
+              <div className="relative">
+                <img 
+                  src="https://images.pexels.com/photos/1570807/pexels-photo-1570807.jpeg?auto=compress&cs=tinysrgb&w=600"
+                  alt="Professional barber at work"
+                  className="w-full h-[600px] object-cover rounded-lg shadow-2xl"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent rounded-lg"></div>
+              </div>
+              
+              {/* Floating Badge */}
+              <div className="absolute -bottom-8 -right-8 bg-luxury-gradient rounded-lg p-6 shadow-2xl">
+                <div className="text-center">
+                  <div className="text-3xl font-playfair font-bold text-black mb-2">1,927+</div>
+                  <div className="text-black/90 text-sm font-medium uppercase tracking-wider">Students</div>
+                  <div className="text-black/90 text-sm font-medium uppercase tracking-wider">Trained</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
