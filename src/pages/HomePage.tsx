@@ -291,7 +291,7 @@ export default function HomePage() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-playfair font-bold mb-8 leading-tight">
-              Stop Cutting Hair. Start <span className="text-gradient-gold">Crafting Careers.</span>
+              Learn To <span className="text-gradient-gold">Charge $100 for a <i>Taper.</i></span>
             </h2>
             <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
               Every client is more than a haircut. It's a story. It's confidence. It's a future that YOU helped shape.
