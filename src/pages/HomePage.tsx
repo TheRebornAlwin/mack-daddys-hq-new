@@ -452,7 +452,7 @@ export default function HomePage() {
               What You'll Learn <span className="text-gradient-gold">Inside</span>
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-              A comprehensive curriculum designed to take you from beginner to master barber:
+              A comprehensive curriculum designed to take you from beginner to a rich, world-class barber:
             </p>
           </div>
           
