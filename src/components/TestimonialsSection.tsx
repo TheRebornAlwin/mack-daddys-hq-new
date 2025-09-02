@@ -168,14 +168,14 @@ export default function TestimonialsSection() {
           {/* Navigation Arrows - Moved further outward */}
           <button
             onClick={prevTestimonial}
-            className="absolute top-1/2 -left-8 transform -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 bg-luxury-gradient rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all duration-300 z-10"
+            className="absolute top-1/2 -left-12 transform -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 bg-luxury-gradient rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all duration-300 z-10"
           >
             <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 text-black" />
           </button>
           
           <button
             onClick={nextTestimonial}
-            className="absolute top-1/2 -right-8 transform -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 bg-luxury-gradient rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all duration-300 z-10"
+            className="absolute top-1/2 -right-12 transform -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 bg-luxury-gradient rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all duration-300 z-10"
           >
             <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6 text-black" />
           </button>

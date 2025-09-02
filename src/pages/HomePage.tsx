@@ -357,9 +357,7 @@ export default function HomePage() {
                       <item.icon className="h-5 w-5 sm:h-6 sm:w-6 lg:h-7 lg:w-7 text-luxury-gold mb-2 sm:mb-3 lg:mb-4 group-hover:scale-110 transition-transform duration-300" />
                       <div className="text-white font-semibold text-sm sm:text-base lg:text-lg">{item.text}</div>
                       <div className="text-gray-400 text-xs sm:text-sm lg:text-sm uppercase tracking-wider">{item.subtext}</div>
-                      <div className={`stats-tooltip ${tooltipStates[`sean-${index}`] ? 'show' : ''}`}>
-                        <div className="text-gray-300 leading-relaxed">{item.tooltip}</div>
-                      </div>
+                      <CheckCircle className="h-5 w-5 text-gradient-gold mr-3 mt-0.5 flex-shrink-0" />
                     </div>
                   ))}
                 </div>
@@ -536,123 +534,10 @@ export default function HomePage() {
             
             {/* Left Content */}
             <div className="text-center">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold mb-6 leading-tight">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold mb-6 leading-tight text-gradient-gold text-center">
                 Get Access Now
               </h2>
               <p className="text-lg lg:text-xl text-gray-300 mb-12 leading-relaxed text-center">
-                Level Up to Barber Mastery with Mack Daddy's Academy! Your One-Stop 
-                Destination for Everything You Need. Join the Journey Today!
-              </p>
-
-              {/* Included Features */}
-              <div className="mb-12">
-                <h3 className="text-xl lg:text-2xl font-bold text-gradient-gold mb-8">
-                  Included in your Mack Daddy's Academy Membership
-                </h3>
-                <div className="grid md:grid-cols-2 gap-4 lg:gap-6">
-                  {[
-                    "28+ Years of Expert Knowledge",
-                    "Complete Shape & Flow System", 
-                    "Advanced Consultation Techniques",
-                    "All Hair Types Cutting Methods",
-                    "Modern Finishing Techniques",
-                    "Premium Pricing Strategies",
-                    "Client Retention Secrets",
-                    "Business Growth Blueprint",
-                    "Lifetime Access & Updates",
-                    "Private Community Access",
-                    "Monthly Live Q&A Sessions",
-                    "Downloadable Practice Guides"
-                  ].map((feature, index) => (
-                    <div key={index} className="flex items-start text-left">
-                      <CheckCircle className="h-5 w-5 text-gradient-gold mr-3 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300 text-sm lg:text-base">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* CTA Section */}
-              <div className="text-center">
-                <h3 className="text-2xl lg:text-3xl font-playfair font-bold text-white mb-6">
-                  Become a Master Barber Today
-                </h3>
-                
-                {/* Price Display */}
-                <div className="mb-8 text-center">
-                  <div className="flex items-baseline justify-center mb-2">
-                    <span className="text-6xl lg:text-7xl font-bold text-gradient-gold-price">$47</span>
-                    <span className="text-xl lg:text-2xl text-gray-400 ml-4">Regular price: $297</span>
-                  </div>
-                  <p className="text-gray-400 text-sm text-center">
-                    one-time • Limited time offer
-                  </p>
-                </div>
-
-                {/* Main CTA Button */}
-                <button 
-                  onClick={handleCheckoutClick}
-                  className="btn-luxury text-black font-bold text-xl lg:text-2xl px-12 lg:px-16 py-6 lg:py-8 rounded-lg mb-8 hover:scale-105 transition-all duration-300 shadow-2xl mx-auto block"
-                >
-                  GET ACCESS NOW
-                </button>
-
-
-                {/* Security Text */}
-                <div className="flex items-center justify-center">
-                  <Shield className="h-4 w-4 text-green-400 mr-2" />
-                  <p className="text-green-400 text-sm font-medium">
-                    All orders are 100% SAFE using our SECURE SSL encrypted server
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Image */}
-            <div className="relative lg:order-last order-first">
-              <div className="relative">
-                <img
-                  src="/images/bin11.jpg"
-                  alt="Professional barber at work"
-                  className="w-full h-96 lg:h-[500px] object-cover rounded-lg shadow-2xl"
-                  style={{ marginTop: '-2rem' }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-lg"></div>
-                
-                {/* Floating Badge */}
-                <div className="absolute top-6 right-6">
-                  <div className="badge-premium rounded-lg px-4 py-3">
-                    <Crown className="h-5 w-5 text-luxury-gold mr-2" />
-                    <span className="text-white font-bold text-sm">MASTER LEVEL</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-          
-          {/* Trust Badges */}
-          <div className="mt-16 grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
-            <div className="card-luxury rounded-lg p-6 text-center border border-green-500/30">
-              <Shield className="h-8 w-8 text-green-400 mx-auto mb-4" />
-              <h4 className="text-gradient-gold font-bold text-lg mb-2">365-Day Money-Back Guarantee</h4>
-              <p className="text-gray-300 text-sm">
-                Not satisfied? Get a full refund within 365 days, no questions asked.
-              </p>
-            </div>
-            
-            <div className="card-luxury rounded-lg p-6 text-center border border-luxury/30">
-              <Lock className="h-8 w-8 text-luxury-gold mx-auto mb-4" />
-              <h4 className="text-gradient-gold font-bold text-lg mb-2">Secure Checkout</h4>
-              <p className="text-gray-300 text-sm">
-                Your payment is protected by bank-level SSL encryption and Stripe security.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
       {/* FAQ Section */}
       <section className="py-16 sm:py-24 lg:py-32 bg-gradient-to-br from-gray-900 to-black relative">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
