@@ -521,7 +521,7 @@ export default function HomePage() {
       {/* Success Stories Section - Replace existing testimonials */}
       <TestimonialsSection />
 
-      {/* Final CTA Section - Modeled after the screenshot */}
+      {/* Get Access Now Section */}
       <section className="py-20 bg-gradient-to-br from-black via-gray-900 to-black relative overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
@@ -530,15 +530,94 @@ export default function HomePage() {
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            
-            {/* Left Content */}
-            <div className="text-center">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold mb-6 leading-tight text-gradient-gold text-center">
-                Get Access Now
-              </h2>
-              <p className="text-lg lg:text-xl text-gray-300 mb-12 leading-relaxed text-center">
-                Join thousands of successful barbers who transformed their careers with our proven system.
+          {/* Centered Headlines */}
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold mb-6 leading-tight text-gradient-gold text-center">
+              Get Access Now
+            </h2>
+            <p className="text-lg lg:text-xl text-gray-300 mb-12 leading-relaxed text-center">
+              Level Up to Barber Mastery with Mack Daddy's Academy! Your One-Stop Destination for Everything You Need. Join the Journey Today!
+            </p>
+          </div>
+
+          {/* Two Column Layout */}
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16">
+            {/* Left Side - Course Offerings */}
+            <div>
+              <h3 className="text-2xl font-playfair font-bold text-gradient-gold mb-8 text-center lg:text-left">
+                Included in your Mack Daddy's Academy Membership
+              </h3>
+              <div className="space-y-4">
+                {[
+                  "Complete Shape & Flow System",
+                  "Advanced Consultation Techniques", 
+                  "All Hair Types Cutting Methods",
+                  "Modern Finishing Techniques",
+                  "Lifetime Access & Updates",
+                  "Private Community Access"
+                ].map((item, index) => (
+                  <div key={index} className="flex items-center text-gray-300">
+                    <CheckCircle className="h-5 w-5 text-gradient-gold mr-4 flex-shrink-0" />
+                    <span className="text-lg">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right Side - Image */}
+            <div className="flex justify-center lg:justify-end">
+              <img 
+                src="/images/bin13.jpg"
+                alt="Professional barber training"
+                className="w-full max-w-md h-auto object-cover rounded-lg shadow-2xl"
+              />
+            </div>
+          </div>
+
+          {/* Final CTA Block */}
+          <div className="text-center mb-16">
+            <h3 className="text-3xl md:text-4xl font-playfair font-bold text-gradient-gold mb-8">
+              Become a Master Barber Today
+            </h3>
+            <div className="flex items-center justify-center mb-8">
+              <span className="text-6xl lg:text-7xl font-playfair font-bold text-gradient-gold">$47</span>
+              <span className="text-2xl text-gray-400 line-through ml-4">$297</span>
+            </div>
+            <p className="text-lg text-gray-300 mb-8">
+              one-time • Limited time offer
+            </p>
+            <button 
+              onClick={handleCheckoutClick}
+              className="btn-luxury text-black font-bold text-xl px-12 py-6 rounded mx-auto block hover:scale-105 transition-transform duration-300"
+            >
+              GET ACCESS NOW
+            </button>
+          </div>
+
+          {/* Trust Cards */}
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* 365-Day Guarantee Card */}
+            <div className="card-luxury rounded-lg p-8 border-l-4 border-green-500">
+              <div className="flex items-center justify-center mb-4">
+                <Shield className="h-6 w-6 text-green-400 mr-3" />
+                <span className="text-green-400 font-bold text-lg">365-DAY MONEY-BACK GUARANTEE</span>
+              </div>
+              <p className="text-gray-300 text-center leading-relaxed">
+                Try the course risk-free. If you're not completely satisfied, get a full refund within 365 days.
+              </p>
+            </div>
+
+            {/* Limited Time Pricing Card */}
+            <div className="card-luxury rounded-lg p-8 border-l-4 border-luxury">
+              <div className="flex items-center justify-center mb-4">
+                <Timer className="h-6 w-6 text-luxury-gold mr-3" />
+                <span className="text-gradient-gold font-bold text-lg">Limited Time Pricing</span>
+              </div>
+              <p className="text-white font-medium text-center mb-2">
+                Price increases to $297 after 2,000 students
+              </p>
+              <p className="text-gray-300 text-center">
+                Current enrollment: <span className="text-gradient-gold font-bold">1,927 students</span>
               </p>
             </div>
           </div>
