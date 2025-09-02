@@ -538,6 +538,13 @@ export default function HomePage() {
                 Get Access Now
               </h2>
               <p className="text-lg lg:text-xl text-gray-300 mb-12 leading-relaxed text-center">
+                Join thousands of successful barbers who transformed their careers with our proven system.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ Section */}
       <section className="py-16 sm:py-24 lg:py-32 bg-gradient-to-br from-gray-900 to-black relative">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
