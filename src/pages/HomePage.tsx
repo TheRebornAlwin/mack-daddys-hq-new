@@ -550,8 +550,8 @@ export default function HomePage() {
               <h3 className="text-2xl lg:text-3xl font-playfair font-bold text-gradient-gold mb-8 text-center lg:text-left">
                 Included in your Mack Daddy's Academy Membership:
               </h3>
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-12">
+                <div className="space-y-4">
                   {[
                     "Complete Shape & Flow System",
                     "Advanced Consultation Techniques", 
@@ -569,15 +569,24 @@ export default function HomePage() {
                             <stop offset="50%" stopColor="#FFCA28" />
                             <stop offset="100%" stopColor="#FFB300" />
                           </linearGradient>
+                    <div key={index} className="flex items-center text-gray-300">
+                      <svg className="h-7 w-7 mr-4 flex-shrink-0" viewBox="0 0 20 20" fill="none">
+                        <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill="url(#checkGradient)" strokeWidth="1.5" stroke="url(#checkGradient)"/>
+                        <defs>
+                          <linearGradient id="checkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#FFD54F" />
+                            <stop offset="50%" stopColor="#FFCA28" />
+                            <stop offset="100%" stopColor="#FFB300" />
+                          </linearGradient>
                         </defs>
                       </svg>
                       <span className="text-lg">{item}</span>
                     </div>
                   ))}
                 </div>
-                <div className="space-y-6">
+                <div className="space-y-4">
                   {[
-                    "Modern Finishing Techniques",
+                    "Modern Finishing Techniques", 
                     "Lifetime Access & Updates",
                     "Private Community Access",
                     "Monthly Live Q&A Sessions",
@@ -587,6 +596,15 @@ export default function HomePage() {
                     <div key={index} className="flex items-center text-gray-300">
                       <svg className="h-5 w-5 mr-4 flex-shrink-0" viewBox="0 0 20 20" fill="none">
                         <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill="url(#checkGradient2)"/>
+                        <defs>
+                          <linearGradient id="checkGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#FFD54F" />
+                            <stop offset="50%" stopColor="#FFCA28" />
+                            <stop offset="100%" stopColor="#FFB300" />
+                          </linearGradient>
+                    <div key={index} className="flex items-center text-gray-300">
+                      <svg className="h-7 w-7 mr-4 flex-shrink-0" viewBox="0 0 20 20" fill="none">
+                        <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill="url(#checkGradient2)" strokeWidth="1.5" stroke="url(#checkGradient2)"/>
                         <defs>
                           <linearGradient id="checkGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" stopColor="#FFD54F" />
@@ -604,10 +622,11 @@ export default function HomePage() {
 
             {/* Right Side - Image */}
             <div className="flex justify-center lg:justify-end">
+              {/* Image size can be adjusted by changing h-[value] for height and max-w-[size] for width */}
               <img 
                 src="/images/bin13.jpg"
                 alt="Professional barber training"
-                className="w-full max-w-md h-auto object-cover rounded-lg shadow-2xl"
+                className="w-full max-w-lg h-[500px] object-cover rounded-lg shadow-2xl"
               />
             </div>
           </div>

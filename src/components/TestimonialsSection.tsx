@@ -15,21 +15,21 @@ export default function TestimonialsSection() {
       name: "Marcus Johnson",
       location: "Tulsa, Oklahoma", 
       achievement: "Went from $20 to $85 per cut using Sean's pricing techniques",
-      imageUrl: "/images/bin1.jpg"
+      imageUrl: "https://images.pexels.com/photos/1319460/pexels-photo-1319460.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
     {
       text: "I was terrified to touch anyone's hair. Sean's step-by-step approach gave me the confidence to start cutting. Now I'm making $1,800 a week at my local barbershop and clients specifically request me.",
       name: "Jake Martinez",
       location: "Boise, Idaho",
       achievement: "Overcame fear, now earning $1,800/week using course methods",
-      imageUrl: "/images/bin2.jpg"
+      imageUrl: "https://images.pexels.com/photos/1570807/pexels-photo-1570807.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
     {
       text: "Fresh out of barber school, I was struggling to get clients. Sean's techniques helped me create cuts that people actually wanted. I went from 2 clients a week to fully booked, making $3,500 monthly.",
       name: "Tyler Anderson",
       location: "Grand Rapids, Michigan",
       achievement: "Applied Sean's cutting techniques, now fully booked at $3,500/month",
-      imageUrl: "/images/bin3.jpg"
+      imageUrl: "https://images.pexels.com/photos/1570806/pexels-photo-1570806.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
     {
       text: "I thought I knew how to cut hair until I took this course. Sean's consultation method alone doubled my client retention. My cuts now grow out clean for weeks.",
@@ -168,16 +168,16 @@ export default function TestimonialsSection() {
           {/* Navigation Arrows - Moved further outward */}
           <button
             onClick={prevTestimonial}
-            className="absolute top-1/2 -left-12 transform -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 bg-luxury-gradient rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all duration-300 z-10"
+            className="absolute top-1/2 -left-24 transform -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 bg-black rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all duration-300 z-10 border border-luxury/30"
           >
-            <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 text-black" />
+            <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 text-gradient-gold" />
           </button>
           
           <button
             onClick={nextTestimonial}
-            className="absolute top-1/2 -right-12 transform -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 bg-luxury-gradient rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all duration-300 z-10"
+            className="absolute top-1/2 -right-24 transform -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 bg-black rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all duration-300 z-10 border border-luxury/30"
           >
-            <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6 text-black" />
+            <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6 text-gradient-gold" />
           </button>
         </div>
       </div>
