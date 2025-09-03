@@ -357,6 +357,10 @@ export default function HomePage() {
                       <item.icon className="h-5 w-5 sm:h-6 sm:w-6 lg:h-7 lg:w-7 text-luxury-gold mb-2 sm:mb-3 lg:mb-4 group-hover:scale-110 transition-transform duration-300" />
                       <div className="text-white font-semibold text-sm sm:text-base lg:text-lg">{item.text}</div>
                       <div className="text-gray-400 text-xs sm:text-sm lg:text-sm uppercase tracking-wider">{item.subtext}</div>
+                      <div className={`stats-tooltip ${tooltipStates[`sean-${index}`] ? 'show' : ''}`}>
+                        <div className="font-semibold text-luxury mb-1">{item.text}</div>
+                        <div className="text-gray-300 leading-relaxed">{item.tooltip}</div>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -543,30 +547,54 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16">
             {/* Left Side - Course Offerings */}
             <div>
-              <h3 className="text-2xl font-playfair font-bold text-gradient-gold mb-8 text-center lg:text-left">
+              <h3 className="text-2xl lg:text-3xl font-playfair font-bold text-gradient-gold mb-8 text-center lg:text-left">
                 Included in your Mack Daddy's Academy Membership:
               </h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-4">
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-6">
                   {[
                     "Complete Shape & Flow System",
                     "Advanced Consultation Techniques", 
-                    "All Hair Types Cutting Methods"
+                    "All Hair Types Cutting Methods",
+                    "Precision Scissor Work",
+                    "Clipper Over Comb Mastery",
+                    "Client Retention Strategies"
                   ].map((item, index) => (
                     <div key={index} className="flex items-center text-gray-300">
-                      <CheckCircle className="h-5 w-5 text-luxury-gold mr-4 flex-shrink-0" />
+                      <svg className="h-5 w-5 mr-4 flex-shrink-0" viewBox="0 0 20 20" fill="none">
+                        <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill="url(#checkGradient)"/>
+                        <defs>
+                          <linearGradient id="checkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#FFD54F" />
+                            <stop offset="50%" stopColor="#FFCA28" />
+                            <stop offset="100%" stopColor="#FFB300" />
+                          </linearGradient>
+                        </defs>
+                      </svg>
                       <span className="text-lg">{item}</span>
                     </div>
                   ))}
                 </div>
-                <div className="space-y-4">
+                <div className="space-y-6">
                   {[
                     "Modern Finishing Techniques",
                     "Lifetime Access & Updates",
-                    "Private Community Access"
+                    "Private Community Access",
+                    "Monthly Live Q&A Sessions",
+                    "Downloadable Practice Guides",
+                    "Business Growth Blueprint"
                   ].map((item, index) => (
                     <div key={index} className="flex items-center text-gray-300">
-                      <CheckCircle className="h-5 w-5 text-luxury-gold mr-4 flex-shrink-0" />
+                      <svg className="h-5 w-5 mr-4 flex-shrink-0" viewBox="0 0 20 20" fill="none">
+                        <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill="url(#checkGradient2)"/>
+                        <defs>
+                          <linearGradient id="checkGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#FFD54F" />
+                            <stop offset="50%" stopColor="#FFCA28" />
+                            <stop offset="100%" stopColor="#FFB300" />
+                          </linearGradient>
+                        </defs>
+                      </svg>
                       <span className="text-lg">{item}</span>
                     </div>
                   ))}
@@ -589,8 +617,8 @@ export default function HomePage() {
             <h3 className="text-3xl md:text-4xl font-playfair font-bold text-gradient-gold mb-8">
               Become a Master Barber Today
             </h3>
-            <div className="flex items-center justify-center gap-4 mb-8">
-              <span className="text-6xl lg:text-7xl font-bold text-gradient-gold" style={{ fontFamily: 'Inter, sans-serif' }}>$47</span>
+            <div className="flex items-center justify-center mb-8">
+              <span className="text-6xl lg:text-7xl font-bold text-gradient-gold mr-6" style={{ fontFamily: 'Inter, sans-serif' }}>$47</span>
               <span className="text-2xl text-gray-400 line-through">$297</span>
             </div>
             <button 
@@ -604,7 +632,7 @@ export default function HomePage() {
           {/* Trust Cards */}
           <div className="grid md:grid-cols-2 gap-8">
             {/* 365-Day Guarantee Card */}
-            <div className="card-luxury rounded-lg p-8 border-l-4 border-green-500 hover:border-green-300 transition-colors duration-300">
+            <div className="card-luxury rounded-lg p-8 border-l-4 border-green-500 hover:border-green-400 transition-colors duration-300">
               <div className="flex items-center justify-center mb-4">
                 <Shield className="h-6 w-6 text-green-400 mr-3" />
                 <span className="text-green-400 font-bold text-lg">365-DAY MONEY-BACK GUARANTEE</span>
