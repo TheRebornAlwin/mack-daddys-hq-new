@@ -357,7 +357,6 @@ export default function HomePage() {
                       <item.icon className="h-5 w-5 sm:h-6 sm:w-6 lg:h-7 lg:w-7 text-luxury-gold mb-2 sm:mb-3 lg:mb-4 group-hover:scale-110 transition-transform duration-300" />
                       <div className="text-white font-semibold text-sm sm:text-base lg:text-lg">{item.text}</div>
                       <div className="text-gray-400 text-xs sm:text-sm lg:text-sm uppercase tracking-wider">{item.subtext}</div>
-                      <CheckCircle className="h-5 w-5 text-gradient-gold mr-3 mt-0.5 flex-shrink-0" />
                     </div>
                   ))}
                 </div>
@@ -545,18 +544,33 @@ export default function HomePage() {
             {/* Left Side - Course Offerings */}
             <div>
               <h3 className="text-2xl font-playfair font-bold text-gradient-gold mb-8 text-center lg:text-left">
-                Included in your Mack Daddy's Academy Membership
+                Included in your Mack Daddy's Academy Membership:
               </h3>
-              <div className="grid grid-cols-1 gap-4">
-                {[
-                  ["Complete Shape & Flow System", "Advanced Consultation Techniques", "All Hair Types Cutting Methods"],
-                  ["Modern Finishing Techniques", "Lifetime Access & Updates", "Private Community Access"]
-                ].flat().map((item, index) => (
-                  <div key={index} className="flex items-center text-gray-300">
-                    <CheckCircle className="h-5 w-5 text-luxury-gold mr-4 flex-shrink-0" />
-                    <span className="text-lg">{item}</span>
-                  </div>
-                ))}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  {[
+                    "Complete Shape & Flow System",
+                    "Advanced Consultation Techniques", 
+                    "All Hair Types Cutting Methods"
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-center text-gray-300">
+                      <CheckCircle className="h-5 w-5 text-luxury-gold mr-4 flex-shrink-0" />
+                      <span className="text-lg">{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="space-y-4">
+                  {[
+                    "Modern Finishing Techniques",
+                    "Lifetime Access & Updates",
+                    "Private Community Access"
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-center text-gray-300">
+                      <CheckCircle className="h-5 w-5 text-luxury-gold mr-4 flex-shrink-0" />
+                      <span className="text-lg">{item}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -575,9 +589,9 @@ export default function HomePage() {
             <h3 className="text-3xl md:text-4xl font-playfair font-bold text-gradient-gold mb-8">
               Become a Master Barber Today
             </h3>
-            <div className="flex items-center justify-center mb-8">
+            <div className="flex items-center justify-center gap-4 mb-8">
               <span className="text-6xl lg:text-7xl font-bold text-gradient-gold" style={{ fontFamily: 'Inter, sans-serif' }}>$47</span>
-              <span className="text-2xl text-gray-400 line-through ml-4">$297</span>
+              <span className="text-2xl text-gray-400 line-through">$297</span>
             </div>
             <button 
               onClick={handleCheckoutClick}
@@ -588,9 +602,9 @@ export default function HomePage() {
           </div>
 
           {/* Trust Cards */}
-          <div className="grid md:grid-cols-2 gap-8 mx-auto">
+          <div className="grid md:grid-cols-2 gap-8">
             {/* 365-Day Guarantee Card */}
-            <div className="card-luxury rounded-lg p-8 border-l-4 border-green-500">
+            <div className="card-luxury rounded-lg p-8 border-l-4 border-green-500 hover:border-green-300 transition-colors duration-300">
               <div className="flex items-center justify-center mb-4">
                 <Shield className="h-6 w-6 text-green-400 mr-3" />
                 <span className="text-green-400 font-bold text-lg">365-DAY MONEY-BACK GUARANTEE</span>
@@ -606,12 +620,14 @@ export default function HomePage() {
                 <Timer className="h-6 w-6 text-luxury-gold mr-3" />
                 <span className="text-gradient-gold font-bold text-lg">Limited Time Pricing</span>
               </div>
-              <p className="text-white font-medium text-center mb-2">
-                Price increases to $297 after 2,000 students
-              </p>
-              <p className="text-gray-300 text-center">
-                Current enrollment: <span className="text-gradient-gold font-bold">1,927 students</span>
-              </p>
+              <div className="text-center">
+                <p className="text-white font-medium mb-2">
+                  Price increases to $297 after 2,000 students
+                </p>
+                <p className="text-gray-300">
+                  Current enrollment: <span className="text-gradient-gold font-bold">1,927 students</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>
