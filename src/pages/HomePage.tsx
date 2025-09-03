@@ -547,17 +547,13 @@ export default function HomePage() {
               <h3 className="text-2xl font-playfair font-bold text-gradient-gold mb-8 text-center lg:text-left">
                 Included in your Mack Daddy's Academy Membership
               </h3>
-              <div className="space-y-4">
+              <div className="grid grid-cols-1 gap-4">
                 {[
-                  "Complete Shape & Flow System",
-                  "Advanced Consultation Techniques", 
-                  "All Hair Types Cutting Methods",
-                  "Modern Finishing Techniques",
-                  "Lifetime Access & Updates",
-                  "Private Community Access"
-                ].map((item, index) => (
+                  ["Complete Shape & Flow System", "Advanced Consultation Techniques", "All Hair Types Cutting Methods"],
+                  ["Modern Finishing Techniques", "Lifetime Access & Updates", "Private Community Access"]
+                ].flat().map((item, index) => (
                   <div key={index} className="flex items-center text-gray-300">
-                    <CheckCircle className="h-5 w-5 text-gradient-gold mr-4 flex-shrink-0" />
+                    <CheckCircle className="h-5 w-5 text-luxury-gold mr-4 flex-shrink-0" />
                     <span className="text-lg">{item}</span>
                   </div>
                 ))}
@@ -580,12 +576,9 @@ export default function HomePage() {
               Become a Master Barber Today
             </h3>
             <div className="flex items-center justify-center mb-8">
-              <span className="text-6xl lg:text-7xl font-playfair font-bold text-gradient-gold">$47</span>
+              <span className="text-6xl lg:text-7xl font-bold text-gradient-gold" style={{ fontFamily: 'Inter, sans-serif' }}>$47</span>
               <span className="text-2xl text-gray-400 line-through ml-4">$297</span>
             </div>
-            <p className="text-lg text-gray-300 mb-8">
-              one-time • Limited time offer
-            </p>
             <button 
               onClick={handleCheckoutClick}
               className="btn-luxury text-black font-bold text-xl px-12 py-6 rounded mx-auto block hover:scale-105 transition-transform duration-300"
@@ -595,7 +588,7 @@ export default function HomePage() {
           </div>
 
           {/* Trust Cards */}
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 mx-auto">
             {/* 365-Day Guarantee Card */}
             <div className="card-luxury rounded-lg p-8 border-l-4 border-green-500">
               <div className="flex items-center justify-center mb-4">
